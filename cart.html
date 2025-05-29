@@ -14,6 +14,7 @@
         .dark-bg { background-color: #1A202C; }
         .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
         .btn-primary:hover { background-color: #82b362; }
+        .btn-primary:disabled { background-color: #cccccc; cursor: not-allowed; }
         .btn-danger { background-color: #E53E3E; color: white; transition: background-color 0.3s ease; }
         .btn-danger:hover { background-color: #C53030; }
         .quantity-input::-webkit-outer-spin-button,
@@ -69,25 +70,6 @@
         
         <div id="cart-items-container" class="bg-white shadow-xl rounded-lg overflow-hidden">
             <!-- Cart items akan di-generate JavaScript -->
-            <!-- Contoh Struktur Item:
-            <div class="cart-item flex items-center p-4 border-b border-gray-200">
-                <img src="images/product1-thumb.jpg" alt="Nama Produk" class="w-20 h-20 object-cover rounded mr-4">
-                <div class="flex-grow">
-                    <h3 class="text-lg font-semibold dark-text">Nama Produk</h3>
-                    <p class="text-sm text-slate-gray">Variasi: 1kg</p>
-                    <p class="text-md primary-text font-medium">Rp 15.000</p>
-                </div>
-                <div class="flex items-center mx-4">
-                    <button class="px-2 py-1 text-slate-gray hover:bg-gray-100 rounded-l">-</button>
-                    <input type="number" value="1" class="w-12 text-center border-t border-b border-gray-300 quantity-input p-1">
-                    <button class="px-2 py-1 text-slate-gray hover:bg-gray-100 rounded-r">+</button>
-                </div>
-                <p class="text-lg font-semibold dark-text w-24 text-right">Rp 15.000</p>
-                <button class="ml-4 text-red-500 hover:text-red-700 transition-colors">
-                    <i class="fas fa-trash-alt fa-lg"></i>
-                </button>
-            </div>
-             -->
         </div>
 
         <div id="cart-empty-message" class="hidden text-center py-10 bg-white shadow-xl rounded-lg">
@@ -96,7 +78,7 @@
             <a href="index.html#products" class="btn-primary mt-6 py-2 px-6 rounded-md inline-block">Mulai Belanja</a>
         </div>
 
-        <div id="cart-summary" class="mt-8 p-6 bg-white shadow-xl rounded-lg">
+        <div id="cart-summary" class="mt-8 p-6 bg-white shadow-xl rounded-lg hidden"> <!-- Hidden by default if cart is empty -->
             <h2 class="text-2xl font-semibold dark-text mb-4">Ringkasan Belanja</h2>
             <div class="flex justify-between mb-2">
                 <span class="text-slate-gray">Subtotal Produk:</span>
@@ -104,16 +86,16 @@
             </div>
             <div class="flex justify-between mb-2">
                 <span class="text-slate-gray">Biaya Pengiriman:</span>
-                <span class="font-medium dark-text">Rp 10.000 (Estimasi)</span>
+                <span id="shipping-cost" class="font-medium dark-text">Rp 10.000 (Estimasi)</span>
             </div>
             <hr class="my-3 border-gray-300">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <span class="dark-text">Total Pembayaran:</span>
                 <span id="cart-total" class="primary-text">Rp 10.000</span>
             </div>
-            <a href="checkout.html" id="checkout-button" class="btn-primary w-full text-lg font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center block">
+            <button id="checkout-button" class="btn-primary w-full text-lg font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center block" disabled>
                 Lanjut ke Checkout <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+            </button>
         </div>
     </main>
 
@@ -125,7 +107,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js"></script> <!-- For allProducts, if needed by cart.js, and mobile menu -->
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
 </body>

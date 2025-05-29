@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akun Saya - MAYMART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F7FAFC; color: #1A202C; }
+        .primary-bg { background-color: #99cc76; }
+        .primary-text { color: #99cc76; }
+        .dark-bg { background-color: #1A202C; }
+        .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
+        .btn-primary:hover { background-color: #82b362; }
+        .btn-danger { background-color: #E53E3E; color: white; transition: background-color 0.3s ease; }
+        .btn-danger:hover { background-color: #C53030; }
+        
+    </style>
+     <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#99cc76',
+                        dark: '#1A202C',
+                        'slate-gray': '#4A5568',
+                        'off-white': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
+                <a href="index.html#products" class="hover:primary-text transition-colors">Produk</a>
+                <a href="cart.html" class="relative hover:primary-text transition-colors">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
+                </a>
+                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden dark-bg">
+             <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
+            <a href="index.html#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
+            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
+            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="bg-white p-8 shadow-xl rounded-lg max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold dark-text mb-6 text-center">Akun Saya</h1>
+            
+            <div id="account-details" class="hidden">
+                <p class="text-lg text-slate-gray mb-2">Selamat datang, <strong id="account-username" class="primary-text"></strong>!</p>
+                <p class="text-slate-gray mb-6">Di sini Anda dapat melihat riwayat pesanan dan mengatur preferensi akun Anda (fitur akan datang).</p>
+                
+                <!-- Placeholder for future content like order history -->
+                <div class="border-t border-gray-200 pt-6 mt-6">
+                    <h2 class="text-xl font-semibold dark-text mb-4">Riwayat Pesanan</h2>
+                    <p class="text-slate-gray">Belum ada riwayat pesanan. <a href="index.html#products" class="primary-text hover:underline">Mulai belanja sekarang!</a></p>
+                </div>
+
+                <button onclick="logoutAndRedirect()" class="btn-danger w-full md:w-auto mt-8 py-2 px-6 rounded-md">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+
+            <div id="login-prompt" class="hidden text-center">
+                <p class="text-lg text-slate-gray mb-4">Anda harus login untuk mengakses halaman akun.</p>
+                <a href="login.html" class="btn-primary py-2 px-6 rounded-md">Login Sekarang</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+     <footer class="dark-bg text-off-white py-12 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
+            <p>© <span id="current-year-footer"></span> MAYMART. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+    
+    <script src="js/script.js"></script> <!-- Common scripts, mobile menu -->
+    <script src="js/auth.js"></script> <!-- User link, cart count, logout -->
+    <script src="js/cart.js"></script> <!-- For cart count updates -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const accountDetailsDiv = document.getElementById('account-details');
+            const loginPromptDiv = document.getElementById('login-prompt');
+            const accountUsernameSpan = document.getElementById('account-username');
+
+            if (currentUser && accountDetailsDiv && loginPromptDiv && accountUsernameSpan) {
+                accountUsernameSpan.textContent = currentUser.username;
+                accountDetailsDiv.classList.remove('hidden');
+                loginPromptDiv.classList.add('hidden');
+            } else if (loginPromptDiv && accountDetailsDiv) {
+                loginPromptDiv.classList.remove('hidden');
+                accountDetailsDiv.classList.add('hidden');
+            }
+
+            // Footer year
+            const yearSpan = document.getElementById('current-year-footer');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+
+        function logoutAndRedirect() {
+            if (typeof logout === 'function') {
+                logout(); // This function is in auth.js and should redirect
+            } else {
+                // Fallback if auth.js logout doesn't redirect as expected
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

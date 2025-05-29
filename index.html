@@ -5,55 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAYMART - Sayuran Segar Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Untuk ikon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <style>
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #F7FAFC; /* Abu-abu Sangat Terang */
-            color: #1A202C; /* Charcoal */
+            font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #0f172a; /* Dark blue/slate base */
+            color: #e2e8f0; /* Light text */
         }
-        .primary-bg { background-color: #99cc76; }
-        .primary-text { color: #99cc76; }
-        .dark-bg { background-color: #1A202C; }
-        .dark-text { color: #1A202C; }
-        .accent-bg { background-color: #4FD1C5; } /* Teal cerah jika dipakai */
+        .primary-bg { background-color: #6ee7b7; } /* Mint Green */
+        .primary-text { color: #6ee7b7; }
+        .primary-border { border-color: #6ee7b7; }
+        .dark-bg { background-color: #1e293b; } /* Slightly lighter dark blue */
+        .dark-text { color: #e2e8f0; } /* Overriding default dark text for dark theme */
+        .accent-bg { background-color: #3b82f6; } /* Blue accent */
+        
         .futuristic-card {
+            background-color: rgba(30, 41, 59, 0.7); /* Semi-transparent card bg */
+            border: 1px solid rgba(107, 231, 183, 0.2);
+            backdrop-filter: blur(10px);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .futuristic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2), 0 0 15px rgba(107, 231, 183, 0.15);
         }
         .btn-primary {
-            background-color: #99cc76;
-            color: white;
-            transition: background-color 0.3s ease;
+            background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+            color: #0f172a; /* Dark text for contrast */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(88, 201, 225, 0.2);
         }
         .btn-primary:hover {
-            background-color: #82b362; /* Warna hijau lebih gelap saat hover */
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(88, 201, 225, 0.3);
+            filter: brightness(1.1);
         }
-        .btn-secondary {
-            background-color: #4A5568; /* Slate Gray */
-            color: white;
-            transition: background-color 0.3s ease;
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5ce0a8; }
+
+        /* Navbar Styles */
+        .navbar-modern {
+            background-color: rgba(15, 23, 42, 0.8); /* Very dark, semi-transparent */
+            backdrop-filter: blur(15px) saturate(150%);
+            -webkit-backdrop-filter: blur(15px) saturate(150%);
+            border-bottom: 1px solid rgba(107, 231, 183, 0.1);
         }
-        .btn-secondary:hover {
-            background-color: #2D3748; /* Darker Slate Gray */
+        .navbar-modern .site-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; /* Adjusted size */
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 8px rgba(107, 231, 183, 0.4);
         }
-        /* Custom scrollbar (opsional, untuk nuansa futuristik) */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .navbar-modern nav a {
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.03em;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: #2D3748; /* Dark Gray */
+        .navbar-modern nav a:hover {
+            color: #6ee7b7;
+            text-shadow: 0 0 10px rgba(107, 231, 183, 0.5);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #99cc76;
-            border-radius: 4px;
+        .navbar-modern nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #6ee7b7;
+            transition: width 0.3s ease;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #82b362;
+        .navbar-modern nav a:hover::after {
+            width: 70%;
+        }
+        .navbar-modern #cart-count {
+             background-color: #3b82f6; /* Blue accent for cart count */
+             color: #e2e8f0;
+             box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+        .navbar-modern #user-link i, .navbar-modern #mobile-user-link i,
+        .navbar-modern #account-link i, .navbar-modern #mobile-account-link i {
+             color: #6ee7b7; /* Green icon for user links */
+        }
+        .mobile-menu-modern {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .mobile-menu-modern a {
+            border-bottom: 1px solid rgba(107, 231, 183, 0.08);
+        }
+        .mobile-menu-modern a:hover {
+            background-color: rgba(107, 231, 183, 0.05);
+            color: #6ee7b7;
+        }
+
+
+        /* Hero Section Enhancement */
+        .hero-section-modern {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-section-modern h1 {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+        }
+
+        /* About Us Section - Futuristic */
+        .about-us-futuristic {
+            position: relative;
+            overflow: hidden; /* Crucial for pseudo-elements */
+            background-color: #111827; /* Darker than body */
+            padding: 5rem 0;
+        }
+        .about-us-futuristic::before { /* Grid overlay */
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(107, 231, 183, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(107, 231, 183, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        .about-us-content-wrapper {
+            position: relative; /* To be above the grid */
+            z-index: 1;
+        }
+        .about-us-futuristic .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+            color: #6ee7b7;
+            margin-bottom: 0.5rem;
+        }
+        .about-us-futuristic .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem; /* md:text-5xl */
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(107, 231, 183, 0.3);
+        }
+        .about-us-futuristic p {
+            color: #9ca3af; /* Lighter gray */
+            line-height: 1.8;
+        }
+        .vision-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(107, 231, 183, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            min-height: 220px; /* Consistent height */
+        }
+        .vision-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            border-color: rgba(107, 231, 183, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 20px rgba(107, 231, 183, 0.1);
+        }
+        .vision-card .icon-wrapper {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+            color: #0f172a;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(88, 201, 225, 0.3);
+        }
+        .vision-card h3 {
+            color: #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+         /* Products Section on Dark Theme */
+        .products-section-dark {
+            background-color: #1e293b; /* Slightly lighter dark blue */
         }
     </style>
     <script>
@@ -61,14 +197,21 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#99cc76',
-                        dark: '#1A202C',
-                        'slate-gray': '#4A5568',
-                        'off-white': '#F7FAFC',
-                        accent: '#4FD1C5',
+                        primary: '#6ee7b7', // Mint Green
+                        'primary-darker': '#5ce0a8',
+                        accent: '#3b82f6',  // Blue
+                        dark: {
+                            DEFAULT: '#1e293b', // base dark bg for sections
+                            text: '#e2e8f0',    // default light text
+                            subtext: '#9ca3af', // lighter gray for subtext
+                            card: 'rgba(30, 41, 59, 0.7)',
+                            border: 'rgba(107, 231, 183, 0.2)',
+                            body: '#0f172a' // very dark base for body
+                        }
                     },
                     fontFamily: {
-                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                        sans: ['Poppins', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif']
                     }
                 }
             }
@@ -78,65 +221,149 @@
 <body class="antialiased">
 
     <!-- Header -->
-    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50">
+    <header class="navbar-modern sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
-                <a href="#products" class="hover:primary-text transition-colors">Produk</a>
-                <a href="cart.html" class="relative hover:primary-text transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
+            <a href="index.html" class="site-title primary-text">MAYMART</a>
+            
+            <div class="hidden md:flex flex-grow max-w-lg mx-6 items-center">
+                <div class="relative w-full">
+                    <input type="text" id="search-input" placeholder="Telusuri produk digital..." class="w-full py-2.5 px-4 pr-10 rounded-lg bg-dark-card border border-dark-border text-dark-text placeholder-dark-subtext focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all">
+                    <button class="absolute top-0 right-0 h-full px-3 text-dark-subtext hover:text-primary transition-colors">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-7 items-center text-sm font-medium text-dark-subtext">
+                <a href="index.html">Beranda</a>
+                <a href="#about-us">Tentang Kami</a>
+                <a href="#products">Produk</a>
+                <a href="cart.html" class="relative">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-3 text-xs rounded-full px-1.5 py-0.5 font-bold">0</span>
                 </a>
-                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
-                 <!-- <a href="account.html" id="account-link" class="hidden hover:primary-text transition-colors">Akun Saya</a> -->
+                <a href="login.html" id="user-link"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-dark-subtext hover:text-primary transition-colors">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden dark-bg">
-            <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
-            <a href="#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
-            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
-            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
+        <div id="mobile-menu" class="hidden md:hidden mobile-menu-modern text-dark-subtext">
+            <div class="px-4 py-3">
+                 <div class="relative w-full">
+                    <input type="text" id="search-input-mobile" placeholder="Cari produk..." class="w-full py-2.5 px-4 pr-10 rounded-lg bg-dark-card border border-dark-border text-dark-text placeholder-dark-subtext focus:outline-none focus:ring-2 focus:ring-primary transition-all">
+                     <button class="absolute top-0 right-0 h-full px-3 text-dark-subtext hover:text-primary transition-colors">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <a href="index.html" class="block px-4 py-3">Beranda</a>
+            <a href="#about-us" class="block px-4 py-3">Tentang Kami</a>
+            <a href="#products" class="block px-4 py-3">Produk</a>
+            <a href="cart.html" class="block px-4 py-3"><i class="fas fa-shopping-cart mr-2"></i>Keranjang Belanja</a>
+            <a href="login.html" id="mobile-user-link" class="block px-4 py-3"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="h-[70vh] bg-cover bg-center relative flex items-center justify-center text-off-white" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
-        <div class="absolute inset-0 bg-black opacity-60"></div>
-        <div class="relative z-10 text-center p-6">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">Sayuran <span class="primary-text">Segar</span> Langsung ke Rumah Anda</h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-300">Kualitas terbaik, panen setiap hari, untuk hidup lebih sehat.</p>
-            <a href="#products" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Belanja Sekarang <i class="fas fa-arrow-right ml-2"></i>
+    <section class="min-h-[75vh] hero-section-modern flex items-center justify-center text-center text-white">
+        <div class="relative z-10 p-6">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
+                Sayuran <span class="primary-text">Segar Berkualitas</span>, Masa Depan Pangan Anda.
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-dark-subtext max-w-2xl mx-auto">
+                Teknologi bertemu tradisi. Dapatkan hasil panen terbaik langsung ke pintu Anda, didukung oleh inovasi untuk kesegaran maksimal.
+            </p>
+            <a href="#products" class="btn-primary text-base font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                Jelajahi Produk <i class="fas fa-angle-double-right ml-2"></i>
             </a>
         </div>
     </section>
 
-    <!-- Featured Products Section -->
-    <section id="products" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold dark-text text-center mb-12">Produk Unggulan Kami</h2>
-            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Product cards akan di-generate oleh JavaScript -->
+    <!-- About Us Section - Futuristic Remake -->
+    <section id="about-us" class="about-us-futuristic">
+        <div class="container mx-auto px-4 about-us-content-wrapper">
+            <div class="text-center mb-16">
+                <span class="section-subtitle">Our Core</span>
+                <h2 class="section-title">Visi <span class="primary-text">MAYMART</span>: Pertanian Masa Depan</h2>
+                <p class="max-w-3xl mx-auto text-lg">
+                    MAYMART bukan hanya e-commerce sayuran. Kami adalah pionir dalam mengintegrasikan teknologi dengan pertanian untuk menghadirkan produk segar berkualitas tinggi, memberdayakan petani lokal, dan membangun ekosistem pangan yang berkelanjutan dan transparan.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="vision-card">
+                    <div class="icon-wrapper flex items-center justify-center">
+                        <i class="fas fa-cogs fa-lg"></i>
+                    </div>
+                    <h3 class="text-xl mb-3">Inovasi Teknologi</h3>
+                    <p class="text-sm">Memanfaatkan AI dan IoT untuk optimalisasi rantai pasok, dari pemantauan pertumbuhan hingga pengiriman presisi, memastikan kesegaran terjaga.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="icon-wrapper flex items-center justify-center">
+                        <i class="fas fa-leaf fa-lg"></i>
+                    </div>
+                    <h3 class="text-xl mb-3">Kualitas & Kesegaran Terdepan</h3>
+                    <p class="text-sm">Standar kualitas ketat dan kemasan pintar menjaga nutrisi dan kesegaran produk hingga sampai ke tangan Anda.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="icon-wrapper flex items-center justify-center">
+                        <i class="fas fa-users fa-lg"></i>
+                    </div>
+                    <h3 class="text-xl mb-3">Pemberdayaan Komunitas</h3>
+                    <p class="text-sm">Membangun kemitraan adil dengan petani lokal, meningkatkan kesejahteraan mereka melalui akses pasar digital dan praktik pertanian modern.</p>
+                </div>
+                 <div class="vision-card md:col-span-2 lg:col-span-1">
+                    <div class="icon-wrapper flex items-center justify-center">
+                        <i class="fas fa-globe-asia fa-lg"></i>
+                    </div>
+                    <h3 class="text-xl mb-3">Keberlanjutan Ekosistem</h3>
+                    <p class="text-sm">Mendorong praktik pertanian ramah lingkungan, mengurangi limbah pangan, dan jejak karbon untuk planet yang lebih sehat.</p>
+                </div>
+                 <div class="vision-card lg:col-span-2">
+                    <div class="icon-wrapper flex items-center justify-center">
+                        <i class="fas fa-chart-line fa-lg"></i>
+                    </div>
+                    <h3 class="text-xl mb-3">Transformasi Digital Pangan</h3>
+                    <p class="text-sm">Menjadi platform terdepan yang menghubungkan produsen dan konsumen secara transparan, efisien, dan cerdas, menciptakan masa depan pangan yang lebih baik untuk semua.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#products" class="btn-primary text-base font-semibold py-3 px-8 rounded-lg">
+                    Lihat Bagaimana Kami Bekerja
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="dark-bg text-off-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
-            <div class="space-x-6 mb-4">
-                <a href="#" class="hover:primary-text"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="hover:primary-text"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" class="hover:primary-text"><i class="fab fa-whatsapp fa-lg"></i></a>
+    <!-- Featured Products Section -->
+    <section id="products" class="py-16 products-section-dark">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 primary-text font-orbitron">Produk Digital Kami</h2>
+            <p id="search-message" class="text-center text-dark-subtext mb-12 hidden"></p>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Product cards akan di-generate oleh JavaScript -->
             </div>
-            <p>© <span id="current-year"></span> MAYMART. Semua Hak Dilindungi.</p>
-            <p class="text-sm text-slate-gray mt-2">Dibuat dengan <i class="fas fa-heart primary-text"></i> dan Tailwind CSS</p>
+             <p id="no-products-message" class="text-center text-xl text-dark-subtext mt-10 hidden">
+                <i class="fas fa-satellite-dish fa-2x text-primary mb-3"></i><br>
+                Sinyal Produk Hilang! Coba kata kunci lain.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="dark-bg text-dark-subtext py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-3xl font-bold primary-text mb-4 font-orbitron">MAYMART</p>
+            <div class="space-x-6 mb-6">
+                <a href="#" class="hover:text-primary transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-primary transition-colors text-xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-primary transition-colors text-xl"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-primary transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© <span id="current-year"></span> MAYMART Industries. All Rights Reserved.</p>
+            <p class="text-sm text-dark-subtext/70 mt-2">Crafted with <i class="fas fa-atom primary-text"></i> & Quantum Entanglement</p>
         </div>
     </footer>
 

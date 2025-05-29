@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MAYMART</title>
+    <!-- Tailwind CSS is not strictly needed here if auth.css covers all, but good for consistency if you mix -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        /* Minimal Tailwind-like helpers if not using full Tailwind on this page */
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="login-card">
+        <div class="site-logo">MAYMART</div>
+        <h2>Selamat Datang Kembali!</h2>
+        <form id="login-form" autocomplete="off">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input class="input-field" type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input class="input-field" type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-primary">Login</button>
+            <p id="login-error" class="hidden">Username atau password salah!</p>
+        </form>
+        <p class="form-link">Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>
+```
+--- END OF FILE login.html ---
+
+Next, update `register.html` to use similar styling.
+
+--- START OF FILE register.html ---
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MAYMART</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/auth.css">
+     <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="register-card">
+        <div class="site-logo">MAYMART</div>
+        <h2>Buat Akun Baru</h2>
+        <form id="register-form" autocomplete="off">
+            <div class="input-group">
+                <label for="reg-username">Username</label>
+                <input class="input-field" type="text" id="reg-username" name="reg-username" required>
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Password</label>
+                <input class="input-field" type="password" id="reg-password" name="reg-password" required>
+            </div>
+             <div class="input-group">
+                <label for="reg-confirm-password">Konfirmasi Password</label>
+                <input class="input-field" type="password" id="reg-confirm-password" name="reg-confirm-password" required>
+            </div>
+            <button type="submit" class="btn-primary">Register</button>
+            <p id="register-error" class="hidden">Terjadi kesalahan atau username sudah ada.</p>
+        </form>
+        <p class="form-link">Sudah punya akun? <a href="login.html">Login di sini</a></p>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -66,46 +66,11 @@
     <main class="container mx-auto px-4 py-12">
         <div id="product-detail-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
             <!-- Konten detail produk akan di-generate JavaScript -->
-            <!-- Contoh Struktur: -->
-            <!-- 
-            <div class="product-images">
-                <a href="images/product1-large.jpg" data-lightbox="product-gallery">
-                    <img src="images/product1.jpg" alt="Nama Produk" class="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer">
-                </a>
-                <div class="grid grid-cols-4 gap-2 mt-4">
-                    <img src="images/product1-thumb1.jpg" alt="thumbnail" class="w-full h-auto object-cover rounded cursor-pointer border-2 border-transparent hover:border-primary">
-                </div>
+            <!-- Fallback content if JS fails or product not found -->
+            <div id="product-loading" class="md:col-span-2 text-center py-10">
+                <i class="fas fa-spinner fa-spin fa-3x text-primary mb-4"></i>
+                <p class="text-xl text-slate-gray">Memuat detail produk...</p>
             </div>
-            <div class="product-info">
-                <h1 class="text-4xl font-bold dark-text mb-3">Nama Produk Sayuran</h1>
-                <p class="text-2xl primary-text font-semibold mb-4">Rp 15.000 / kg</p>
-                <div class="mb-4">
-                    <span class="text-sm font-medium px-3 py-1 rounded-full bg-green-100 text-green-700">Stok: <span id="stock-level">25</span> Tersedia</span>
-                </div>
-                <p class="text-slate-gray mb-6 leading-relaxed">
-                    Deskripsi lengkap produk sayuran ini. Sangat segar, dipanen langsung dari kebun petani lokal. Kaya akan vitamin dan mineral yang baik untuk kesehatan Anda dan keluarga. Cocok untuk berbagai masakan.
-                </p>
-                <div class="mb-6">
-                    <label for="variation" class="block text-sm font-medium text-slate-gray mb-1">Pilihan Kemasan:</label>
-                    <select id="variation" name="variation" class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary">
-                        <option value="500g">500 gram</option>
-                        <option value="1kg" selected>1 kilogram</option>
-                        <option value="ikat">1 Ikat</option>
-                    </select>
-                </div>
-                <div class="flex items-center mb-6">
-                    <label for="quantity" class="block text-sm font-medium text-slate-gray mr-3">Jumlah:</label>
-                    <div class="flex items-center border border-gray-300 rounded-md">
-                        <button onclick="updateQuantity(-1)" class="px-3 py-2 text-slate-gray hover:bg-gray-100 rounded-l-md">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1" class="w-16 text-center border-l border-r border-gray-300 quantity-input p-2 focus:outline-none">
-                        <button onclick="updateQuantity(1)" class="px-3 py-2 text-slate-gray hover:bg-gray-100 rounded-r-md">+</button>
-                    </div>
-                </div>
-                <button onclick="addToCartFromDetail()" class="btn-primary w-full md:w-auto text-lg font-semibold py-3 px-10 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                    <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
-                </button>
-            </div>
-            -->
         </div>
     </main>
 
@@ -120,14 +85,16 @@
     <!-- Lightbox2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     <script>
-        lightbox.option({
-          'resizeDuration': 200,
-          'wrapAround': true
-        })
+        if (typeof lightbox !== 'undefined') {
+            lightbox.option({
+              'resizeDuration': 200,
+              'wrapAround': true
+            });
+        }
     </script>
-    <script src="js/script.js"></script> <!-- Umum -->
+    <script src="js/script.js"></script> <!-- Umum, allProducts, mobile menu -->
     <script src="js/auth.js"></script> <!-- Untuk update user link & cart count -->
-    <script src="js/cart.js"></script> <!-- Untuk update cart count -->
+    <script src="js/cart.js"></script> <!-- Untuk update cart count & addToCart function -->
     <script src="js/product.js"></script> <!-- Khusus halaman detail produk -->
 </body>
 </html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Berhasil - MAYMART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F7FAFC; color: #1A202C; }
+        .primary-bg { background-color: #99cc76; }
+        .primary-text { color: #99cc76; }
+        .dark-bg { background-color: #1A202C; }
+        .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
+        .btn-primary:hover { background-color: #82b362; }
+        .btn-secondary { background-color: #4A5568; color: white; transition: background-color 0.3s ease; }
+        .btn-secondary:hover { background-color: #2D3748; }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-receipt, #printable-receipt * {
+                visibility: visible;
+            }
+            #printable-receipt {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            header, footer, .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+     <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#99cc76',
+                        dark: '#1A202C',
+                        'slate-gray': '#4A5568',
+                        'off-white': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
+                <a href="index.html#products" class="hover:primary-text transition-colors">Produk</a>
+                <a href="cart.html" class="relative hover:primary-text transition-colors">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
+                </a>
+                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden dark-bg">
+             <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
+            <a href="index.html#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
+            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
+            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="bg-white p-6 sm:p-10 shadow-xl rounded-lg max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <i class="fas fa-check-circle text-6xl primary-text mb-4"></i>
+                <h1 class="text-3xl sm:text-4xl font-bold dark-text">Pesanan Berhasil Dibuat!</h1>
+                <p class="text-slate-gray mt-2 text-lg">Terima kasih telah berbelanja di MAYMART.</p>
+                <p class="text-slate-gray mt-1">Pesanan Anda <strong id="receipt-order-id-msg" class="primary-text"></strong> sedang kami proses.</p>
+            </div>
+
+            <!-- Electronic Receipt -->
+            <div id="printable-receipt" class="border border-gray-200 rounded-lg p-6">
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+                    <div>
+                        <h2 class="text-2xl font-bold primary-text">MAYMART</h2>
+                        <p class="text-sm text-slate-gray">Nota Pembelian</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold dark-text">Order ID: <span id="receipt-order-id"></span></p>
+                        <p class="text-sm text-slate-gray">Tanggal: <span id="receipt-order-date"></span></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-md font-semibold dark-text mb-1">Ditagihkan Kepada:</h3>
+                        <p id="receipt-customer-name" class="text-slate-gray"></p>
+                        <p id="receipt-customer-phone" class="text-slate-gray"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-md font-semibold dark-text mb-1">Dikirim Ke:</h3>
+                        <p id="receipt-shipping-address" class="text-slate-gray whitespace-pre-line"></p>
+                        <p id="receipt-shipping-city-postal" class="text-slate-gray"></p>
+                    </div>
+                </div>
+                 <div id="receipt-customer-notes-container" class="mb-6 hidden">
+                    <h3 class="text-md font-semibold dark-text mb-1">Catatan Pembeli:</h3>
+                    <p id="receipt-customer-notes" class="text-slate-gray italic"></p>
+                </div>
+
+
+                <h3 class="text-md font-semibold dark-text mb-2">Detail Pesanan:</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-slate-gray uppercase tracking-wider">Produk</th>
+                                <th scope="col" class="px-4 py-2 text-center text-xs font-medium text-slate-gray uppercase tracking-wider">Jumlah</th>
+                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-slate-gray uppercase tracking-wider">Harga Satuan</th>
+                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-slate-gray uppercase tracking-wider">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receipt-items-table" class="bg-white divide-y divide-gray-200">
+                            <!-- Items will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex justify-end mb-6">
+                    <div class="w-full md:w-1/2 lg:w-1/3 space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-gray">Subtotal Produk:</span>
+                            <span id="receipt-subtotal" class="font-medium dark-text"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-gray">Biaya Pengiriman:</span>
+                            <span id="receipt-shipping" class="font-medium dark-text"></span>
+                        </div>
+                         <div class="flex justify-between">
+                            <span class="text-slate-gray">Metode Pembayaran:</span>
+                            <span id="receipt-payment-method" class="font-medium dark-text"></span>
+                        </div>
+                        <hr class="my-1 border-gray-300">
+                        <div class="flex justify-between text-lg font-bold">
+                            <span class="dark-text">Total Pembayaran:</span>
+                            <span id="receipt-total" class="primary-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-slate-gray mt-6">
+                    Terima kasih atas kepercayaan Anda! Kami akan segera memproses pesanan Anda.
+                </p>
+            </div>
+
+            <div class="mt-10 text-center space-y-3 sm:space-y-0 sm:space-x-4 no-print">
+                <a href="index.html" class="btn-primary py-2 px-6 rounded-md inline-block">
+                    <i class="fas fa-home mr-2"></i> Kembali ke Beranda
+                </a>
+                <!-- <button onclick="window.print()" class="btn-secondary py-2 px-6 rounded-md inline-block">
+                    <i class="fas fa-print mr-2"></i> Cetak Nota
+                </button> -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+     <footer class="dark-bg text-off-white py-12 mt-16 no-print">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
+            <p>© <span id="current-year-footer"></span> MAYMART. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+    
+    <script src="js/script.js"></script> <!-- Common scripts, mobile menu -->
+    <script src="js/auth.js"></script> <!-- User link, cart count -->
+    <script src="js/cart.js"></script> <!-- For cart count updates -->
+    <script src="js/order-success.js"></script>
+</body>
+</html>
