@@ -2,13 +2,13 @@
 const allProducts = [
     {
         id: 1,
-        name: "Brokoli Segar",
+        name: "Kubis",
         price: 15000,
         originalPrice: 18000, // Optional, for showing discounts
-        image: "https://plus.unsplash.com/premium_photo-1671013001499-3d8af5fd062b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnJvY2NvbGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        imageThumb: "https://plus.unsplash.com/premium_photo-1671013001499-3d8af5fd062b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnJvY2NvbGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=200&q=60",
-        imageLarge: "https://plus.unsplash.com/premium_photo-1671013001499-3d8af5fd062b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnJvY2NvbGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=80",
-        description: "Brokoli segar pilihan, kaya akan vitamin dan mineral. Cocok untuk tumisan, sup, atau dikukus. Dipanen dari kebun lokal.",
+        image: "images/kubis.jpg",
+        imageThumb: "images/kubis.jpg",
+        imageLarge: "images/kubis.jpg",
+        description: "Kubis adalah sayuran yang daunnya padat dan sering dikonsumsi, dikenal juga dengan nama kol. Kubis mengandung vitamin C, vitamin K, serat, dan berbagai nutrisi lainnya. Kubis memiliki banyak manfaat kesehatan, seperti membantu menjaga kesehatan pencernaan, mengurangi peradangan, dan melawan radikal bebas. Penderita asam lambung sebaiknya membatasi asupan kubis karena mengandung fruktosa yang dapat meningkatkan gas dalam tubuh",
         unit: "kg",
         stock: 25,
         variations: [
@@ -19,43 +19,44 @@ const allProducts = [
     },
     {
         id: 2,
-        name: "Wortel Manis",
-        price: 12000,
-        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Fycm90fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        imageThumb: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Fycm90fGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60",
-        imageLarge: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Fycm90fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=80",
-        description: "Wortel manis dan renyah, sumber beta-karoten yang baik untuk mata. Ideal untuk jus, salad, atau masakan lainnya.",
-        unit: "kg",
+        name: "Pare",
+        price: 15000,
+        image: "images/pare.jpg",
+        imageThumb: "images/pare.jpg",
+        imageLarge: "images/pare.jpg",
+        description: "Pare adalah sebuah sayuran yang dikenal karena rasanya yang pahit. Namun, di balik rasanya yang pahit, pare memiliki berbagai manfaat kesehatan dan sering digunakan dalam masakan Asia, terutama di Indonesia. Pare juga dapat digunakan dalam pengobatan tradisional. Pare mengandung berbagai nutrisi penting seperti vitamin C, vitamin A, vitamin K, zat besi, magnesium, dan serat. Pare memiliki banyak manfaat kesehatan, termasuk membantu menurunkan kadar gula darah, meningkatkan kekebalan tubuh, menjaga kesehatan mata, dan membantu proses pencernaan.",
+        unit: "Kg",
         stock: 30,
         variations: [
             { name: "500 gram", price_modifier: 0 },
-            { name: "1 kilogram", price_modifier: 0, is_default: true },
+            { name: "1 Kg", price_modifier: 0, is_default: true },
         ],
-        category: "Umbi-umbian"
+        category: "Buah"
     },
     {
         id: 3,
-        name: "Tomat Ceri",
-        price: 20000,
-        image: "https://images.unsplash.com/photo-1591378605424-f275591330fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlcnJ5JTIwdG9tYXRvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        imageThumb: "https://images.unsplash.com/photo-1591378605424-f275591330fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlcnJ5JTIwdG9tYXRvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=200&q=60",
-        imageLarge: "https://images.unsplash.com/photo-1591378605424-f275591330fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlcnJ5JTIwdG9tYXRvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=80",
+        name: "Kangkung",
+        price: 3000,
+        image: "images/kangkung.jpg",
+        imageThumb: "images/kangkung.jpg",
+        imageLarge: "images/kangkung.jpg",
         description: "Tomat ceri merah merona, rasa manis asam segar. Sempurna untuk camilan sehat, salad, atau hiasan masakan.",
-        unit: "pack",
+        unit: "ikat",
         stock: 15,
         variations: [
-            { name: "250 gram", price_modifier: 0, is_default: true },
+            { name: "1 Ikat", price_modifier: 0, is_default: true },
+            { name: "3 Ikat (Hemat)", price_modifier: 0, base_price: 8000 } // Example of bundle pricing
         ],
-        category: "Buah Sayur"
+        category: "Sayuran Hijau"
     },
     {
         id: 4,
         name: "Bayam Hijau",
         price: 8000,
-        image: "https://images.unsplash.com/photo-1586103436805-279521993335?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3BpbmFjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        imageThumb: "https://images.unsplash.com/photo-1586103436805-279521993335?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3BpbmFjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=200&q=60",
-        imageLarge: "https://images.unsplash.com/photo-1586103436805-279521993335?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3BpbmFjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        description: "Bayam hijau segar, kaya zat besi dan vitamin. Mudah diolah menjadi berbagai masakan lezat dan bergizi.",
+        image: "images/bayam.jpg",
+        imageThumb: "images/bayam.jpg",
+        imageLarge: "images/bayam.jpg",
+        description: "Bayam merupakan salah satu tumbuhan yang sering ditanam untuk dijadikan sayuran hijau. Daun bayam ini dikonsumsi karena kandungan nutrisi yang bergizi. Bayam juga kaya akan beragam vitamin, mulai dari vitamin A, vitamin B, vitamin C, vitamin E, hingga vitamin K, serta mengandung beragam jenis antioksidan, seperti lutein, karotenoid, dan zeaxanthin. Sayuran ini telah terbukti bermanfaat bagi kesehatan dalam beberapa cara. Bayam dapat mengurangi stres oksidatif, meningkatkan kesehatan mata, dan membantu mencegah penyakit jantung dan kanker .",
         unit: "ikat",
         stock: 50,
         variations: [
@@ -63,7 +64,75 @@ const allProducts = [
             { name: "3 Ikat (Hemat)", price_modifier: 0, base_price: 20000 } // Example of bundle pricing
         ],
         category: "Sayuran Hijau"
-    }
+    },
+    {
+        id: 5,
+        name: "Wortel",
+        price: 13000,
+        originalPrice: 15000, // Optional, for showing discounts
+        image: "images/wortel.jpg",
+        imageThumb: "images/wortel.jpg",
+        imageLarge: "images/wortel.jpg",
+        description: "Wortel adalah tumbuhan sayuran umbi yang biasa berwarna kuning kemerahan atau jingga kekuningan. Tanaman ini memiliki akar tunggang yang membesar dan berfungsi sebagai tempat penyimpanan cadangan makanan. Wortel termasuk tanaman biennial, artinya ia memiliki siklus hidup dua tahun. Wortel mengandung berbagai nutrisi penting, seperti vitamin A, vitamin K, dan vitamin B6. Wortel juga kaya akan antioksidan dan bermanfaat untuk kesehatan mata, jantung, dan pencernaan.",
+        unit: "kg",
+        stock: 60,
+        variations: [
+            { name: "500 gram", price_modifier: 0 }, // base price is for 500g if selected
+            { name: "1 kilogram", price_modifier: 0, base_price:25000 }, // default variation uses base price
+        ],
+        category: "Sayuran umbi akar"
+    },
+    {
+        id: 6,
+        name: "Kol Merah",
+        price: 25000,
+        originalPrice: 30000, // Optional, for showing discounts
+        image: "images/kol_merah.jpg",
+        imageThumb: "images/kol_merah.jpg",
+        imageLarge: "images/kol_merah.jpg",
+        description: "Kol merah, yang juga dikenal sebagai kubis ungu atau kraut merah, adalah jenis sayuran kol yang memiliki warna merah keunguan pada daunnya. Sayuran ini kaya akan nutrisi seperti serat, kalium, antioksidan, dan vitamin. Kol merah dapat dikonsumsi mentah dalam salad, dimasak dalam berbagai masakan, atau diolah menjadi kraut.",
+        unit: "kg",
+        stock: 80,
+        variations: [
+            { name: "500 gram", price_modifier: 0 }, // base price is for 500g if selected
+            { name: "1 kilogram", price_modifier: 0, base_price:45000 }, // default variation uses base price
+        ],
+        category: "Tanaman kubis"
+    },
+    {
+        id: 7,
+        name: "Ubi",
+        price: 7500,
+        originalPrice: 10000, // Optional, for showing discounts
+        image: "images/ubi.jpg",
+        imageThumb: "images/ubi.jpg",
+        imageLarge: "images/ubi.jpg",
+        description: "Ubi adalah istilah umum untuk berbagai jenis tanaman umbi-umbian yang dapat dimakan. Meskipun sering dikaitkan dengan ubi kayu atau ketela pohon, ubi juga mencakup ubi jalar, ubi kelapa, talas, dan banyak jenis lainnya. Ubi sering dijadikan sebagai sumber karbohidrat pengganti nasi atau sebagai bahan makanan dalam berbagai olahan, baik tradisional maupun modern. ubi merupakan tanaman Pangan sebagai cadangan bahan makanan pokok selain beras. Tanaman ubi kayu dimana hasil olahannya sangat luas bisa dilihat di pasar tradisional begitu juga sudah merambah ke Supermaket.",
+        unit: "kg",
+        stock: 60,
+        variations: [
+            { name: "500 gram", price_modifier: 0 }, // base price is for 500g if selected
+            { name: "1 kilogram", price_modifier: 0, base_price:14000 }, // default variation uses base price
+        ],
+        category: "Umbi-umbian"
+    },
+    {
+        id: 8,
+        name: "Selada",
+        price: 14000,
+        originalPrice: 15000, // Optional, for showing discounts
+        image: "images/selada.jpg",
+        imageThumb: "images/selada.jpg",
+        imageLarge: "images/selada.jpg",
+        description: "Selada adalah tanaman sayuran hijau yang sering dimakan mentah sebagai lalapan atau dalam hidangan salad. Selada memiliki berbagai jenis.selada juga kaya nutrisi dan antioksidan yang bermanfaat bagi kesehatan. Selada merupakan sayuran hijau yang kaya kandungan antioksidan sehingga berperan penting dalam memperkuat fungsi sel tubuh. Kandungan antioksidan dalam daun selada di antaranya adalah antosianin, beta karoten, dan vitamin C. Ketiganya dapat menangkal radikal bebas yang bisa menyebabkan kerusakan pada sel-sel tubuh.",
+        unit: "kg",
+        stock: 60,
+        variations: [
+            { name: "500 gram", price_modifier: 0 }, // base price is for 500g if selected
+            { name: "1 kilogram", price_modifier: 0, base_price:26000 }, // default variation uses base price
+        ],
+        category: "Umbi-umbian"
+    },
 ];
 
 

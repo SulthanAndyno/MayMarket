@@ -5,32 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesanan Berhasil - MAYMART</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F7FAFC; color: #1A202C; }
-        .primary-bg { background-color: #99cc76; }
-        .primary-text { color: #99cc76; }
-        .dark-bg { background-color: #1A202C; }
-        .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
-        .btn-primary:hover { background-color: #82b362; }
-        .btn-secondary { background-color: #4A5568; color: white; transition: background-color 0.3s ease; }
-        .btn-secondary:hover { background-color: #2D3748; }
-        @media print {
-            body * {
-                visibility: hidden;
+        body { opacity: 0; transition: opacity 0.5s ease-in-out; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        body.loaded { opacity: 1; }
+        .primary-text { color: #6ee7b7; }
+        .btn-primary-futuristic { background: linear-gradient(135deg, #6ee7b7, #3b82f6); color: #0f172a; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(88, 201, 225, 0.2); font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; }
+        .btn-primary-futuristic:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(88, 201, 225, 0.3); filter: brightness(1.1); }
+        /* Tombol sekunder untuk Print, dengan warna berbeda */
+        .btn-secondary-futuristic { background: linear-gradient(135deg, #334155, #4b5563); color: #e2e8f0; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(51, 65, 85, 0.2); font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; }
+        .btn-secondary-futuristic:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(51, 65, 85, 0.3); filter: brightness(1.1); }
+
+        .navbar-modern { background-color: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(107, 231, 183, 0.15); padding: 0.75rem 0; }
+        .navbar-modern .navbar-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .navbar-modern .desktop-nav { display: none; }
+        @media (min-width: 768px) { .navbar-modern .desktop-nav { display: flex; align-items: center; } }
+        .navbar-modern .desktop-nav .nav-links { display: flex; gap: 1.5rem; align-items: center; font-size: 0.9rem; font-weight: 500; color: #9ca3af; }
+        .navbar-modern .nav-links a { position: relative; padding: 0.25rem 0; letter-spacing: 0.03em; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap; }
+        .navbar-modern .nav-links a:hover, .navbar-modern .nav-links a.active-link { color: #6ee7b7; text-shadow: 0 0 10px rgba(107, 231, 183, 0.5); }
+        .navbar-modern .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 50%; transform: translateX(-50%); background-color: #6ee7b7; transition: width 0.3s ease; }
+        .navbar-modern .nav-links a:hover::after, .navbar-modern .nav-links a.active-link::after { width: 60%; }
+        .navbar-modern .search-bar-desktop input { background-color: rgba(30, 41, 59, 0.8); border: 1px solid rgba(107, 231, 183, 0.15); color: #e2e8f0; }
+        .navbar-modern .search-bar-desktop input::placeholder { color: #6b7280; }
+        .navbar-modern #cart-count { background-color: #3b82f6; color: #e2e8f0; box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); font-size: 0.65rem; padding: 2px 5px; position: absolute; top: -8px; right: -10px; }
+        .navbar-modern .user-actions a i, .navbar-modern .nav-links a i { color: #6ee7b7; margin-right: 0.3rem; }
+        .navbar-modern .user-actions { display: flex; align-items: center; gap: 1rem; }
+        .navbar-modern .mobile-menu-button { display: block; color: #9ca3af; }
+        @media (min-width: 768px) { .navbar-modern .mobile-menu-button { display: none; } }
+        .navbar-modern .mobile-menu-button:hover { color: #6ee7b7; }
+        .mobile-menu-modern { background-color: rgba(15, 23, 42, 0.97); backdrop-filter: blur(15px); color: #9ca3af; position: absolute; top: 100%; left: 0; right: 0; z-index: 40; border-top: 1px solid rgba(107, 231, 183, 0.1); max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding-bottom 0.4s ease-out; }
+        .mobile-menu-modern.open { max-height: 500px; padding-bottom: 1rem; }
+        .mobile-menu-modern .search-bar-mobile input { background-color: rgba(30, 41, 59, 0.8); border: 1px solid rgba(107, 231, 183, 0.15); color: #e2e8f0;}
+        .mobile-menu-modern .search-bar-mobile input::placeholder { color: #6b7280; }
+        .mobile-menu-modern a { display: block; padding: 0.9rem 1.5rem; border-bottom: 1px solid rgba(107, 231, 183, 0.08); transition: background-color 0.2s ease, color 0.2s ease; font-weight: 500; }
+        .mobile-menu-modern a:last-child { border-bottom: none; }
+        .mobile-menu-modern a:hover, .mobile-menu-modern a.active-mobile-link { background-color: rgba(107, 231, 183, 0.05); color: #6ee7b7; }
+        .mobile-menu-modern a i { margin-right: 0.75rem; width: 20px; color: #6ee7b7; }
+        
+        .receipt-card { background-color: rgba(30, 41, 59, 0.85); border: 1px solid rgba(107, 231, 183, 0.2); backdrop-filter: blur(10px); border-radius: 0.75rem; }
+        
+        @keyframes iconSuccessPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(107, 231, 183, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(107, 231, 183, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(107, 231, 183, 0); }
+        }
+        .icon-success-animated {
+            animation: iconSuccessPulse 2s infinite;
+            display: inline-block; /* Agar animasi transform bekerja dengan baik */
+        }
+
+        @media print { 
+            body * { visibility: hidden; } 
+            #printable-receipt, #printable-receipt * { visibility: visible; } 
+            #printable-receipt { 
+                position: absolute; left: 0; top: 0; width: 100%; 
+                background-color: white !important; 
+                color: black !important; 
+                border: 1px solid #ccc !important; /* Border sederhana untuk print */
+                padding: 1.5rem !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
             }
-            #printable-receipt, #printable-receipt * {
-                visibility: visible;
+            header, footer, .no-print { display: none !important; } 
+            #printable-receipt .primary-text { color: #228B22 !important; /* Warna hijau solid untuk print */ } 
+            #printable-receipt .text-light-text, 
+            #printable-receipt .text-dark-subtext,
+            #printable-receipt .font-semibold, /* Pastikan semua teks penting hitam */
+            #printable-receipt .font-medium { color: black !important; }
+            #printable-receipt .font-orbitron { font-family: Arial, sans-serif !important; /* Fallback font untuk print */}
+            #printable-receipt table, #printable-receipt th, #printable-receipt td {
+                border-color: #ccc !important;
             }
-            #printable-receipt {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
+            #printable-receipt thead {
+                background-color: #f0f0f0 !important;
             }
-            header, footer, .no-print {
-                display: none !important;
+             #printable-receipt .bg-dark-bg\/30, #printable-receipt .bg-dark-card\/50 {
+                background-color: transparent !important;
+            }
+            #printable-receipt .divide-dark-border\/30, #printable-receipt .divide-dark-border\/20, #printable-receipt .border-dark-border\/50, #printable-receipt .border-dark-border\/30 {
+                border-color: #ccc !important;
             }
         }
     </style>
@@ -38,99 +92,115 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#99cc76',
-                        dark: '#1A202C',
-                        'slate-gray': '#4A5568',
-                        'off-white': '#F7FAFC',
-                    },
-                    fontFamily: {
-                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
+                     colors: { primary: '#6ee7b7', 'primary-dark': '#5ce0a8', secondary: '#3b82f6', 'secondary-dark': '#2563eb', accent: '#ec4899', 'accent-dark': '#d926a9', 'dark-bg': '#0f172a', 'dark-card': '#1e293b', 'dark-border': '#334155', 'light-text': '#e2e8f0', 'dark-subtext': '#9ca3af', 'dark-placeholder': '#6b7280', },
+                    fontFamily: { sans: ['Poppins', 'Helvetica Neue', 'Arial', 'sans-serif'], orbitron: ['Orbitron', 'sans-serif'], },
+                    boxShadow: { 'glow-primary': '0 0 15px rgba(107, 231, 183, 0.5)', 'glow-secondary': '0 0 15px rgba(59, 130, 246, 0.5)',}
                 }
             }
         }
     </script>
 </head>
 <body class="antialiased">
-    <!-- Header -->
-    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50 no-print">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
-                <a href="index.html#products" class="hover:primary-text transition-colors">Produk</a>
-                <a href="cart.html" class="relative hover:primary-text transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
+    <header class="navbar-modern sticky top-0 z-50 no-print">
+        <div class="container mx-auto px-4">
+            <div class="navbar-container">
+                <a href="index.html" class="block mr-4" data-no-transition> 
+                    <img src="images/logo.png" alt="MAYMART Logo" class="h-12 md:h-14 object-contain"> 
                 </a>
-                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+                <div class="desktop-nav">
+                     <div class="search-bar-desktop relative w-full max-w-xs md:max-w-sm lg:max-w-md mx-4">
+                        <input type="text" id="search-input" placeholder="Cari di MAYMART..." class="w-full py-2.5 px-4 pr-10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all">
+                        <button id="search-button-desktop" class="absolute top-0 right-0 h-full px-3 text-dark-subtext hover:text-primary transition-colors" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <nav class="nav-links">
+                        <a href="index.html">Beranda</a>
+                        <a href="index.html#products">Produk</a>
+                        <a href="cart.html" class="relative" aria-label="Keranjang Belanja">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </nav>
+                    <div class="user-actions ml-6 text-sm font-medium text-dark-subtext">
+                         <a href="login.html" id="user-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+                         <a href="account.html" id="account-link-index" class="hidden"><i class="fas fa-cog"></i> Akun</a>
+                    </div>
+                </div>
+                <button id="mobile-menu-button" class="mobile-menu-button text-2xl" aria-label="Toggle Menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden dark-bg">
-             <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
-            <a href="index.html#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
-            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
-            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
+        <div id="mobile-menu" class="mobile-menu-modern no-print">
+             <div class="search-bar-mobile p-3">
+                 <div class="relative w-full">
+                    <input type="text" id="search-input-mobile" placeholder="Cari produk..." class="w-full py-2.5 px-4 pr-10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all">
+                     <button id="search-button-mobile" class="absolute top-0 right-0 h-full px-3 text-dark-subtext hover:text-primary transition-colors" aria-label="Search Mobile">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <a href="index.html"><i class="fas fa-home"></i>Beranda</a>
+            <a href="index.html#products"><i class="fas fa-cubes"></i>Produk</a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i>Keranjang Belanja</a>
+            <hr class="border-dark-border/10 my-1">
+            <a href="login.html" id="mobile-user-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="account.html" id="mobile-account-link-index" class="hidden"><i class="fas fa-cog"></i> Akun Saya</a>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-12">
-        <div class="bg-white p-6 sm:p-10 shadow-xl rounded-lg max-w-3xl mx-auto">
+        <div class="receipt-card p-6 sm:p-10 shadow-xl max-w-3xl mx-auto">
             <div class="text-center mb-8">
-                <i class="fas fa-check-circle text-6xl primary-text mb-4"></i>
-                <h1 class="text-3xl sm:text-4xl font-bold dark-text">Pesanan Berhasil Dibuat!</h1>
-                <p class="text-slate-gray mt-2 text-lg">Terima kasih telah berbelanja di MAYMART.</p>
-                <p class="text-slate-gray mt-1">Pesanan Anda <strong id="receipt-order-id-msg" class="primary-text"></strong> sedang kami proses.</p>
+                <i class="fas fa-rocket text-6xl primary-text mb-6 icon-success-animated"></i>
+                <h1 class="text-3xl sm:text-4xl font-bold text-light-text font-orbitron">Pesanan Anda Meluncur!</h1>
+                <p class="text-dark-subtext mt-3 text-lg">Terima kasih telah memilih MAYMART untuk kebutuhan Anda.</p>
+                <p class="text-dark-subtext mt-1">Pesanan Anda <strong id="receipt-order-id-msg" class="primary-text font-semibold"></strong> sedang kami siapkan untuk pengiriman.</p>
             </div>
 
-            <!-- Electronic Receipt -->
-            <div id="printable-receipt" class="border border-gray-200 rounded-lg p-6">
-                <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+            <div id="printable-receipt" class="border border-dark-border/50 rounded-lg p-6 mt-8">
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-dark-border/30">
                     <div>
-                        <h2 class="text-2xl font-bold primary-text">MAYMART</h2>
-                        <p class="text-sm text-slate-gray">Nota Pembelian</p>
+                        <h2 class="text-2xl font-bold primary-text font-orbitron">MAYMART</h2>
+                        <p class="text-sm text-dark-subtext">Nota Pembelian Digital</p>
                     </div>
                     <div class="text-right">
-                        <p class="font-semibold dark-text">Order ID: <span id="receipt-order-id"></span></p>
-                        <p class="text-sm text-slate-gray">Tanggal: <span id="receipt-order-date"></span></p>
+                        <p class="font-semibold text-light-text">Order ID: <span id="receipt-order-id"></span></p>
+                        <p class="text-sm text-dark-subtext">Tanggal: <span id="receipt-order-date"></span></p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <h3 class="text-md font-semibold dark-text mb-1">Ditagihkan Kepada:</h3>
-                        <p id="receipt-customer-name" class="text-slate-gray"></p>
-                        <p id="receipt-customer-phone" class="text-slate-gray"></p>
+                        <h3 class="text-md font-semibold text-light-text mb-1">Ditagihkan Kepada:</h3>
+                        <p id="receipt-customer-name" class="text-dark-subtext"></p>
+                        <p id="receipt-customer-phone" class="text-dark-subtext"></p>
                     </div>
                     <div>
-                        <h3 class="text-md font-semibold dark-text mb-1">Dikirim Ke:</h3>
-                        <p id="receipt-shipping-address" class="text-slate-gray whitespace-pre-line"></p>
-                        <p id="receipt-shipping-city-postal" class="text-slate-gray"></p>
+                        <h3 class="text-md font-semibold text-light-text mb-1">Dikirim Ke:</h3>
+                        <p id="receipt-shipping-address" class="text-dark-subtext whitespace-pre-line"></p>
+                        <p id="receipt-shipping-city-postal" class="text-dark-subtext"></p>
                     </div>
                 </div>
                  <div id="receipt-customer-notes-container" class="mb-6 hidden">
-                    <h3 class="text-md font-semibold dark-text mb-1">Catatan Pembeli:</h3>
-                    <p id="receipt-customer-notes" class="text-slate-gray italic"></p>
+                    <h3 class="text-md font-semibold text-light-text mb-1">Catatan Pembeli:</h3>
+                    <p id="receipt-customer-notes" class="text-dark-subtext italic"></p>
                 </div>
 
-
-                <h3 class="text-md font-semibold dark-text mb-2">Detail Pesanan:</h3>
+                <h3 class="text-md font-semibold text-light-text mb-2">Detail Pesanan:</h3>
                 <div class="overflow-x-auto mb-6">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                    <table class="min-w-full divide-y divide-dark-border/30">
+                        <thead class="bg-dark-bg/30">
                             <tr>
-                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-slate-gray uppercase tracking-wider">Produk</th>
-                                <th scope="col" class="px-4 py-2 text-center text-xs font-medium text-slate-gray uppercase tracking-wider">Jumlah</th>
-                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-slate-gray uppercase tracking-wider">Harga Satuan</th>
-                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-slate-gray uppercase tracking-wider">Subtotal</th>
+                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-dark-subtext uppercase tracking-wider">Produk</th>
+                                <th scope="col" class="px-4 py-2 text-center text-xs font-medium text-dark-subtext uppercase tracking-wider">Jumlah</th>
+                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-dark-subtext uppercase tracking-wider">Harga Satuan</th>
+                                <th scope="col" class="px-4 py-2 text-right text-xs font-medium text-dark-subtext uppercase tracking-wider">Subtotal</th>
                             </tr>
                         </thead>
-                        <tbody id="receipt-items-table" class="bg-white divide-y divide-gray-200">
-                            <!-- Items will be populated by JavaScript -->
+                        <tbody id="receipt-items-table" class="bg-dark-card/50 divide-y divide-dark-border/20">
+                            <!-- Items populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -138,51 +208,126 @@
                 <div class="flex justify-end mb-6">
                     <div class="w-full md:w-1/2 lg:w-1/3 space-y-2">
                         <div class="flex justify-between">
-                            <span class="text-slate-gray">Subtotal Produk:</span>
-                            <span id="receipt-subtotal" class="font-medium dark-text"></span>
+                            <span class="text-dark-subtext">Subtotal Produk:</span>
+                            <span id="receipt-subtotal" class="font-medium text-light-text"></span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-slate-gray">Biaya Pengiriman:</span>
-                            <span id="receipt-shipping" class="font-medium dark-text"></span>
+                            <span class="text-dark-subtext">Biaya Pengiriman:</span>
+                            <span id="receipt-shipping" class="font-medium text-light-text"></span>
                         </div>
                          <div class="flex justify-between">
-                            <span class="text-slate-gray">Metode Pembayaran:</span>
-                            <span id="receipt-payment-method" class="font-medium dark-text"></span>
+                            <span class="text-dark-subtext">Metode Pembayaran:</span>
+                            <span id="receipt-payment-method" class="font-medium text-light-text"></span>
                         </div>
-                        <hr class="my-1 border-gray-300">
+                        <hr class="my-1 border-dark-border/30">
                         <div class="flex justify-between text-lg font-bold">
-                            <span class="dark-text">Total Pembayaran:</span>
+                            <span class="text-light-text">Total Pembayaran:</span>
                             <span id="receipt-total" class="primary-text"></span>
                         </div>
                     </div>
                 </div>
-                <p class="text-center text-sm text-slate-gray mt-6">
+                <p class="text-center text-sm text-dark-subtext mt-6">
                     Terima kasih atas kepercayaan Anda! Kami akan segera memproses pesanan Anda.
                 </p>
             </div>
 
-            <div class="mt-10 text-center space-y-3 sm:space-y-0 sm:space-x-4 no-print">
-                <a href="index.html" class="btn-primary py-2 px-6 rounded-md inline-block">
+            <div class="mt-10 text-center space-y-3 sm:space-y-0 sm:flex sm:justify-center sm:space-x-4 no-print">
+                <a href="index.html" class="btn-primary-futuristic py-2.5 px-8 rounded-lg inline-flex items-center justify-center">
                     <i class="fas fa-home mr-2"></i> Kembali ke Beranda
                 </a>
-                <!-- <button onclick="window.print()" class="btn-secondary py-2 px-6 rounded-md inline-block">
+                 <button onclick="window.print()" class="btn-secondary-futuristic py-2.5 px-8 rounded-lg inline-flex items-center justify-center">
                     <i class="fas fa-print mr-2"></i> Cetak Nota
-                </button> -->
+                </button>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-     <footer class="dark-bg text-off-white py-12 mt-16 no-print">
+    <footer class="dark-bg text-dark-subtext py-12 mt-16 no-print">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
-            <p>© <span id="current-year-footer"></span> MAYMART. Semua Hak Dilindungi.</p>
+            <p class="text-3xl font-bold primary-text mb-4 font-orbitron">MAYMART</p>
+            <p>© <span id="current-year-footer"></span> MAYMART Industries. All Rights Reserved.</p>
         </div>
     </footer>
     
-    <script src="js/script.js"></script> <!-- Common scripts, mobile menu -->
-    <script src="js/auth.js"></script> <!-- User link, cart count -->
-    <script src="js/cart.js"></script> <!-- For cart count updates -->
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
     <script src="js/order-success.js"></script>
+    <!-- SKRIP GLOBAL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            document.querySelectorAll('.nav-links a, .mobile-menu-modern a').forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop() || "index.html";
+                link.classList.remove('active-link', 'active-mobile-link');
+                if (linkPath === currentPath && !link.href.includes('#')) {
+                    link.classList.add(link.closest('.mobile-menu-modern') ? 'active-mobile-link' : 'active-link');
+                }
+            });
+            document.querySelectorAll('a').forEach(link => {
+                if (link.hostname === window.location.hostname && !link.href.includes('#') && link.target !== '_blank' && !link.hasAttribute('data-no-transition')) {
+                    link.addEventListener('click', function(e) {
+                        const href = this.href;
+                        if (href && (new URL(href).pathname !== window.location.pathname || new URL(href).search !== window.location.search)) {
+                            e.preventDefault();
+                            document.body.classList.remove('loaded');
+                            setTimeout(() => { window.location.href = href; }, 500);
+                        }
+                    });
+                }
+            });
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                if (typeof window.toggleMobileMenuGlobal === 'undefined') {
+                    window.toggleMobileMenuGlobal = () => {
+                        mobileMenuButton.setAttribute('aria-expanded', !(mobileMenuButton.getAttribute('aria-expanded') === 'true'));
+                        mobileMenu.classList.toggle('open');
+                        const icon = mobileMenuButton.querySelector('i');
+                        if (mobileMenu.classList.contains('open')) { icon.classList.remove('fa-bars'); icon.classList.add('fa-times'); }
+                        else { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+                    };
+                }
+                mobileMenuButton.removeEventListener('click', window.toggleMobileMenuGlobal);
+                mobileMenuButton.addEventListener('click', window.toggleMobileMenuGlobal);
+            }
+            const currentYearSpan = document.getElementById('current-year-footer');
+            if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+
+            const searchInputDesktop = document.getElementById('search-input');
+            const searchButtonDesktop = document.getElementById('search-button-desktop');
+            const searchInputMobile = document.getElementById('search-input-mobile');
+            const searchButtonMobile = document.getElementById('search-button-mobile');
+            function performSearchNavigation(searchTerm) {
+                if (searchTerm.trim() === "") return;
+                const isIndexPage = window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html');
+                if (isIndexPage) {
+                    let targetInput = searchInputDesktop;
+                    if (searchInputDesktop && searchInputDesktop.offsetParent === null && searchInputMobile) targetInput = searchInputMobile;
+                    if(targetInput){
+                        targetInput.value = searchTerm;
+                        targetInput.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+                    }
+                } else {
+                    document.body.classList.remove('loaded');
+                    setTimeout(() => { window.location.href = `index.html?search=${encodeURIComponent(searchTerm.trim())}`; }, 300);
+                }
+            }
+            if (searchButtonDesktop && searchInputDesktop) {
+                searchButtonDesktop.addEventListener('click', () => performSearchNavigation(searchInputDesktop.value));
+                searchInputDesktop.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearchNavigation(searchInputDesktop.value); });
+            }
+            if (searchButtonMobile && searchInputMobile) {
+                searchButtonMobile.addEventListener('click', () => performSearchNavigation(searchInputMobile.value));
+                searchInputMobile.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearchNavigation(searchInputMobile.value); });
+            }
+            
+            // --- LOGIKA SPESIFIK HALAMAN order-success.html ---
+            if (typeof loadOrderDetails === 'function') loadOrderDetails();
+            // updateCartCount(); // Sudah ada di global
+            // --- AKHIR LOGIKA SPESIFIK HALAMAN order-success.html ---
+        });
+    </script>
 </body>
 </html>
