@@ -1,0 +1,565 @@
+/* css/theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap');
+
+:root {
+    --font-sans: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+    --font-orbitron: 'Orbitron', sans-serif;
+
+    --color-primary: #6ee7b7; /* Mint Green (Cyber Lime) */
+    --color-primary-dark: #5ce0a8;
+    --color-secondary: #3b82f6; /* Bright Blue (Cyber Blue) */
+    --color-secondary-dark: #2563eb;
+    --color-accent: #ec4899; /* Fuchsia Pink (Cyber Pink) */
+    --color-accent-dark: #d926a9;
+
+    --color-bg-dark: #0f172a;      /* Very Dark Blue (Space Cadet) */
+    --color-card-dark: #1e293b;    /* Dark Slate Blue (Charcoal) */
+    --color-card-dark-hover: rgba(30, 41, 59, 0.85);
+    --color-border-dark: #334155;  /* Slate Gray (Gunmetal) */
+    --color-border-primary-accent: rgba(107, 231, 183, 0.25);
+
+    --color-text-light: #e2e8f0;   /* Light Gray (Platinum) */
+    --color-text-subtle: #9ca3af; /* Medium Gray (Cool Gray) */
+    --color-text-placeholder: #6b7280; /* Gray (Sonic Silver) */
+    --color-text-dark-on-light-bg: #0f172a; /* For buttons on light gradient */
+    
+    --shadow-glow-primary: 0 0 15px rgba(107, 231, 183, 0.5);
+    --shadow-glow-secondary: 0 0 15px rgba(59, 130, 246, 0.5);
+    --shadow-card: 0 8px 16px rgba(0,0,0,0.15);
+    --shadow-card-hover: 0 12px 25px rgba(0,0,0,0.2), 0 0 15px rgba(107, 231, 183, 0.15);
+
+    --transition-speed: 0.3s;
+    --transition-ease: ease;
+    --transition-all: all var(--transition-speed) var(--transition-ease);
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Ini membantu untuk scroll #hash, tapi JS lebih presisi */
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body.loaded {
+    opacity: 1;
+}
+main {
+    flex-grow: 1;
+}
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+
+
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed) var(--transition-ease);
+}
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: var(--transition-all);
+    cursor: pointer;
+    text-align: center;
+    border: none;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-text-dark-on-light-bg);
+    box-shadow: 0 4px 15px rgba(88, 201, 225, 0.2);
+}
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(88, 201, 225, 0.3);
+    filter: brightness(1.1);
+}
+.btn-primary:disabled {
+    background: var(--color-text-placeholder);
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(0.5);
+    color: var(--color-text-subtle);
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+.btn-danger:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+.btn-secondary {
+    background: linear-gradient(135deg, var(--color-border-dark), #4b5563);
+    color: var(--color-text-light);
+    box-shadow: 0 4px 15px rgba(51, 65, 85, 0.2);
+}
+.btn-secondary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(51, 65, 85, 0.3);
+    filter: brightness(1.1);
+}
+
+/* Cards */
+.content-card {
+    background-color: var(--color-card-dark-hover);
+    border: 1px solid var(--color-border-primary-accent);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(107, 231, 183, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.product-card {
+    background-color: rgba(30, 41, 59, 0.7);
+    border: 1px solid var(--color-border-primary-accent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) var(--transition-ease),
+                box-shadow var(--transition-speed) var(--transition-ease),
+                background-color var(--transition-speed) var(--transition-ease);
+}
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    background-color: var(--color-card-dark-hover);
+    box-shadow: var(--shadow-card-hover);
+}
+.product-card img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+.product-card .card-content {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.product-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+}
+.product-card .card-category {
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.25rem;
+}
+.product-card .card-price {
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+.product-card .card-price .original-price {
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+}
+.product-card .card-description {
+    color: var(--color-text-subtle);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Batasi deskripsi menjadi 3 baris */
+}
+.product-card .card-actions {
+    margin-top: auto;
+}
+
+/* Forms */
+/* ... (Styling form lainnya tetap sama) ... */
+.quantity-input {
+    width: 3rem;
+    text-align: center;
+    border-top: 1px solid var(--color-border-dark);
+    border-bottom: 1px solid var(--color-border-dark);
+    background-color: var(--color-card-dark);
+    color: var(--color-text-light);
+    padding: 0.25rem;
+}
+.quantity-input:focus { outline: none; }
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.quantity-button {
+    padding: 0.25rem 0.75rem;
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-border-dark);
+    background-color: var(--color-bg-dark);
+    transition: background-color var(--transition-speed);
+}
+.quantity-button:hover { background-color: var(--color-border-dark); }
+.quantity-button.minus { border-radius: 0.375rem 0 0 0.375rem; border-right:none; }
+.quantity-button.plus { border-radius: 0 0.375rem 0.375rem 0; border-left:none;}
+
+/* Navbar Styling */
+.navbar-modern {
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid rgba(107, 231, 183, 0.15);
+    padding: 0.75rem 0;
+    position: sticky; /* Memastikan navbar menempel di atas */
+    top: 0;
+    z-index: 50; /* Di atas elemen lain */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-logo-link {
+    display: block;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.navbar-logo-img {
+    height: 2.75rem;
+    object-fit: contain;
+}
+@media (min-width: 768px) {
+    .navbar-logo-img {
+        height: 3.25rem;
+    }
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: none; /* Default tersembunyi, muncul di layar besar */
+}
+@media (min-width: 1024px) { /* Breakpoint untuk desktop nav, sesuaikan jika perlu */
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+        flex-grow: 1; /* Mengisi ruang yang tersedia */
+        gap: 1rem; /* Jarak antara search bar dan grup kanan */
+        min-width: 0; /* Mencegah overflow */
+    }
+}
+
+.search-bar-desktop {
+    position: relative;
+    flex-grow: 1; /* Biarkan search bar mengisi ruang */
+    flex-shrink: 1; /* Biarkan search bar menyusut jika perlu */
+    min-width: 180px;
+    max-width: 400px; /* Batasi lebar maksimum */
+    margin: 0 auto; /* Tengahkan search bar jika tidak mengisi penuh */
+}
+@media (min-width: 1280px) {
+    .search-bar-desktop {
+        max-width: 500px; /* Lebih lebar di layar sangat besar */
+    }
+}
+@media (min-width: 1024px) and (max-width: 1180px) { /* Untuk layar desktop yang lebih sempit */
+    .search-bar-desktop {
+        max-width: 320px; /* Kurangi agar tidak terlalu mendominasi */
+        margin: 0 0.5rem; /* Beri sedikit margin jika tidak bisa di tengah */
+    }
+}
+
+.search-input-field {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    padding-right: 2.5rem; /* Untuk ikon search */
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background-color: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(107, 231, 183, 0.15);
+    color: var(--color-text-light);
+    transition: var(--transition-all);
+}
+.search-input-field::placeholder { color: var(--color-text-placeholder); }
+.search-input-field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(107, 231, 183, 0.3);
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 0.75rem;
+    color: var(--color-text-subtle);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+.search-button:hover { color: var(--color-primary); }
+
+.desktop-nav-right-group {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Mendorong ke kanan */
+    gap: 1.5rem; /* Jarak antara nav-links dan user-actions */
+    flex-shrink: 0; /* Mencegah grup ini menyusut */
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.25rem; /* Jarak antar link navigasi */
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.nav-links a {
+    position: relative;
+    padding: 0.25rem 0;
+    letter-spacing: 0.03em;
+    transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease;
+    white-space: nowrap;
+    color: var(--color-text-subtle);
+}
+.nav-links a:hover, .nav-links a.active-link {
+    color: var(--color-primary);
+    text-shadow: var(--shadow-glow-primary);
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    transition: width var(--transition-speed) ease;
+}
+.nav-links a:hover::after, .nav-links a.active-link::after { width: 60%; }
+.nav-icon { color: var(--color-primary); margin-right: 0.3rem; }
+
+.cart-count-badge {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-glow-secondary);
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 9999px;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    line-height: 1;
+    display: none; /* Default tersembunyi, diatur JS */
+}
+
+.user-actions a {
+    color: var(--color-text-subtle);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.user-actions a:hover { color: var(--color-primary); }
+
+/* Mobile Navigation */
+.mobile-menu-button {
+    display: none; /* Default tersembunyi, muncul di layar kecil */
+    color: var(--color-text-subtle);
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem; /* Area klik lebih baik */
+}
+@media (max-width: 1023px) { /* Breakpoint untuk mobile menu button (kebalikan dari .desktop-nav) */
+    .mobile-menu-button {
+        display: block;
+    }
+    .desktop-nav { /* Pastikan desktop nav tersembunyi di mobile */
+        display: none !important;
+    }
+}
+.mobile-menu-button:hover { color: var(--color-primary); }
+
+.mobile-menu-modern {
+    background-color: rgba(15, 23, 42, 0.97);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: var(--color-text-subtle);
+    position: absolute; /* Agar bisa muncul di bawah header */
+    top: 100%; /* Muncul tepat di bawah parent (.navbar-modern) */
+    left: 0;
+    right: 0;
+    z-index: 40; /* Di bawah navbar utama (z-index: 50) tapi di atas konten lain */
+    border-top: 1px solid rgba(107, 231, 183, 0.1);
+    max-height: 0; /* Awalnya tersembunyi */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding-bottom 0.4s ease-out;
+}
+.mobile-menu-modern.open {
+    max-height: 600px; /* Sesuaikan jika menu sangat panjang */
+    padding-bottom: 1rem; /* Memberi ruang di bawah saat terbuka */
+}
+
+.mobile-menu-modern .search-bar-mobile { padding: 0.75rem 1rem; }
+
+.mobile-menu-modern a {
+    display: block;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid rgba(107, 231, 183, 0.08);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    color: var(--color-text-subtle);
+}
+.mobile-menu-modern a:last-child { border-bottom: none; }
+.mobile-menu-modern a:hover, .mobile-menu-modern a.active-mobile-link {
+    background-color: rgba(107, 231, 183, 0.05);
+    color: var(--color-primary);
+}
+.nav-icon-mobile { margin-right: 0.75rem; width: 20px; color: var(--color-primary); }
+.mobile-menu-divider { border-color: rgba(107, 231, 183, 0.1); }
+
+
+/* Footer */
+/* ... (Styling footer tetap sama) ... */
+.site-footer {
+    background-color: var(--color-card-dark);
+    color: var(--color-text-subtle);
+    padding: 3rem 0;
+    margin-top: 4rem;
+}
+.footer-logo-text {
+    font-family: var(--font-orbitron);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.social-icon-link {
+    color: var(--color-text-subtle);
+    font-size: 1.25rem;
+    transition: color var(--transition-speed);
+}
+.social-icon-link:hover { color: var(--color-primary); }
+.copyright-text { font-size: 0.875rem; }
+
+/* Utility */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.font-orbitron { font-family: var(--font-orbitron); }
+.primary-text { color: var(--color-primary); }
+.text-light { color: var(--color-text-light); }
+.text-subtle { color: var(--color-text-subtle); }
+.section-divider {
+    border-color: rgba(107, 231, 183, 0.15);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.page-title {
+    font-family: var(--font-orbitron);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    color: var(--color-text-light);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: var(--shadow-glow-primary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-card-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary-dark); }
+
+/* Print Styles */
+/* ... (Styling print tetap sama) ... */
+@media print {
+    body * { visibility: hidden; }
+    #printable-receipt, #printable-receipt * { visibility: visible; }
+    #printable-receipt {
+        position: absolute; left: 0; top: 0; width: 100%;
+        background-color: white !important; color: black !important;
+        border: 1px solid #ccc !important; padding: 1.5rem !important;
+        box-shadow: none !important; backdrop-filter: none !important;
+    }
+    .no-print, .navbar-modern, .site-footer { display: none !important; }
+    #printable-receipt .primary-text { color: #228B22 !important; }
+    #printable-receipt .text-light-text, #printable-receipt .text-dark-subtext,
+    #printable-receipt .font-semibold, #printable-receipt .font-medium,
+    #printable-receipt span, #printable-receipt p, #printable-receipt h1, #printable-receipt h2, #printable-receipt h3, #printable-receipt th, #printable-receipt td {
+        color: black !important; font-family: Arial, sans-serif !important;
+    }
+    #printable-receipt table, #printable-receipt th, #printable-receipt td { border-color: #ccc !important; }
+    #printable-receipt thead { background-color: #f0f0f0 !important; }
+    #printable-receipt .bg-dark-bg\/30, #printable-receipt .bg-dark-card\/50,
+    #printable-receipt div[class*="bg-dark-"] { background-color: transparent !important; }
+    #printable-receipt hr, #printable-receipt [class*="border-dark-"],
+    #printable-receipt [class*="divide-dark-"] { border-color: #ccc !important; }
+}
+
+/* About Us Section Specifics */
+.about-us-intro { text-align: center; margin-bottom: 4rem; }
+.about-us-section .section-description {
+    color: #cbd5e1; font-weight: 300; line-height: 1.7; font-size: 1.125rem;
+    max-width: 48rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem;
+}
+.about-us-cta-container { text-align: center; margin-top: 3rem; }
+
+/* Product Card Specifics */
+.product-card .card-actions .btn { width: 100%; display: block; margin-bottom: 0.5rem; }
+.product-card .card-actions .detail-link {
+    display: block; text-align: center; font-size: 0.875rem;
+    color: var(--color-primary); text-decoration: none;
+}
+.product-card .card-actions .detail-link:hover { text-decoration: underline; color: var(--color-primary-dark); }
+
+/* Search Message Styling */
+.products-section #search-message {
+    text-align: center; color: var(--color-text-subtle);
+    margin-bottom: 2rem; min-height: 1.5em;
+}
+.products-section #search-message.hidden { display: none; }

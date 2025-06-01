@@ -1,0 +1,57 @@
+<!-- _navbar.html -->
+<header class="navbar-modern sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo-link" data-no-transition>
+                <img src="images/logo.png" alt="MAYMART Logo" class="navbar-logo-img">
+            </a>
+
+            <div class="desktop-nav"> <!-- Akan disembunyikan di layar kecil oleh CSS -->
+                <div class="search-bar-desktop">
+                    <div class="relative w-full">
+                        <input type="text" id="search-input-desktop" placeholder="Cari di MAYMART..." class="search-input-field">
+                        <button id="search-button-desktop" class="search-button" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="desktop-nav-right-group">
+                    <nav class="nav-links">
+                        <a href="index.html" data-navlink="index.html">Beranda</a>
+                        <a href="index.html#products" data-navlink="index.html#products">Produk</a>
+                        <a href="account.html" data-navlink="account.html" id="nav-account-link" class="hidden"><i class="fas fa-user-cog nav-icon"></i>Akun</a>
+                        <a href="cart.html" class="relative" data-navlink="cart.html" aria-label="Keranjang Belanja">
+                            <i class="fas fa-shopping-cart text-lg nav-icon"></i>
+                            <span id="cart-count" class="cart-count-badge">0</span>
+                        </a>
+                    </nav>
+                    <div class="user-actions">
+                        <a href="login.html" id="nav-user-link" data-navlink="login.html"><i class="fas fa-sign-in-alt nav-icon"></i> Login</a>
+                    </div>
+                </div>
+            </div>
+
+            <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Toggle Menu" aria-expanded="false"> <!-- Akan ditampilkan di layar kecil oleh CSS -->
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu-modern"> <!-- Menu dropdown untuk mobile -->
+        <div class="search-bar-mobile p-3">
+            <div class="relative w-full">
+                <input type="text" id="search-input-mobile" placeholder="Cari produk..." class="search-input-field">
+                <button id="search-button-mobile" class="search-button" aria-label="Search Mobile">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <a href="index.html" data-navlink="index.html"><i class="fas fa-home nav-icon-mobile"></i>Beranda</a>
+        <a href="index.html#products" data-navlink="index.html#products"><i class="fas fa-cubes nav-icon-mobile"></i>Produk</a>
+        <a href="cart.html" data-navlink="cart.html"><i class="fas fa-shopping-cart nav-icon-mobile"></i>Keranjang</a>
+        <hr class="mobile-menu-divider my-1">
+        <a href="account.html" data-navlink="account.html" id="mobile-nav-account-link" class="hidden"><i class="fas fa-user-cog nav-icon-mobile"></i>Akun Saya</a>
+        <a href="login.html" id="mobile-nav-user-link" data-navlink="login.html"><i class="fas fa-sign-in-alt nav-icon-mobile"></i>Login</a>
+    </div>
+</header>

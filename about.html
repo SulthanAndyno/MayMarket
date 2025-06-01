@@ -3,59 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAYMART - Sayuran Segar Online</title>
+    <title>Tentang Kami - MAYMART</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/theme.css">
     <style>
-        /* INDEX-SPECIFIC STYLES - Minimal */
-        .hero-section-modern {
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            min-height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 2.5rem;
-            padding-bottom: 2.5rem;
+        /* ABOUT-PAGE-SPECIFIC STYLES (if any, reuse from index or theme) */
+        /* Styles for .about-us-section and its children are now in theme.css or index.html's specific styles */
+        /* For this page, we assume they are sufficiently covered by theme.css or copied from index.html if needed */
+        .hero-placeholder { /* Optional: if you want some top spacing like a hero but simpler */
+            padding-top: 3rem; /* Adjust as needed */
+            padding-bottom: 1rem;
+            background-color: var(--color-bg-dark); /* Match body background */
         }
-        .hero-section-modern .hero-content {
-            position: relative;
-            z-index: 10;
-            padding: 1.5rem;
-        }
-        .hero-section-modern h1 {
-            font-family: var(--font-orbitron);
-            font-size: clamp(2.25rem, 6vw, 4.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.025em;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-        }
-        .hero-section-modern .hero-subtitle {
-            font-size: 1.125rem;
-            margin-bottom: 2.5rem;
-            color: var(--color-text-subtle);
-            max-width: 42rem;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero-section-modern .hero-cta {
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-        }
-        .hero-section-modern .hero-cta:hover {
-             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-             transform: scale(1.05);
-        }
-        .hero-section-modern .hero-cta i { margin-left: 0.5rem; }
-
+         /* Re-include about-us-section specific styles if not fully in theme.css */
         .about-us-section {
             background: linear-gradient(160deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 30, 48, 0.9) 100%);
             padding: 4rem 0;
@@ -124,36 +85,6 @@
             .vision-card.lg-col-span-1 { grid-column: span 1 / span 1; }
             .vision-card.lg-col-span-2 { grid-column: span 2 / span 2; }
         }
-
-        .products-section {
-            background: var(--color-bg-dark); padding: 4rem 0; position: relative; overflow: hidden;
-        }
-        .products-section::after {
-            content: ''; position: absolute; bottom: -30%; right: -15%; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, rgba(59, 130, 246, 0) 60%);
-            pointer-events: none; z-index: 0;
-        }
-        .products-section .section-title-products {
-            font-family: var(--font-orbitron); font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 700;
-            color: var(--color-primary); margin-bottom: 1rem; text-align: center;
-            text-shadow: var(--shadow-glow-primary);
-        }
-        /* .products-section #search-message is now in theme.css */
-        .products-grid {
-            display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem;
-        }
-        @media (min-width: 640px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        @media (min-width: 1280px) { .products-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-
-        .products-section #no-products-message {
-            text-align: center; font-size: 1.25rem; color: var(--color-text-subtle); margin-top: 2.5rem;
-        }
-        .products-section #no-products-message.hidden { display: none; }
-        .products-section #no-products-message i {
-             font-size: 2rem; color: var(--color-primary); margin-bottom: 0.75rem; display: block;
-        }
-        .hidden { display: none !important; } /* Global utility if needed */
     </style>
 </head>
 <body class="antialiased">
@@ -161,23 +92,16 @@
     <div id="page-navbar-container"></div> <!-- Navbar will be loaded here -->
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero-section-modern">
-            <div class="hero-content">
-                <h1>Sayuran <span class="primary-text">Segar Berkualitas</span>, Masa Depan Pangan Anda.</h1>
-                <p class="hero-subtitle">
-                    Teknologi bertemu tradisi. Dapatkan hasil panen terbaik langsung ke pintu Anda, didukung oleh inovasi untuk kesegaran maksimal.
-                </p>
-                <a href="#products" class="btn btn-primary hero-cta">
-                    Jelajahi Produk <i class="fas fa-angle-double-right"></i>
-                </a>
+        <div class="hero-placeholder">
+            <div class="container">
+                <h1 class="page-title" style="color: var(--color-primary); text-shadow: var(--shadow-glow-primary);">Tentang MAYMART</h1>
             </div>
-        </section>
+        </div>
 
-        <!-- About Us Section -->
-        <section id="about-us" class="about-us-section">
+        <!-- About Us Section (copied from index.html content structure) -->
+        <section id="about-us-content" class="about-us-section">
             <div class="container about-us-content-wrapper">
-                <div class="about-us-intro"> <!-- Diganti dari text-center mb-16 -->
+                <div class="about-us-intro">
                     <span class="section-subtitle">Our Core</span>
                     <h2 class="section-title">Visi <span class="primary-text">MAYMART</span>: Pertanian Masa Depan</h2>
                     <p class="section-description">
@@ -212,26 +136,11 @@
                         <p>Menjadi platform terdepan yang menghubungkan produsen dan konsumen secara transparan, efisien, dan cerdas, menciptakan masa depan pangan yang lebih baik untuk semua.</p>
                     </div>
                 </div>
-                <div class="about-us-cta-container"> <!-- Diganti dari text-center mt-12 -->
-                    <a href="#products" class="btn btn-primary">
-                        Lihat Bagaimana Kami Bekerja
+                 <div class="about-us-cta-container">
+                    <a href="index.html#products" class="btn btn-primary">
+                        Jelajahi Produk Kami
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <!-- Featured Products Section -->
-        <section id="products" class="products-section">
-            <div class="container">
-                <h2 class="section-title-products">Produk Pilihan MAYMART</h2>
-                <p id="search-message" class="hidden"></p>
-                <div id="product-list" class="products-grid">
-                    <!-- Product cards will be generated by JavaScript -->
-                </div>
-                <p id="no-products-message" class="hidden">
-                    <i class="fas fa-satellite-dish"></i><br>
-                    Sinyal Produk Hilang! Coba kata kunci lain atau <a href="#products" onclick="window.displayProducts(window.allProducts); document.getElementById('search-input-desktop').value=''; document.getElementById('search-input-mobile').value=''; document.getElementById('search-message').classList.add('hidden'); return false;" class="primary-text">lihat semua produk</a>.
-                </p>
             </div>
         </section>
     </main>
@@ -241,6 +150,6 @@
     <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/script.js"></script>
+    <!-- No script.js needed as it's for product listing on index.html -->
 </body>
 </html>
