@@ -4,129 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang Belanja - MAYMART</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F7FAFC; color: #1A202C; }
-        .primary-bg { background-color: #99cc76; }
-        .primary-text { color: #99cc76; }
-        .dark-bg { background-color: #1A202C; }
-        .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
-        .btn-primary:hover { background-color: #82b362; }
-        .btn-danger { background-color: #E53E3E; color: white; transition: background-color 0.3s ease; }
-        .btn-danger:hover { background-color: #C53030; }
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    </style>
-     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#99cc76',
-                        dark: '#1A202C',
-                        'slate-gray': '#4A5568',
-                        'off-white': '#F7FAFC',
-                        danger: '#E53E3E',
-                    },
-                    fontFamily: {
-                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/cart.css"> <!-- Cart page specific styles -->
 </head>
 <body class="antialiased">
-    <!-- Header (Sama) -->
-    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
-                <a href="index.html#products" class="hover:primary-text transition-colors">Produk</a>
-                <a href="cart.html" class="relative primary-text transition-colors"> <!-- Active state -->
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
-                </a>
-                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-         <div id="mobile-menu" class="hidden md:hidden dark-bg">
-             <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
-            <a href="index.html#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
-            <a href="cart.html" class="block px-4 py-2 bg-slate-gray transition-colors">Keranjang</a> <!-- Active -->
-            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
-        </div>
-    </header>
+
+    <div id="page-navbar-container"></div>
 
     <main class="container mx-auto px-4 py-12">
-        <h1 class="text-4xl font-bold dark-text mb-8 text-center">Keranjang Belanja Anda</h1>
+        <h1 class="cart-page-title">Keranjang Belanja Anda</h1>
         
-        <div id="cart-items-container" class="bg-white shadow-xl rounded-lg overflow-hidden">
-            <!-- Cart items akan di-generate JavaScript -->
-            <!-- Contoh Struktur Item:
-            <div class="cart-item flex items-center p-4 border-b border-gray-200">
-                <img src="images/product1-thumb.jpg" alt="Nama Produk" class="w-20 h-20 object-cover rounded mr-4">
-                <div class="flex-grow">
-                    <h3 class="text-lg font-semibold dark-text">Nama Produk</h3>
-                    <p class="text-sm text-slate-gray">Variasi: 1kg</p>
-                    <p class="text-md primary-text font-medium">Rp 15.000</p>
-                </div>
-                <div class="flex items-center mx-4">
-                    <button class="px-2 py-1 text-slate-gray hover:bg-gray-100 rounded-l">-</button>
-                    <input type="number" value="1" class="w-12 text-center border-t border-b border-gray-300 quantity-input p-1">
-                    <button class="px-2 py-1 text-slate-gray hover:bg-gray-100 rounded-r">+</button>
-                </div>
-                <p class="text-lg font-semibold dark-text w-24 text-right">Rp 15.000</p>
-                <button class="ml-4 text-red-500 hover:text-red-700 transition-colors">
-                    <i class="fas fa-trash-alt fa-lg"></i>
-                </button>
-            </div>
-             -->
+        <div id="cart-items-container" class="cart-content-card rounded-lg shadow-xl overflow-hidden">
+            <!-- Cart items will be generated by JavaScript -->
         </div>
 
-        <div id="cart-empty-message" class="hidden text-center py-10 bg-white shadow-xl rounded-lg">
-            <i class="fas fa-shopping-cart fa-3x text-gray-300 mb-4"></i>
-            <p class="text-xl text-slate-gray">Keranjang belanja Anda kosong.</p>
-            <a href="index.html#products" class="btn-primary mt-6 py-2 px-6 rounded-md inline-block">Mulai Belanja</a>
+        <div id="cart-empty-message" class="hidden cart-content-card rounded-lg shadow-xl">
+            <i class="fas fa-ghost"></i>
+            <p class="empty-text">Keranjang Anda terasa kosong...</p>
+            <a href="products.html" class="btn btn-primary start-shopping-btn">Mulai Berburu Produk!</a>
         </div>
 
-        <div id="cart-summary" class="mt-8 p-6 bg-white shadow-xl rounded-lg">
-            <h2 class="text-2xl font-semibold dark-text mb-4">Ringkasan Belanja</h2>
-            <div class="flex justify-between mb-2">
-                <span class="text-slate-gray">Subtotal Produk:</span>
-                <span id="cart-subtotal" class="font-medium dark-text">Rp 0</span>
+        <div id="cart-summary" class="cart-content-card rounded-lg shadow-xl hidden">
+            <h2 class="summary-title">Ringkasan Belanja</h2>
+            <div class="summary-row">
+                <span class="summary-label">Subtotal Produk:</span>
+                <span id="cart-subtotal" class="summary-value">Rp 0</span>
             </div>
-            <div class="flex justify-between mb-2">
-                <span class="text-slate-gray">Biaya Pengiriman:</span>
-                <span class="font-medium dark-text">Rp 10.000 (Estimasi)</span>
+            <div class="summary-row">
+                <span class="summary-label">Biaya Pengiriman:</span>
+                <span id="shipping-cost" class="summary-value">Rp 10.000 (Estimasi)</span>
             </div>
-            <hr class="my-3 border-gray-300">
-            <div class="flex justify-between text-xl font-bold mb-6">
-                <span class="dark-text">Total Pembayaran:</span>
-                <span id="cart-total" class="primary-text">Rp 10.000</span>
+            <hr>
+            <div class="total-row">
+                <span class="total-label">Total Pembayaran:</span>
+                <span id="cart-total" class="total-value text-primary">Rp 10.000</span>
             </div>
-            <a href="checkout.html" id="checkout-button" class="btn-primary w-full text-lg font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center block">
-                Lanjut ke Checkout <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+            <button id="checkout-button" class="btn btn-primary" disabled>
+                Lanjut ke Checkout <i class="fas fa-shield-alt"></i>
+            </button>
         </div>
     </main>
 
-    <!-- Footer (Sama) -->
-     <footer class="dark-bg text-off-white py-12 mt-16">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
-            <p>© <span id="current-year-footer"></span> MAYMART. Semua Hak Dilindungi.</p>
-        </div>
-    </footer>
+    <div id="page-footer-container"></div>
 
-    <script src="js/script.js"></script>
+    <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+                // User is not logged in. Show a message and redirect.
+                const mainContent = document.querySelector('main.container');
+                if (mainContent) {
+                    mainContent.innerHTML = `
+                        <div class="cart-content-card text-center py-10">
+                            <i class="fas fa-exclamation-triangle fa-3x text-yellow-400 mb-4"></i>
+                            <p class="text-xl text-light-text mb-3">Akses Ditolak</p>
+                            <p class="text-dark-subtext mb-6">Anda harus login untuk melihat keranjang belanja.</p>
+                            <a href="login.html?redirect=cart.html" class="btn btn-primary">Login Sekarang</a>
+                        </div>`;
+                }
+                // Hide elements that shouldn't be visible
+                const cartItemsContainer = document.getElementById('cart-items-container');
+                const cartSummaryDiv = document.getElementById('cart-summary');
+                if(cartItemsContainer) cartItemsContainer.classList.add('hidden');
+                if(cartSummaryDiv) cartSummaryDiv.classList.add('hidden');
+                
+                // Optionally, redirect after a delay or keep them on the page with the message.
+                // For immediate redirect:
+                // if (typeof redirectToLogin === 'function') redirectToLogin('cart.html');
+                return; 
+            }
+            
+            // If logged in, cart.js's own DOMContentLoaded listener will call displayCartItems, 
+            // updateCartCount (though global.js also calls it), and setupCheckoutButton.
+            // Explicit calls here ensure they run after the login check.
+            if (typeof displayCartItems === 'function') displayCartItems();
+            if (typeof setupCheckoutButton === 'function') setupCheckoutButton();
+        });
+    </script>
 </body>
 </html>

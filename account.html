@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akun Saya - MAYMART</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/account.css"> <!-- Account page specific styles -->
+</head>
+<body class="antialiased">
+    
+    <div id="page-navbar-container"></div> <!-- Navbar akan dimuat di sini oleh global.js -->
+
+    <main class="container account-main-container">
+        <div class="account-card content-card"> <!-- content-card for base styling from theme.css -->
+            <div id="account-details" class="hidden">
+                <h1 class="account-title">Portal Akun Saya</h1>
+                <p class="account-subtitle">Selamat Datang Kembali, <strong id="account-username" class="primary-text font-orbitron"></strong>!</p>
+                <p class="account-text">Dari dasbor ini, Anda dapat mengelola detail akun, melihat riwayat pesanan, dan menyesuaikan preferensi Anda.</p>
+                
+                <hr class="section-divider">
+                
+                <div>
+                    <h2 class="order-history-title"><i class="fas fa-receipt"></i>Riwayat Pesanan</h2>
+                    <div class="content-box-dark">
+                        <p class="text-content">Fitur untuk memeriksa riwayat pesanan akan segera hadir. Stay tune ya!</p>
+                    </div>
+                </div>
+                
+                 <hr class="section-divider">
+
+                 <div>
+                    <h2 class="account-settings-title"><i class="fas fa-user-cog"></i>Pengaturan Akun</h2>
+                     <div class="content-box-dark">
+                        <p class="text-content">Fitur untuk mengubah detail pribadi, alamat, dan preferensi notifikasi akan segera hadir. Stay tune ya!</p>
+                    </div>
+                </div>
+
+                <div class="logout-button-container">
+                    <button onclick="logoutAndRedirect()" class="btn btn-danger btn-logout-system">
+                        <i class="fas fa-power-off"></i>Logout Sistem
+                    </button>
+                </div>
+            </div>
+
+            <div id="login-prompt" class="hidden">
+                <i class="fas fa-user-shield prompt-icon"></i>
+                <h1 class="account-title prompt-title">Portal Akun Saya</h1>
+                <p class="prompt-subtitle">Akses Terbatas</p>
+                <p class="prompt-text">Untuk mengakses portal akun Anda dan mengelola informasi pribadi, silakan lakukan autentikasi terlebih dahulu.</p>
+                <a href="login.html" class="btn btn-primary btn-authenticate">
+                    <i class="fas fa-fingerprint"></i>Autentikasi Sekarang
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div id="page-footer-container"></div>
+    
+    <script src="js/global.js"></script>
+    <script src="js/auth.js"></script> 
+    <script src="js/cart.js"></script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const accountDetailsDiv = document.getElementById('account-details');
+            const loginPromptDiv = document.getElementById('login-prompt');
+            const accountUsernameSpan = document.getElementById('account-username');
+
+            if (currentUser && accountDetailsDiv && loginPromptDiv && accountUsernameSpan) {
+                accountUsernameSpan.textContent = currentUser.username;
+                accountDetailsDiv.classList.remove('hidden');
+                loginPromptDiv.classList.add('hidden');
+            } else if (loginPromptDiv && accountDetailsDiv) { 
+                loginPromptDiv.classList.remove('hidden');
+                accountDetailsDiv.classList.add('hidden');
+                // Redirect if not logged in (auth.js handles this via redirectToLogin)
+                // This check should ideally be done by auth.js on page load for protected pages.
+                if (typeof isLoggedIn === 'function' && !isLoggedIn() && typeof redirectToLogin === 'function') {
+                     redirectToLogin('account.html'); 
+                     return; // Stop further script execution if redirecting
+                }
+            }
+            // Navbar "Akun" link disabling is handled by global.js
+        });
+
+        function logoutAndRedirect() { 
+            if (typeof logout === 'function') { // logout is defined in auth.js
+                logout();
+            } else { 
+                console.warn('logout function from auth.js not found. Performing manual logout.');
+                localStorage.removeItem('currentUser');
+                document.body.classList.remove('loaded'); // Start fade out
+                setTimeout(() => { window.location.href = 'login.html'; }, 300); // Transition time
+            }
+        }
+    </script>
+</body>
+</html>

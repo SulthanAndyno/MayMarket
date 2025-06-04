@@ -3,145 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAYMART - Sayuran Segar Online</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Untuk ikon -->
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #F7FAFC; /* Abu-abu Sangat Terang */
-            color: #1A202C; /* Charcoal */
-        }
-        .primary-bg { background-color: #99cc76; }
-        .primary-text { color: #99cc76; }
-        .dark-bg { background-color: #1A202C; }
-        .dark-text { color: #1A202C; }
-        .accent-bg { background-color: #4FD1C5; } /* Teal cerah jika dipakai */
-        .futuristic-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .futuristic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .btn-primary {
-            background-color: #99cc76;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #82b362; /* Warna hijau lebih gelap saat hover */
-        }
-        .btn-secondary {
-            background-color: #4A5568; /* Slate Gray */
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background-color: #2D3748; /* Darker Slate Gray */
-        }
-        /* Custom scrollbar (opsional, untuk nuansa futuristik) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #2D3748; /* Dark Gray */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #99cc76;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #82b362;
-        }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#99cc76',
-                        dark: '#1A202C',
-                        'slate-gray': '#4A5568',
-                        'off-white': '#F7FAFC',
-                        accent: '#4FD1C5',
-                    },
-                    fontFamily: {
-                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>MAYMART - Inovasi Pangan Masa Depan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/index.css"> <!-- Index page specific styles -->
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
-                <a href="#products" class="hover:primary-text transition-colors">Produk</a>
-                <a href="cart.html" class="relative hover:primary-text transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
-                </a>
-                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
-                 <!-- <a href="account.html" id="account-link" class="hidden hover:primary-text transition-colors">Akun Saya</a> -->
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden dark-bg">
-            <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
-            <a href="#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
-            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
-            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
-        </div>
-    </header>
+    <div id="page-navbar-container"></div> <!-- Navbar akan dimuat di sini -->
 
-    <!-- Hero Section -->
-    <section class="h-[70vh] bg-cover bg-center relative flex items-center justify-center text-off-white" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
-        <div class="absolute inset-0 bg-black opacity-60"></div>
-        <div class="relative z-10 text-center p-6">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">Sayuran <span class="primary-text">Segar</span> Langsung ke Rumah Anda</h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-300">Kualitas terbaik, panen setiap hari, untuk hidup lebih sehat.</p>
-            <a href="#products" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Belanja Sekarang <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section id="products" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold dark-text text-center mb-12">Produk Unggulan Kami</h2>
-            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Product cards akan di-generate oleh JavaScript -->
+    <main class="page-main-content">
+        <!-- Hero Section -->
+        <section id="hero-home" class="hero-section-modern">
+            <div class="container hero-container"> <!-- Tambahkan kelas .hero-container untuk kontrol lebih -->
+                <div class="hero-content">
+                    <h1 class="hero-title">Sayuran <span class="primary-text">Segar Berkualitas</span>, Transformasi Pangan Digital.</h1>
+                    <p class="hero-subtitle">
+                        Inovasi teknologi bertemu kearifan agrikultur. Nikmati hasil panen premium langsung ke pintu Anda, dengan kesegaran dan kualitas terdepan.
+                    </p>
+                    <a href="products.html" class="btn btn-secondary hero-cta">
+                        Jelajahi Ekosistem Produk <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="dark-bg text-off-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
-            <div class="space-x-6 mb-4">
-                <a href="#" class="hover:primary-text"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="hover:primary-text"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" class="hover:primary-text"><i class="fab fa-whatsapp fa-lg"></i></a>
+        <!-- Call to Action / About Us Snippet -->
+        <section id="about-snippet-section" class="home-section about-us-snippet-section section-padding">
+            <div class="container text-center">
+                <div class="section-heading">
+                    <h2 class="section-heading__title snippet-title">Kenapa Memilih <span class="primary-text">MAYMART</span>?</h2>
+                </div>
+                <p class="snippet-description">
+                    Kami adalah pionir dalam revolusi agrikultur digital, menghubungkan Anda langsung dengan petani lokal melalui platform yang transparan dan berkelanjutan. Rasakan bedanya kualitas, kesegaran, dan dampak positif bagi komunitas.
+                </p>
+                <div class="section-cta">
+                    <a href="about.html" class="btn btn-secondary">Jelajahi Visi Kami <i class="fas fa-angle-double-right"></i></a>
+                </div>
             </div>
-            <p>© <span id="current-year"></span> MAYMART. Semua Hak Dilindungi.</p>
-            <p class="text-sm text-slate-gray mt-2">Dibuat dengan <i class="fas fa-heart primary-text"></i> dan Tailwind CSS</p>
-        </div>
-    </footer>
+        </section>
 
-    <script src="js/script.js"></script>
+        <!-- Featured Products Section -->
+        <section id="featured-products-section" class="home-section featured-products-section section-padding">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <h2 class="section-heading__title">Produk <span class="primary-text">Unggulan</span> Terkurasi</h2>
+                    <p class="section-heading__subtitle">Pilihan terbaik dari kebun kami, hasil inovasi dan dedikasi untuk Anda.</p>
+                </div>
+                <div id="featured-product-list" class="products-grid featured-grid">
+                    <p class="placeholder-text text-center text-subtle col-span-full">Memuat produk unggulan...</p>
+                </div>
+                <div class="section-cta text-center">
+                    <a href="products.html" class="btn btn-secondary">Lihat Semua Koleksi <i class="fas fa-angle-double-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="page-footer-container"></div> <!-- Footer akan dimuat di sini -->
+
+    <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Memuat produk unggulan
+            if (typeof displayFeaturedProducts === 'function') {
+                displayFeaturedProducts(4); // Menampilkan 4 produk unggulan
+            } else {
+                const featuredList = document.getElementById('featured-product-list');
+                if(featuredList) {
+                    const placeholder = featuredList.querySelector('.placeholder-text');
+                    if(placeholder) placeholder.textContent = 'Gagal memuat produk unggulan (fungsi tidak ada).';
+                }
+                console.warn('Fungsi displayFeaturedProducts tidak ditemukan.');
+            }
+        });
+    </script>
 </body>
 </html>

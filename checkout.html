@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MAYMART</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/checkout.css"> <!-- Checkout page specific styles -->
+</head>
+<body class="antialiased">
+
+    <div id="page-navbar-container"></div>
+
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="checkout-page-title">Proses Checkout</h1>
+
+        <div class="checkout-grid">
+            <div class="checkout-form-section content-card shadow-xl">
+                <h2 class="checkout-section-title">Detail Pengiriman</h2>
+                <form id="shipping-form" class="checkout-form">
+                    <div class="form-grid">
+                        <div>
+                            <label for="fullName">Nama Lengkap</label>
+                            <input type="text" id="fullName" name="fullName" class="input-checkout" required>
+                        </div>
+                        <div>
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" name="phone" class="input-checkout" required placeholder="Contoh: 081234567890">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Alamat Lengkap</label>
+                        <textarea id="address" name="address" rows="3" class="input-checkout" required placeholder="Nama Jalan, Nomor Rumah, RT/RW, Kelurahan, Kecamatan"></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div>
+                            <label for="city">Kota/Kabupaten</label>
+                            <input type="text" id="city" name="city" class="input-checkout" required>
+                        </div>
+                        <div>
+                            <label for="postalCode">Kode Pos</label>
+                            <input type="text" id="postalCode" name="postalCode" class="input-checkout" required pattern="[0-9]{5}" title="Masukkan 5 digit kode pos">
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="notes">Catatan Tambahan (Opsional)</label>
+                        <textarea id="notes" name="notes" rows="2" class="input-checkout" placeholder="Misal: Patokan rumah, permintaan khusus"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout-summary-section content-card shadow-xl">
+                <h2 class="checkout-section-title">Ringkasan Pesanan</h2>
+                <div id="checkout-order-summary">
+                    <!-- Items populated by JavaScript -->
+                </div>
+                <hr>
+                <div class="summary-details">
+                    <div>
+                        <span class="detail-label">Subtotal Produk:</span>
+                        <span id="summary-subtotal" class="detail-value">Rp 0</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">Biaya Pengiriman:</span>
+                        <span id="summary-shipping" class="detail-value">Rp 0</span>
+                    </div>
+                </div>
+                <div class="summary-total-row">
+                    <span class="total-label">Total:</span>
+                    <span id="summary-total" class="total-value primary-text">Rp 0</span>
+                </div>
+                
+                <div class="payment-method-section">
+                    <h3 class="section-subtitle">Metode Pembayaran</h3>
+                    <div class="payment-method-box">
+                        <p class="payment-info-text">Saat ini hanya tersedia <strong class="primary-text">Bayar di Tempat (COD)</strong>.</p>
+                        <p class="payment-note-text">Fitur pembayaran online akan segera hadir.</p>
+                    </div>
+                </div>
+                <button id="place-order-button" class="btn btn-primary">
+                    Buat Pesanan <i class="fas fa-check-circle"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="page-footer-container"></div>
+    
+    <script src="js/global.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+     
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+                // User not logged in, show message and redirect
+                const mainContent = document.querySelector('main.container');
+                 if (mainContent) {
+                    mainContent.innerHTML = `
+                        <div class="content-card text-center py-10 max-w-md mx-auto">
+                            <i class="fas fa-exclamation-triangle fa-3x text-yellow-400 mb-4"></i>
+                            <p class="text-xl text-light-text mb-3">Akses Ditolak</p>
+                            <p class="text-dark-subtext mb-6">Anda harus login untuk melanjutkan ke halaman checkout.</p>
+                            <a href="login.html?redirect=checkout.html" class="btn btn-primary">Login Sekarang</a>
+                        </div>`;
+                }
+                return; 
+            }
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                // Cart is empty, inform user and redirect
+                 const mainContent = document.querySelector('main.container');
+                 if (mainContent) {
+                    mainContent.innerHTML = `
+                        <div class="content-card text-center py-10 max-w-md mx-auto">
+                            <i class="fas fa-shopping-cart fa-3x text-primary mb-4"></i>
+                            <p class="text-xl text-light-text mb-3">Keranjang Kosong</p>
+                            <p class="text-dark-subtext mb-6">Anda tidak memiliki item di keranjang untuk di-checkout.</p>
+                            <a href="products.html" class="btn btn-primary">Mulai Belanja</a>
+                        </div>`;
+                }
+                // Optionally redirect after a delay
+                // setTimeout(() => { window.location.href = 'products.html'; }, 3000);
+                return;
+            }
+
+            // If logged in and cart is not empty, proceed with checkout logic
+            if (typeof loadCheckoutSummary === 'function') loadCheckoutSummary(); 
+            
+            const shippingForm = document.getElementById('shipping-form');
+            const placeOrderButton = document.getElementById('place-order-button');
+
+            if (placeOrderButton && shippingForm) {
+                placeOrderButton.addEventListener('click', () => {
+                    if (shippingForm.checkValidity()) {
+                        if (typeof handlePlaceOrder === 'function') handlePlaceOrder();
+                    } else {
+                        shippingForm.reportValidity(); // Shows native browser validation messages
+                        // Consider a more styled custom alert/modal here for better UX
+                        alert('Mohon lengkapi semua data pengiriman yang wajib diisi.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
