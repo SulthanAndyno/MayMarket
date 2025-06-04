@@ -1,0 +1,667 @@
+/* css/theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap');
+
+:root {
+    --font-sans: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+    --font-orbitron: 'Orbitron', sans-serif;
+
+    --color-primary: #6ee7b7; /* Mint Green (Cyber Lime) */
+    --color-primary-dark: #5ce0a8;
+    --color-primary-rgb: 107, 231, 183; /* For rgba usage */
+
+    --color-secondary: #3b82f6; /* Bright Blue (Cyber Blue) */
+    --color-secondary-dark: #2563eb;
+    --color-secondary-rgb: 59, 130, 246; /* For rgba usage */
+    
+    --color-accent: #ec4899; /* Fuchsia Pink (Cyber Pink) */
+    --color-accent-dark: #d926a9;
+    --color-accent-rgb: 236, 72, 153; /* For rgba usage */
+
+    --color-bg-dark: #0f172a;      /* Very Dark Blue (Space Cadet) */
+    --color-card-dark: #1e293b;    /* Dark Slate Blue (Charcoal) */
+    --color-card-dark-hover: rgba(30, 41, 59, 0.9); /* Adjusted for hover */
+    --color-border-dark: #334155;  /* Slate Gray (Gunmetal) */
+    --color-border-primary-accent: rgba(107, 231, 183, 0.2); /* Slightly less opacity for subtlety */
+
+    --color-text-light: #e2e8f0;   /* Light Gray (Platinum) */
+    --color-text-subtle: #9ca3af; /* Medium Gray (Cool Gray) */
+    --color-text-placeholder: #6b7280; /* Gray (Sonic Silver) */
+    --color-text-dark-on-light-bg: #0f172a; /* For buttons on light gradient */
+    
+    --shadow-glow-primary: 0 0 12px rgba(107, 231, 183, 0.45); /* Adjusted glow */
+    --shadow-glow-secondary: 0 0 12px rgba(59, 130, 246, 0.45);
+    --shadow-card: 0 7px 14px rgba(0,0,0,0.18); /* Adjusted shadow */
+    --shadow-card-hover: 0 10px 22px rgba(0,0,0,0.22), 0 0 12px rgba(107, 231, 183, 0.12);
+
+    --transition-speed: 0.25s; /* Slightly faster default transition */
+    --transition-ease: ease-in-out; /* Smoother easing */
+    --transition-all: all var(--transition-speed) var(--transition-ease);
+
+    --navbar-height: 4.5rem; /* Example, adjust based on actual final height */
+    --footer-height: 10rem; /* Example, adjust */
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /* Standard fade duration */
+    line-height: 1.65; /* Improved line height */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body.loaded {
+    opacity: 1;
+}
+main {
+    flex-grow: 1;
+}
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem; /* 16px */
+}
+/* Standard container widths based on Tailwind breakpoints */
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+@media (min-width: 1536px) { .container { max-width: 1536px; } }
+
+
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed) var(--transition-ease);
+}
+a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline; /* Subtle hover underline */
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.65rem 1.4rem; /* Adjusted padding */
+    border-radius: 0.4rem; /* Slightly smaller radius */
+    transition: var(--transition-all);
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    font-size: 0.9rem; /* Base button font size */
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-text-dark-on-light-bg);
+    box-shadow: 0 3px 12px rgba(88, 201, 225, 0.18);
+}
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 18px rgba(88, 201, 225, 0.28);
+    filter: brightness(1.08);
+}
+.btn-primary:disabled {
+    background: var(--color-text-placeholder);
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(0.6);
+    color: var(--color-text-subtle);
+    transform: none; /* Disable hover transform */
+}
+
+.btn-danger {
+    background-color: #ef4444; /* Tailwind red-500 */
+    color: white;
+    box-shadow: 0 3px 12px rgba(239, 68, 68, 0.18);
+}
+.btn-danger:hover {
+    background-color: #dc2626; /* Tailwind red-600 */
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 18px rgba(239, 68, 68, 0.28);
+}
+.btn-secondary {
+    background: linear-gradient(135deg, var(--color-border-dark), #4b5563); /* Darker gradient */
+    color: var(--color-text-light);
+    box-shadow: 0 3px 12px rgba(51, 65, 85, 0.18);
+}
+.btn-secondary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 18px rgba(51, 65, 85, 0.28);
+    filter: brightness(1.08);
+}
+
+/* General Content Card (used by account.css, cart.css, etc.) */
+.content-card {
+    background-color: var(--color-card-dark-hover); /* Slightly more opaque */
+    border: 1px solid var(--color-border-primary-accent);
+    border-radius: 0.85rem; /* Adjusted radius */
+    padding: 1.75rem; /* Default padding */
+    box-shadow: 0 9px 28px rgba(0,0,0,0.28), 0 0 18px rgba(107, 231, 183, 0.08);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+}
+
+/* Product Card Styling (untuk product listings dan featured products) */
+.product-card {
+    background-color: rgba(var(--color-card-dark-rgb), 0.75); /* Base background */
+    border: 1px solid var(--color-border-primary-accent);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) var(--transition-ease),
+                box-shadow var(--transition-speed) var(--transition-ease),
+                background-color var(--transition-speed) var(--transition-ease),
+                outline-color var(--transition-speed) ease; /* Transisi untuk outline */
+    outline: 1.5px solid transparent; /* Outline dasar */
+    position: relative; /* Untuk pseudo-elements seperti badge */
+}
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02); /* Efek hover standar */
+    background-color: var(--color-card-dark-hover);
+    box-shadow: var(--shadow-card-hover);
+    outline-color: var(--color-primary); /* Outline saat hover */
+}
+
+.product-card-image-link { 
+    display: block;
+    overflow: hidden; /* Mencegah gambar keluar dari wrapper saat scale */
+    background-color: var(--color-bg-dark); /* Warna dasar jika gambar tidak full */
+    position: relative; /* Untuk aspect-ratio padding hack jika diperlukan */
+}
+
+.product-card-image-wrapper { /* Wrapper ini bisa digunakan jika perlu kontrol lebih */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bg-dark);
+    aspect-ratio: 4 / 3; /* Rasio aspek gambar yang konsisten */
+}
+
+.product-card-image {
+    display: block; /* Menghilangkan spasi ekstra di bawah gambar */
+    width: 100%;
+    height: 100%; /* Mengisi wrapper aspect-ratio */
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.product-card:hover .product-card-image {
+    transform: scale(1.1); /* Zoom gambar saat hover kartu */
+}
+
+/* Menghapus overlay ikon mata dari theme.css jika ada di sini */
+/* .product-card-image-overlay { ... Dihapus ... } */
+
+
+.product-card .card-content {
+    padding: 0.9rem; /* Padding konten yang konsisten */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.product-card .card-title {
+    font-size: clamp(0.9rem, 1.9vw, 1.05rem); /* Ukuran judul responsif */
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi 2 baris */
+    -webkit-box-orient: vertical;
+    min-height: calc(1.05rem * 1.3 * 2); /* Perkiraan tinggi 2 baris */
+}
+.product-card .card-category {
+    font-size: 0.7rem;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.product-card .price-stock-row { /* Jika digunakan */
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+}
+.product-card .card-price {
+    color: var(--color-primary);
+    font-size: clamp(0.85rem, 1.8vw, 1rem); /* Harga responsif */
+    font-weight: 700;
+    margin-bottom: 0; /* Hapus margin bawah jika di dalam price-stock-row */
+}
+.product-card .card-price .original-price {
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+    text-decoration: line-through;
+    margin-left: 0.4rem;
+}
+.product-card .card-description { /* Deskripsi, jika ditampilkan */
+    color: var(--color-text-subtle);
+    font-size: 0.75rem;
+    margin-bottom: 0.7rem;
+    flex-grow: 1;
+    line-height: 1.45;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Batasi deskripsi 2 baris */
+}
+.product-card .card-actions {
+    margin-top: auto; /* Pushes actions to the bottom */
+    display: grid; 
+    grid-template-columns: 1fr; /* Tombol tumpuk default */
+    gap: 0.4rem; 
+}
+/* Tata letak tombol berdampingan jika ada cukup ruang */
+@media (min-width: 280px) { /* Sesuaikan breakpoint ini berdasarkan lebar kartu */
+   .product-card .card-actions {
+        grid-template-columns: 1fr 1fr;
+   }
+}
+
+.product-card .card-actions .btn {
+    width: 100%; 
+    padding: 0.5rem 0.3rem; 
+    font-size: clamp(0.7rem, 1.6vw, 0.75rem); /* Ukuran font tombol responsif */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.product-card .card-actions .btn i {
+    margin-right: 0.25rem; 
+    font-size: 0.9em; 
+}
+.product-card .card-actions .detail-link-btn { /* Jika tombol detail adalah button */
+    /* Menggunakan .btn-secondary dari theme.css */
+}
+.product-card .card-actions .detail-link { /* Jika tombol detail adalah link biasa */
+    /* Styling untuk link detail jika bukan button */
+    /* ... */
+}
+
+
+/* Forms - Quantity Input (used in cart.js, product.js) */
+.quantity-input {
+    width: 2.8rem;
+    text-align: center;
+    border: 1px solid var(--color-border-dark);
+    border-left: none;
+    border-right: none;
+    background-color: var(--color-card-dark);
+    color: var(--color-text-light);
+    padding: 0.4rem; /* Adjusted padding */
+    font-size: 0.9rem;
+    height: 2.2rem; /* Match button height */
+    line-height: 1.4rem; /* Align text vertically */
+}
+.quantity-input:focus { outline: none; }
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.quantity-button { /* General class for + / - buttons */
+    padding: 0.4rem 0.65rem;
+    font-size: 0.9rem;
+    height: 2.2rem; /* Fixed height */
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-border-dark);
+    background-color: var(--color-bg-dark); /* Slightly darker than input */
+    transition: background-color var(--transition-speed);
+    cursor: pointer;
+}
+.quantity-button:hover { background-color: var(--color-border-dark); color: var(--color-text-light); }
+.quantity-button.minus { border-radius: 0.3rem 0 0 0.3rem; }
+.quantity-button.plus { border-radius: 0 0.3rem 0.3rem 0; }
+
+
+/* Navbar Styling */
+.navbar-modern {
+    background-color: rgba(15, 23, 42, 0.9); /* More opacity */
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border-bottom: 1px solid rgba(107, 231, 183, 0.1); /* Softer border */
+    padding: 0.6rem 0; /* Adjusted padding */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* High z-index for navbar */
+    height: var(--navbar-height); /* Set height using variable */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-logo-link { display: block; margin-right: 0.8rem; flex-shrink: 0; }
+.navbar-logo-img { height: 2.5rem; object-fit: contain; }
+@media (min-width: 768px) { .navbar-logo-img { height: 3rem; } }
+
+
+.desktop-nav { display: none; } /* Hidden by default, shown via media query */
+@media (min-width: 1024px) { /* Breakpoint for desktop nav */
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+}
+
+.search-bar-desktop {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 160px;
+    max-width: 360px;
+    margin: 0 auto; /* Center search bar */
+}
+@media (min-width: 1280px) { .search-bar-desktop { max-width: 450px; } }
+/* Adjustments for very narrow desktop screens if needed */
+@media (min-width: 1024px) and (max-width: 1100px) { .search-bar-desktop { max-width: 280px; } }
+
+
+.search-input-field {
+    width: 100%;
+    padding: 0.55rem 0.9rem; /* Adjusted padding */
+    padding-right: 2.3rem; /* Space for search icon */
+    border-radius: 0.4rem;
+    font-size: 0.85rem;
+    background-color: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(107, 231, 183, 0.1);
+    color: var(--color-text-light);
+    transition: var(--transition-all);
+}
+.search-input-field::placeholder { color: var(--color-text-placeholder); }
+.search-input-field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(107, 231, 183, 0.25);
+}
+
+.search-button {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; /* Center vertically */
+    padding: 0 0.7rem;
+    color: var(--color-text-subtle);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+    display: flex;
+    align-items: center;
+}
+.search-button:hover { color: var(--color-primary); }
+
+.desktop-nav-right-group {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push to the right */
+    gap: 1.3rem; /* Space between nav links and user actions */
+    flex-shrink: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem; /* Space between nav links */
+    align-items: center;
+    font-size: 0.85rem; /* Slightly smaller nav links */
+    font-weight: 500;
+}
+.nav-links a {
+    position: relative;
+    padding: 0.2rem 0;
+    letter-spacing: 0.02em;
+    transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease;
+    white-space: nowrap;
+    color: var(--color-text-subtle);
+}
+.nav-links a:hover, .nav-links a.active-link {
+    color: var(--color-primary);
+    text-shadow: var(--shadow-glow-primary);
+}
+.nav-links a::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1.5px; /* Thinner underline */
+    bottom: -3px; /* Closer to text */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    transition: width var(--transition-speed) ease;
+}
+.nav-links a:hover::after, .nav-links a.active-link::after { width: 50%; } /* Shorter underline */
+.nav-icon { color: inherit; margin-right: 0.25rem; font-size: 0.9em; } /* Inherit color, adjust size */
+
+.cart-count-badge {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-glow-secondary);
+    font-size: 0.6rem; /* Smaller badge */
+    font-weight: bold;
+    padding: 1px 4px; /* Tighter padding */
+    border-radius: 9999px;
+    position: absolute;
+    top: -6px; /* Adjust position */
+    right: -8px;
+    line-height: 1;
+    display: none; /* JS controls visibility */
+    border: 1px solid var(--color-bg-dark); /* Border to pop against icon */
+}
+
+.user-actions a {
+    color: var(--color-text-subtle);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.user-actions a:hover { color: var(--color-primary); }
+
+/* Mobile Navigation */
+.mobile-menu-button {
+    display: none; /* Hidden by default, shown via media query */
+    color: var(--color-text-subtle);
+    font-size: 1.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+}
+@media (max-width: 1023px) { /* Breakpoint for mobile menu button */
+    .mobile-menu-button { display: block; }
+    .desktop-nav { display: none !important; }
+}
+.mobile-menu-button:hover { color: var(--color-primary); }
+
+.mobile-menu-modern {
+    background-color: rgba(15, 23, 42, 0.98); /* Highly opaque */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: var(--color-text-subtle);
+    position: absolute;
+    top: 100%; /* Below navbar */
+    left: 0;
+    right: 0;
+    z-index: 999; /* Below navbar main, above content */
+    border-top: 1px solid rgba(107, 231, 183, 0.08);
+    max-height: 0; /* Hidden by default */
+    overflow-y: auto; /* Scroll if content exceeds max-height */
+    transition: max-height 0.35s ease-out, padding-bottom 0.35s ease-out, box-shadow 0.35s ease-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Add shadow when open */
+}
+.mobile-menu-modern.open {
+    max-height: calc(100vh - var(--navbar-height)); /* Fill available height */
+    padding-bottom: 0.8rem;
+}
+
+.mobile-menu-modern .search-bar-mobile { padding: 0.6rem 1rem; }
+
+.mobile-menu-modern a {
+    display: flex; /* Align icon and text */
+    align-items: center;
+    padding: 0.8rem 1.3rem;
+    border-bottom: 1px solid rgba(107, 231, 183, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    color: var(--color-text-subtle);
+}
+.mobile-menu-modern a:last-child { border-bottom: none; }
+.mobile-menu-modern a:hover, .mobile-menu-modern a.active-mobile-link {
+    background-color: rgba(107, 231, 183, 0.04);
+    color: var(--color-primary);
+}
+.nav-icon-mobile { 
+    margin-right: 0.6rem; 
+    width: 18px; /* Fixed width for alignment */
+    text-align: center;
+    color: var(--color-primary); 
+    font-size: 0.9em;
+}
+.mobile-menu-divider { border-color: rgba(107, 231, 183, 0.08); margin: 0.5rem 0; }
+
+
+/* Footer */
+.site-footer {
+    background-color: var(--color-card-dark); /* Consistent with cards */
+    color: var(--color-text-subtle);
+    padding: 2.5rem 0;
+    margin-top: 3rem; /* Ensure space from main content */
+    border-top: 1px solid var(--color-border-primary-accent);
+}
+.footer-logo-text {
+    font-family: var(--font-orbitron);
+    font-size: 1.7rem; /* Adjusted size */
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.3rem;
+    margin-bottom: 1.3rem;
+}
+.social-icon-link {
+    color: var(--color-text-subtle);
+    font-size: 1.1rem; /* Adjusted size */
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+.social-icon-link:hover { color: var(--color-primary); transform: scale(1.15); }
+.copyright-text { font-size: 0.8rem; }
+
+/* Utility Classes */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.font-orbitron { font-family: var(--font-orbitron); }
+.primary-text { color: var(--color-primary); }
+.text-light { color: var(--color-text-light); }
+.text-subtle { color: var(--color-text-subtle); }
+
+.section-divider {
+    border-color: rgba(107, 231, 183, 0.1); /* Softer divider */
+    margin-top: 1.8rem;
+    margin-bottom: 1.8rem;
+}
+.page-title { /* General page title styling */
+    font-family: var(--font-orbitron);
+    font-size: clamp(1.8rem, 5.5vw, 2.6rem); /* Responsive title */
+    color: var(--color-text-light);
+    text-align: center;
+    margin-bottom: 2.2rem;
+    text-shadow: var(--shadow-glow-primary);
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--color-bg-dark); } /* Match dark background */
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 3.5px; border: 1px solid var(--color-bg-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary-dark); }
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+        font-family: Arial, sans-serif !important;
+        opacity: 1 !important; /* Ensure visible */
+    }
+    .no-print, .navbar-modern, .site-footer, #page-navbar-container, #page-footer-container { 
+        display: none !important; 
+    }
+    main {
+        padding-top: 0 !important; /* Remove padding from navbar */
+    }
+    .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+    
+    #printable-receipt, #printable-receipt * { visibility: visible !important; }
+    #printable-receipt {
+        position: static !important; /* Allow normal flow */
+        width: 100% !important;
+        background-color: white !important; 
+        color: black !important;
+        border: none !important; /* Remove card border */
+        padding: 0 !important;
+        box-shadow: none !important; 
+        backdrop-filter: none !important;
+    }
+    /* Make text readable for print */
+    #printable-receipt .primary-text { color: #166534 !important; } /* Dark green for primary */
+    #printable-receipt .text-light-text, 
+    #printable-receipt .text-dark-subtext,
+    #printable-receipt .font-semibold, 
+    #printable-receipt .font-medium,
+    #printable-receipt span, #printable-receipt p, 
+    #printable-receipt h1, #printable-receipt h2, #printable-receipt h3, 
+    #printable-receipt th, #printable-receipt td,
+    #printable-receipt [class*="text-"] /* Catch-all for text colors */
+    {
+        color: black !important; 
+        font-family: Arial, sans-serif !important;
+        text-shadow: none !important;
+    }
+    /* Table styling for print */
+    #printable-receipt table, #printable-receipt th, #printable-receipt td { 
+        border: 1px solid #ccc !important; 
+    }
+    #printable-receipt thead { 
+        background-color: #f0f0f0 !important; 
+    }
+    /* Remove dark backgrounds */
+    #printable-receipt [class*="bg-dark-"], 
+    #printable-receipt [class*="bg-opacity-"],
+    #printable-receipt [style*="background-color"] /* Catch inline backgrounds */
+    { 
+        background-color: transparent !important; 
+    }
+    /* Simplify borders */
+    #printable-receipt hr, 
+    #printable-receipt [class*="border-dark-"],
+    #printable-receipt [class*="divide-dark-"] { 
+        border-color: #ccc !important; 
+    }
+    a[href]::after { content: "" !important; } /* Remove URL printing for links */
+}

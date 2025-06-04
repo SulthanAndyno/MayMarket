@@ -1,28 +1,262 @@
-.login-card {
-    background-color: #1A202C;
-    color: #F7FAFC;
-    border-radius: 1rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+/* css/auth.css - Assuming this file is largely okay as per your setup */
+/* Minor adjustments for consistency and clean-up if needed based on new theme vars */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;700&display=swap');
+
+html {
+    box-sizing: border-box;
 }
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body.auth-page {
+    font-family: var(--font-sans, 'Poppins', sans-serif); /* Use theme variable */
+    background: var(--color-bg-dark, #0a0f1a); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem; 
+    color: var(--color-text-light, #e2e8f0); 
+    overflow-x: hidden; 
+    position: relative; 
+    /* Added transition for body opacity for login/register pages */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+body.auth-page.loaded { /* JS will add this class */
+    opacity: 1;
+}
+
+
+body.auth-page::before, body.auth-page::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px); /* Softer blur */
+    opacity: 0.2; /* More subtle opacity */
+    z-index: 0;
+    pointer-events: none;
+}
+body.auth-page::before { 
+    width: clamp(250px, 45vw, 450px); 
+    height: clamp(250px, 45vw, 450px);
+    background: var(--color-primary, #6ee7b7); 
+    top: 0%;
+    left: 0%;
+    animation: floatGlow1 22s ease-in-out infinite alternate;
+}
+body.auth-page::after { 
+    width: clamp(220px, 40vw, 400px); 
+    height: clamp(220px, 40vw, 400px);
+    background: var(--color-secondary, #5eead4); 
+    bottom: 5%;
+    right: 5%;
+    animation: floatGlow2 25s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow1 {
+    0% { transform: translate(-10px, -10px) scale(0.95); opacity: 0.15; }
+    50% { opacity: 0.25; }
+    100% { transform: translate(40px, 50px) scale(1.05); opacity: 0.15; }
+}
+@keyframes floatGlow2 {
+    0% { transform: translate(5px, 5px) scale(1.05); opacity: 0.2; }
+    50% { opacity: 0.3; }
+    100% { transform: translate(-45px, -35px) scale(0.9); opacity: 0.2; }
+}
+
+.login-container { /* Wrapper for the card, if used */
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card, .register-card { /* Common styling for auth cards */
+    background-color: rgba(20, 30, 48, 0.92); /* Slightly more opaque */
+    backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    padding: clamp(1.75rem, 6vw, 2.75rem); /* Responsive padding */
+    border-radius: 18px; 
+    border: 1px solid var(--color-border-primary-accent, rgba(107, 231, 183, 0.25));
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35), 
+                inset 0 0 18px rgba(107, 231, 183, 0.07); 
+    text-align: center;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease; 
+}
+
+.login-card:hover, .register-card:hover {
+    transform: translateY(-6px) scale(1.01); 
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.45),
+                inset 0 0 22px rgba(107, 231, 183, 0.1);
+}
+
+.login-card .site-logo, .register-card .site-logo {
+    font-family: var(--font-orbitron, 'Orbitron', sans-serif); 
+    font-size: clamp(2.1rem, 8.5vw, 2.6rem); 
+    font-weight: 700; 
+    color: var(--color-primary, #6ee7b7); 
+    margin-bottom: 0.6rem; 
+    letter-spacing: 0.08em; 
+    text-transform: uppercase;
+    text-shadow: 0 0 16px rgba(107, 231, 183, 0.55), 0 0 7px rgba(107, 231, 183, 0.85);
+}
+
+.login-card h2, .register-card h2 {
+    font-size: clamp(1.15rem, 4.5vw, 1.3rem); 
+    font-weight: 400; 
+    margin-bottom: 1.8rem; 
+    color: var(--color-text-subtle, #9cb3d0); 
+    letter-spacing: 0.01em;
+}
+
+.input-group {
+    margin-bottom: 1.6rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-text-subtle, #819bc1); 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.input-field-container {
+    position: relative;
+}
+
+.input-field-container .input-icon {
+    position: absolute;
+    left: 0.9rem; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-placeholder, #647a97); 
+    font-size: 0.9rem; 
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+    pointer-events: none;
+}
+
 .input-field {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid #4A5568;
-    background: #2D3748;
-    color: #F7FAFC;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
+    padding: 0.85rem 0.9rem 0.85rem 2.8rem; 
+    border: 1px solid var(--color-border-dark, rgba(76, 99, 130, 0.6)); 
+    border-radius: 8px; 
+    background-color: rgba(28, 40, 62, 0.75); 
+    color: var(--color-text-light, #e2e8f0); 
+    font-size: clamp(0.85rem, 2.6vw, 0.9rem); 
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
 }
+.input-field::placeholder {
+    color: var(--color-text-placeholder, #647a97);
+    opacity: 0.75;
+}
+
 .input-field:focus {
-    border-color: #99cc76;
+    outline: none;
+    border-color: var(--color-primary, #6ee7b7); 
+    background-color: rgba(35, 49, 72, 0.85); 
+    box-shadow: 0 0 0 2.5px rgba(107, 231, 183, 0.2), 
+                0 0 18px rgba(107, 231, 183, 0.1), 
+                inset 0 0 7px rgba(107, 231, 183, 0.08); 
 }
-.btn-primary {
-    background-color: #99cc76;
-    color: #fff;
-    transition: background-color 0.3s;
+
+.input-field:focus + .input-icon {
+    color: var(--color-primary, #6ee7b7);
+    text-shadow: 0 0 7px rgba(107, 231, 183, 0.65);
 }
+
+.btn-primary { /* Re-styling to match theme.css .btn-primary if this is a separate context */
+    /* This should ideally use .btn and .btn-primary from theme.css */
+    /* If auth.css is always loaded with theme.css, this can be removed */
+    /* Keeping it for now in case auth.css is used standalone for login page */
+    background: linear-gradient(135deg, var(--color-primary, #6ee7b7), var(--color-secondary, #3b82f6)); 
+    color: var(--color-text-dark-on-light-bg, #0a0f1a); 
+    padding: 0.85rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 3.1vw, 0.95rem); 
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 18px rgba(88, 201, 225, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.5rem; /* Added from login.html form */
+}
+
 .btn-primary:hover {
-    background-color: #82b362;
+    transform: translateY(-2.5px) scale(1.015);
+    box-shadow: 0 7px 22px rgba(88, 201, 225, 0.3);
+    filter: brightness(1.1);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 2.5px 14px rgba(88, 201, 225, 0.18);
+}
+
+#login-error, #register-error { /* Common error styling */
+    color: #f87171; /* Softer red */
+    background-color: rgba(220, 38, 38, 0.15); 
+    border: 1px solid rgba(220, 38, 38, 0.4); 
+    padding: 0.7rem 0.9rem;
+    border-radius: 7px;
+    margin-top: 1.1rem;
+    font-size: 0.85rem;
+    text-align: left; 
+    line-height: 1.35;
+    /* display: none; is handled by .hidden class */
+    /* animation: shake 0.5s ease-in-out; is applied dynamically */
+}
+#login-error i, #register-error i {
+    margin-right: 0.5rem;
+    vertical-align: text-bottom; /* Better alignment */
+}
+
+.shake { /* Animation class to be added by JS */
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); } /* Adjusted intensity */
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+
+.demo-creds {
+    margin-top: 1.8rem;
+    font-size: 0.75rem;
+    color: var(--color-text-placeholder, #647a97);
+    border-top: 1px solid var(--color-border-dark, rgba(76, 99, 130, 0.2));
+    padding-top: 1.1rem;
+}
+.demo-creds strong {
+    color: var(--color-text-subtle, #819bc1);
+    font-weight: 500;
+}
+
+.form-link { /* For "Belum punya akun?" / "Sudah punya akun?" */
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle, #9ca3af);
+}
+.form-link a {
+    color: var(--color-primary, #6ee7b7);
+    font-weight: 500;
+    text-decoration: none;
+}
+.form-link a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-dark, #5ce0a8);
 }

@@ -1,0 +1,351 @@
+/* css/product-detail.css */
+
+/* Styles for product-detail.html specifically */
+/* Adopting a futuristic dark theme, aligning with index.html */
+
+main.product-detail-page {
+    background: var(--color-bg-dark, #0a0f16);
+    color: var(--color-text-light, #e0e0e0);
+    background-image:
+        radial-gradient(rgba(var(--color-primary-rgb, 107, 231, 183), 0.03) 0.7px, transparent 0.7px),
+        radial-gradient(rgba(var(--color-secondary-rgb, 90, 120, 255), 0.03) 0.7px, transparent 0.7px),
+        var(--bg-dark-gradient, linear-gradient(175deg, rgba(var(--color-card-dark-rgb, 18, 28, 48), 0.9) 0%, #0b111e 100%));
+    background-size: 30px 30px, 30px 30px, auto; /* Slightly smaller pattern */
+    background-position: 0 0, 15px 15px, 0 0;
+    background-attachment: fixed;
+    padding-top: clamp(2rem, 5vh, 3rem); /* Added more top padding for overall page */
+    padding-bottom: clamp(3rem, 7vh, 4rem); /* Added more bottom padding for overall page */
+}
+
+.product-detail-container {
+    background-color: rgba(var(--color-card-dark-rgb, 20, 30, 50), 0.9); /* Slightly more opaque */
+    backdrop-filter: blur(15px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(15px);
+    padding: clamp(1.25rem, 3vw, 2rem); /* Slightly reduced padding */
+    border-radius: 10px; /* Consistent radius */
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45),
+                0 0 30px rgba(var(--color-primary-rgb, 107, 231, 183), 0.1), /* Enhanced subtle primary glow */
+                inset 0 0 0 1px rgba(var(--color-border-primary-accent-rgb, 107, 231, 183), 0.2); /* Brighter inner border */
+    border: 1px solid rgba(var(--color-border-primary-accent-rgb, 107, 231, 183), 0.15); /* Brighter outer border */
+}
+
+.product-images .main-product-image {
+    width: 100%;
+    max-height: 420px; /* Reduced max-height for smaller image */
+    object-fit: cover; /* Ensure image covers, might crop */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 8px rgba(var(--color-primary-rgb, 107, 231, 183), 0.06);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(var(--color-border-primary-accent-rgb, 107, 231, 183), 0.1);
+}
+.product-images .main-product-image:hover {
+    transform: scale(1.025); /* Slightly less scale */
+    box-shadow: 0 7px 22px rgba(0,0,0,0.35), 0 0 12px rgba(var(--color-primary-rgb, 107, 231, 183), 0.12);
+}
+
+.product-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Even smaller thumbnails */
+    gap: 0.6rem;
+    margin-top: 1rem; /* Reduced margin */
+}
+.product-thumbnails .thumbnail-link img {
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    opacity: 0.7;
+}
+.product-thumbnails .thumbnail-link img:hover,
+.product-thumbnails .thumbnail-link.active img {
+    border-color: var(--color-primary, #6BE7B7);
+    transform: scale(1.07);
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb, 107, 231, 183), 0.35);
+}
+
+.product-info h1 {
+    font-family: var(--font-orbitron, 'Orbitron', sans-serif);
+    font-size: clamp(1.6rem, 4.5vw, 2.2rem); /* Slightly smaller title */
+    font-weight: 600;
+    color: var(--color-text-light, #f0f0f0);
+    margin-bottom: 0.75rem; /* Reduced margin */
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5),
+                 0 0 15px rgba(var(--color-primary-rgb, 107, 231, 183), 0.2);
+    line-height: 1.25;
+}
+
+.product-info .price-display {
+    font-size: clamp(1.5rem, 3.5vw, 1.8rem); /* Slightly smaller price */
+    font-weight: 700;
+    color: var(--color-primary, #6BE7B7);
+    margin-bottom: 1rem; /* Reduced margin */
+    text-shadow: 0 0 10px rgba(var(--color-primary-rgb, 107, 231, 183), 0.45);
+}
+
+.product-info .stock-category-info {
+    margin-bottom: 1.25rem; /* Reduced margin */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem; /* Smaller gap */
+}
+
+.product-info .stock-category-info .stock-badge,
+.product-info .stock-category-info .category-badge {
+    font-size: 0.7rem; /* Smaller badges */
+    font-weight: 500;
+    padding: 0.35rem 0.8rem;
+    border-radius: 0.8rem; /* Pill shape */
+    display: inline-flex; /* For icon alignment if added */
+    align-items: center;
+    border: 1px solid transparent;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+}
+.product-info .stock-category-info .stock-badge {
+    background-color: rgba(var(--color-primary-rgb, 107, 231, 183), 0.12);
+    color: var(--color-primary, #6BE7B7);
+    border-color: rgba(var(--color-primary-rgb, 107, 231, 183), 0.35);
+}
+.product-info .stock-category-info .category-badge {
+    background-color: rgba(var(--color-secondary-rgb, 90, 120, 255), 0.12);
+    color: var(--color-secondary, #5A78FF);
+    border-color: rgba(var(--color-secondary-rgb, 90, 120, 255), 0.35);
+}
+.product-info .stock-category-info .stock-badge:hover,
+.product-info .stock-category-info .category-badge:hover {
+    filter: brightness(1.25);
+}
+.product-info .stock-category-info .stock-badge.out-of-stock {
+    background-color: rgba(var(--color-danger-rgb, 239, 68, 68), 0.15);
+    color: var(--color-danger, #ef4444);
+    border-color: rgba(var(--color-danger-rgb, 239, 68, 68), 0.4);
+}
+
+
+.product-info .description-text {
+    color: var(--color-text-subtle, #b0b0b0);
+    line-height: 1.7;
+    margin-bottom: 1.5rem; /* Reduced margin */
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem); /* Slightly smaller description */
+}
+
+.product-info .form-group {
+    margin-bottom: 1rem; /* Reduced margin */
+}
+.product-info .form-group label {
+    font-size: 0.8rem; /* Smaller label */
+    font-weight: 500;
+    color: var(--color-text-subtle, #b0b0b0);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.product-info .variation-select,
+.product-info .quantity-controls input[type="number"] {
+    padding: 0.7rem 0.9rem; /* Slightly reduced padding */
+    border: 1px solid var(--color-border-primary-accent, rgba(107, 231, 183, 0.25));
+    border-radius: 5px; /* Consistent radius */
+    background-color: rgba(var(--color-bg-dark-rgb, 10, 15, 22), 0.7);
+    color: var(--color-text-light, #e0e0e0);
+    font-size: 0.85rem;
+    width: 100%;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.product-info .variation-select:focus,
+.product-info .quantity-controls input[type="number"]:focus {
+    outline: none;
+    border-color: var(--color-primary, #6BE7B7);
+    box-shadow: 0 0 0 2.5px rgba(var(--color-primary-rgb, 107, 231, 183), 0.3),
+                inset 0 0 6px rgba(var(--color-primary-rgb, 107, 231, 183), 0.1);
+}
+.product-info .variation-select:disabled,
+.product-info .quantity-controls input[type="number"]:disabled {
+    background-color: rgba(var(--color-bg-dark-rgb, 10, 15, 22), 0.4);
+    border-color: rgba(var(--color-border-primary-accent-rgb, 107, 231, 183), 0.15);
+    color: var(--color-text-subtle, #b0b0b0);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.product-info .quantity-controls {
+    display: flex;
+    align-items: center;
+}
+.product-info .quantity-controls button {
+    padding: 0.7rem 1rem; /* Match input height */
+    border: 1px solid var(--color-border-primary-accent, rgba(107, 231, 183, 0.25));
+    background-color: rgba(var(--color-card-dark-rgb, 20, 30, 50), 0.6);
+    color: var(--color-text-subtle, #b0b0b0);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.product-info .quantity-controls button:hover {
+    background-color: rgba(var(--color-primary-rgb, 107, 231, 183), 0.2);
+    color: var(--color-primary, #6BE7B7);
+    border-color: var(--color-primary, #6BE7B7);
+}
+.product-info .quantity-controls button:disabled {
+    background-color: rgba(var(--color-card-dark-rgb, 20, 30, 50), 0.3);
+    color: rgba(var(--color-text-subtle-rgb, 176, 176, 176), 0.5);
+    border-color: rgba(var(--color-border-primary-accent-rgb, 107, 231, 183), 0.15);
+    cursor: not-allowed;
+}
+
+.product-info .quantity-controls button.minus-btn { border-radius: 5px 0 0 5px; border-right: none;}
+.product-info .quantity-controls button.plus-btn { border-radius: 0 5px 5px 0; border-left: none;}
+.product-info .quantity-controls input[type="number"] {
+    width: 4rem; /* Slightly narrower */
+    text-align: center;
+    border-radius: 0;
+    -moz-appearance: textfield;
+    border-left: none;
+    border-right: none;
+}
+.product-info .quantity-controls input[type="number"]::-webkit-outer-spin-button,
+.product-info .quantity-controls input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.product-info .add-to-cart-section {
+    margin-top: 1.75rem; /* Reduced margin */
+}
+
+.product-info .add-to-cart-button {
+    font-size: 0.95rem; /* Slightly smaller button text */
+    padding: 0.8rem 1.8rem;
+    width: 100%;
+    letter-spacing: 0.04em;
+    /* Additional glow from theme.css btn-primary should be good */
+}
+.product-info .add-to-cart-button:disabled {
+    background: var(--color-gray-700, #374151) !important; /* From theme.css .btn:disabled */
+    border-color: var(--color-gray-600, #4b5563) !important;
+    color: var(--color-gray-400, #9ca3af) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+.product-info .add-to-cart-button:disabled:hover { /* Ensure hover on disabled doesn't change style */
+    background: var(--color-gray-700, #374151) !important;
+    border-color: var(--color-gray-600, #4b5563) !important;
+    color: var(--color-gray-400, #9ca3af) !important;
+}
+
+@media (min-width: 768px) {
+    .product-info .add-to-cart-button {
+        width: auto;
+        min-width: 180px; /* Slightly smaller min-width */
+    }
+}
+
+.add-to-cart-message {
+    color: var(--color-success, #22c55e);
+    margin-top: 0.8rem; /* Reduced margin */
+    font-weight: 500;
+    font-size: 0.85rem; /* Slightly smaller message */
+    text-align: center;
+    min-height: 1.2em; /* Reserve space to prevent layout shift */
+}
+.add-to-cart-message.hidden {
+    display: none;
+}
+@media (min-width: 768px) {
+    .add-to-cart-message {
+        text-align: left;
+    }
+}
+
+
+#product-loading-placeholder {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-text-subtle, #b0b0b0);
+    width: 100%;
+    min-height: 300px; /* Ensure it takes some space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#product-loading-placeholder i {
+    font-size: 2.8rem; /* Slightly smaller spinner */
+    color: var(--color-primary, #6BE7B7);
+    margin-bottom: 1.25rem;
+    display: block;
+    animation: spin 1.4s linear infinite;
+}
+#product-loading-placeholder p {
+    font-size: 1rem;
+    font-family: var(--font-poppins, 'Poppins', sans-serif);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.lightboxOverlay {
+    background-color: rgba(var(--color-bg-dark-rgb, 10, 15, 22), 0.97) !important; /* Even more opaque */
+}
+.lb-dataContainer {
+    background-color: rgba(var(--color-card-dark-rgb, 18, 24, 40), 0.92) !important; /* Slightly different dark */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 0 0 6px 6px !important;
+}
+.lb-caption, .lb-number {
+    color: var(--color-text-subtle, #b0b0b0) !important;
+    font-family: var(--font-poppins, 'Poppins', sans-serif);
+    font-size: 0.9em !important;
+}
+.lb-close {
+    opacity: 0.65 !important;
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+.lb-close:hover {
+    opacity: 1 !important;
+    transform: scale(1.15) rotate(90deg); /* More pronounced hover */
+}
+.lb-nav a.lb-prev, .lb-nav a.lb-next {
+    opacity: 0.55 !important;
+    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
+}
+.lb-nav a.lb-prev:hover, .lb-nav a.lb-next:hover {
+    opacity: 1 !important;
+    transform: scale(1.12);
+    background-color: rgba(var(--color-primary-rgb, 107, 231, 183), 0.1) !important; /* Subtle hover bg */
+}
+
+@media (max-width: 991px) { /* lg breakpoint for more balanced two columns */
+    .product-images .main-product-image {
+        max-height: 380px;
+    }
+}
+
+@media (max-width: 767px) { /* md breakpoint */
+    .product-detail-container {
+        padding: 1.25rem;
+        margin-left: 0.5rem; /* Give a little breathing room for main container on mobile */
+        margin-right: 0.5rem;
+    }
+    .product-info h1 {
+        font-size: 1.7rem;
+    }
+    .product-info .price-display {
+        font-size: 1.5rem;
+    }
+    .product-detail-page .container.mx-auto { /* Target the bootstrap-like container */
+        padding-left: 0.5rem; /* Further reduce padding */
+        padding-right: 0.5rem;
+    }
+     .product-images .main-product-image {
+        max-height: 300px; /* Even smaller on mobile */
+    }
+}

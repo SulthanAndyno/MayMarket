@@ -1,0 +1,278 @@
+/* ==========================================================================
+   1. Hero Section Styling
+   ========================================================================== */
+.hero-section-modern {
+    background:
+        linear-gradient(rgba(10, 15, 22, 0.94), rgba(8, 12, 20, 0.99)), /* Gradien gelap */
+        url("../images/Background.png"); /* Pastikan path gambar benar */
+    background-size: cover;
+    background-attachment: fixed; /* Efek parallax untuk background */
+    background-position: center 20%; /* Posisi background bisa disesuaikan */
+    min-height: 90vh; /* Tinggi minimal section */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-text-light);
+    padding: clamp(3rem, 8vw, 5rem) 1rem; /* Padding vertikal responsif, padding horizontal tetap */
+    position: relative; /* Untuk positioning pseudo-elements */
+    overflow: hidden; /* Mencegah pseudo-elements meluap */
+}
+
+.hero-section-modern .hero-container { 
+    width: 100%;
+    max-width: 1200px; /* Batas lebar konten agar tidak terlalu melebar di layar besar */
+    padding-left: 1rem; /* Padding konsisten dengan container global */
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* Agar konten di atas pseudo-elements */
+    z-index: 1;
+}
+
+/* --- Efek Latar Belakang Halus pada Hero --- */
+.hero-section-modern::before,
+.hero-section-modern::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.03; 
+    pointer-events: none; /* Agar tidak mengganggu interaksi */
+    animation: subtleMovement 16s ease-in-out infinite alternate;
+    mix-blend-mode: screen; /* Blend mode untuk efek cahaya */
+}
+.hero-section-modern::before {
+    width: clamp(380px, 70vw, 900px); /* Ukuran responsif */
+    height: clamp(380px, 70vw, 900px);
+    background: radial-gradient(circle, var(--color-primary) 0%, transparent 52%);
+    top: -28%;
+    left: -22%;
+}
+.hero-section-modern::after {
+    width: clamp(280px, 60vw, 800px);
+    height: clamp(280px, 60vw, 800px);
+    background: radial-gradient(circle, var(--color-secondary) 0%, transparent 57%);
+    bottom: -32%;
+    right: -28%;
+    animation-delay: -8s; /* Animasi tidak sinkron */
+}
+
+@keyframes subtleMovement {
+    0% { transform: translate(5px, 5px) scale(0.96); opacity: 0.02; }
+    100% { transform: translate(25px, -20px) scale(1.04); opacity: 0.04; }
+}
+
+/* --- Konten Hero dan Animasinya --- */
+.hero-section-modern .hero-content { 
+    padding: 1rem 0; /* Padding vertikal untuk konten di dalam container */
+    opacity: 0;
+    transform: translateY(40px); /* Posisi awal untuk animasi */
+    animation: fadeInHeroContent 1.3s cubic-bezier(0.19, 1, 0.22, 1) 0.5s forwards;
+}
+
+@keyframes fadeInHeroContent {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Tipografi dan Tombol CTA Hero --- */
+.hero-section-modern .hero-title {
+    font-family: var(--font-orbitron); 
+    font-size: clamp(2rem, 7vw, 4rem); /* Ukuran font sangat responsif */
+    font-weight: 700; 
+    margin-bottom: 1.5rem; 
+    letter-spacing: -0.025em; 
+    text-shadow: 0 4px 30px rgba(0,0,0,0.85), 
+                 0 0 20px rgba(var(--color-primary-rgb), 0.42); 
+    line-height: 1.2; /* Sedikit lebih rapat untuk judul besar */
+    overflow-wrap: break-word; /* Memastikan teks panjang pindah baris */
+    hyphens: auto; /* Bantu pemenggalan kata (opsional) */
+}
+
+.hero-section-modern .hero-subtitle {
+    font-size: clamp(0.9rem, 2.3vw, 1.15rem); 
+    margin-bottom: 2.8rem; 
+    color: var(--color-text-subtle);
+    max-width: 42rem; /* Batas lebar subtitle */
+    margin-left: auto; 
+    margin-right: auto;
+    line-height: 1.7;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+
+.hero-section-modern .hero-cta {
+    /* Menggunakan .btn .btn-primary dari theme.css */
+    font-size: clamp(0.85rem, 1.8vw, 1.05rem); 
+    padding: 0.8rem clamp(1.6rem, 3.5vw, 2.2rem); 
+    letter-spacing: 0.035em;
+    text-transform: uppercase; /* Membuat CTA lebih tegas */
+    /* Styling spesifik jika perlu, selain dari theme.css */
+}
+.hero-section-modern .hero-cta i { 
+    margin-left: 0.65rem; 
+    transition: transform 0.3s var(--transition-ease);
+}
+.hero-section-modern .hero-cta:hover i {
+    transform: translateX(4px) scale(1.08); 
+}
+
+
+/* ==========================================================================
+   2. General Home Page Section Styling
+   ========================================================================== */
+.home-section {
+    position: relative; 
+    overflow: hidden; /* Mencegah elemen pseudo atau konten meluap */
+}
+
+.section-padding { /* Kelas utilitas untuk padding vertikal konsisten */
+    padding-top: clamp(3rem, 7vw, 4.5rem); 
+    padding-bottom: clamp(3rem, 7vw, 4.5rem);
+    /* Padding horizontal biasanya dihandle oleh .container di dalam section */
+}
+
+/* Variasi latar belakang untuk section */
+.home-section:nth-child(even) { /* Contoh: Produk Unggulan */
+    background-color: rgba(var(--color-card-dark-rgb), 0.08); /* Latar belakang sangat halus */
+}
+.home-section:nth-child(odd) { /* Contoh: Hero (sudah ada), About Snippet */
+    background-color: var(--color-bg-dark); /* Latar belakang standar */
+}
+
+/* Styling judul section yang konsisten */
+.section-heading {
+    margin-bottom: clamp(2.2rem, 5.5vw, 3.2rem); /* Jarak bawah heading group */
+    text-align: center; /* Sebagian besar judul section di tengah */
+}
+.section-heading__title {
+    font-family: var(--font-orbitron);
+    font-size: clamp(1.7rem, 4.8vw, 2.4rem); 
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.6rem; /* Jarak antara judul utama dan subjudul */
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    letter-spacing: -0.012em;
+}
+.section-heading__title .primary-text {
+    text-shadow: var(--shadow-glow-primary); /* Efek glow untuk teks primer */
+}
+.section-heading__subtitle {
+    font-size: clamp(0.9rem, 2.1vw, 1.1rem);
+    color: var(--color-text-subtle);
+    max-width: 600px; /* Batas lebar subjudul */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Kontainer tombol Call to Action di dalam section */
+.section-cta {
+    margin-top: 2.5rem; 
+    text-align: center;
+}
+.section-cta .btn { 
+    /* Menggunakan styling .btn dari theme.css */
+    padding: 0.8rem 2rem; /* Ukuran tombol CTA standar */
+    font-size: clamp(0.85rem, 1.7vw, 0.9rem);
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   3. Featured Products Section Styling
+   ========================================================================== */
+.featured-products-section {
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.05); /* Pemisah halus */
+    background-image: 
+        radial-gradient(rgba(var(--color-primary-rgb), 0.015) 0.5px, transparent 0.5px),
+        radial-gradient(rgba(var(--color-secondary-rgb), 0.015) 0.5px, transparent 0.5px);
+    background-size: 25px 25px, 25px 25px; /* Ukuran pola titik */
+    background-position: 0 0, 12.5px 12.5px; /* Offset antar pola */
+}
+
+/* Grid untuk Produk Unggulan (1, 2, atau 4 kolom) */
+.featured-grid {
+    display: grid;
+    gap: clamp(0.8rem, 2vw, 1.2rem); /* Gap antar kartu responsif */
+    grid-template-columns: repeat(1, minmax(0, 1fr)); /* Default 1 kolom */
+}
+
+/* Responsivitas grid produk unggulan */
+@media (min-width: 480px) { /* Mulai 2 kolom di layar kecil > 480px */
+    .featured-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    }
+}
+/* Breakpoint 768px sengaja di-skip agar tetap 2 kolom di tablet,
+   memberi ruang lebih untuk setiap kartu sebelum menjadi 4 kolom. */
+@media (min-width: 1024px) { /* 4 kolom untuk desktop > 1024px */
+    .featured-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)); 
+    }
+}
+
+/* Teks placeholder jika produk tidak ada/gagal dimuat */
+.placeholder-text {
+    padding: 2rem;
+    background-color: rgba(var(--color-card-dark-rgb), 0.25);
+    border-radius: var(--product-card-border-radius, 0.5rem); /* Ambil dari theme.css jika ada */
+    grid-column: 1 / -1; /* Span penuh jika di dalam grid */
+    border: 1px dashed var(--color-border-primary-accent);
+    color: var(--color-text-subtle);
+    font-style: italic;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Kartu Produk Unggulan: Styling utama dari .product-card di theme.css */
+/* Penyesuaian minor di sini jika perlu, atau animasi */
+.featured-grid .product-card {
+    /* Styling dasar (background, border, shadow awal) diambil dari .product-card di theme.css */
+    opacity: 0; /* Awal untuk animasi */
+    transform: translateY(25px) scale(0.97); /* Awal untuk animasi */
+    /* Badge "UNGGULAN" akan menggunakan ::before pada .product-card jika didefinisikan di theme.css,
+       atau bisa ditambahkan di sini jika hanya untuk featured. */
+}
+/* Animasi masuk untuk kartu produk unggulan (diterapkan oleh JS) */
+@keyframes cardFadeInUpFeatured {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Badge "UNGGULAN" atau "TOP" (Contoh jika ingin spesifik di sini) */
+/* Jika badge ini global, pindahkan ke .product-card::before di theme.css */
+.featured-grid .product-card::before { 
+    content: "TOP"; 
+    position: absolute;
+    top: 8px; 
+    right: -25px; /* Sesuaikan agar pas dengan ukuran kartu */
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.55rem; /* Lebih kecil agar tidak dominan */
+    font-weight: bold;
+    padding: 0.25rem 1.8rem; /* Padding disesuaikan */
+    transform: rotate(45deg);
+    z-index: 5; /* Di atas gambar tapi di bawah elemen interaktif jika ada */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/* ==========================================================================
+   4. About Us Snippet Section Styling
+   ========================================================================== */
+.about-us-snippet-section {
+    background: linear-gradient(175deg, var(--color-card-dark) 0%, #0b111e 100%); /* Gradien gelap */
+    border-top: 1px solid rgba(var(--color-border-primary-accent-rgb), 0.06); /* Pemisah halus */
+}
+.snippet-description {
+    color: var(--color-text-subtle);
+    max-width: 680px; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-bottom: 2.5rem; 
+    font-size: clamp(0.95rem, 2.3vw, 1.05rem);
+    line-height: 1.7;
+}

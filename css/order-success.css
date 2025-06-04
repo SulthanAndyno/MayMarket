@@ -1,0 +1,257 @@
+/* css/order-success.css */
+
+.receipt-card-container {
+    max-width: 56rem; /* max-w-3xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+.receipt-card {
+    /* Uses .content-card from theme.css as a base */
+    padding: 1.5rem; /* p-6 */
+}
+@media (min-width: 640px) { /* sm */
+    .receipt-card {
+        padding: 2.5rem; /* sm:p-10 */
+    }
+}
+
+.order-success-header {
+    text-align: center;
+    margin-bottom: 2rem; /* mb-8 */
+}
+.order-success-icon {
+    font-size: 4rem; /* text-6xl */
+    color: var(--color-primary);
+    margin-bottom: 1.5rem; /* mb-6 */
+    display: inline-block; /* For animation */
+    animation: iconSuccessPulse 2s infinite;
+}
+@keyframes iconSuccessPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(107, 231, 183, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(107, 231, 183, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(107, 231, 183, 0); }
+}
+.order-success-title {
+    font-size: clamp(1.875rem, 5vw, 2.25rem); /* text-3xl sm:text-4xl */
+    font-weight: 700; /* font-bold */
+    color: var(--color-text-light);
+    font-family: var(--font-orbitron);
+}
+.order-success-subtitle {
+    color: var(--color-text-subtle);
+    margin-top: 0.75rem; /* mt-3 */
+    font-size: 1.125rem; /* text-lg */
+}
+.order-success-message {
+    color: var(--color-text-subtle);
+    margin-top: 0.25rem; /* mt-1 */
+}
+.order-success-message strong {
+    color: var(--color-primary);
+    font-weight: 600; /* font-semibold */
+}
+
+#printable-receipt {
+    border: 1px solid rgba(51, 65, 85, 0.5); /* border-dark-border/50 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 1.5rem; /* p-6 */
+    margin-top: 2rem; /* mt-8 */
+    background-color: rgba(20, 30, 48, 0.5); /* Slightly different from main card for depth */
+}
+.receipt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem; /* mb-6 */
+    padding-bottom: 1rem; /* pb-4 */
+    border-bottom: 1px solid rgba(51, 65, 85, 0.3); /* border-dark-border/30 */
+}
+.receipt-logo-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: var(--color-primary);
+    font-family: var(--font-orbitron);
+}
+.receipt-logo-subtitle {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--color-text-subtle);
+}
+.receipt-order-info {
+    text-align: right;
+}
+.receipt-order-info .info-line {
+    font-weight: 600; /* font-semibold */
+    color: var(--color-text-light);
+}
+.receipt-order-info .info-subline {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--color-text-subtle);
+}
+
+.customer-shipping-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* gap-6 */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+@media (min-width: 768px) { /* md */
+    .customer-shipping-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.address-section-title {
+    font-size: 1rem; /* text-md */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+.address-details {
+    color: var(--color-text-subtle);
+    white-space: pre-line; /* For newlines in address */
+}
+
+#receipt-customer-notes-container { margin-bottom: 1.5rem; }
+#receipt-customer-notes-container .notes-title {
+    font-size: 1rem; /* text-md */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+#receipt-customer-notes {
+    color: var(--color-text-subtle);
+    font-style: italic;
+}
+
+.order-details-title {
+    font-size: 1rem; /* text-md */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+.receipt-table-container {
+    overflow-x: auto;
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+.receipt-table {
+    min-width: 100%;
+    border-collapse: collapse; /* More standard than divide-y */
+}
+.receipt-table thead {
+    background-color: rgba(15, 23, 42, 0.3); /* bg-dark-bg/30 */
+}
+.receipt-table th {
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    text-align: left;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 500; /* font-medium */
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* tracking-wider */
+    border-bottom: 1px solid rgba(51, 65, 85, 0.3); /* divide-dark-border/30 */
+}
+.receipt-table th.text-center { text-align: center; }
+.receipt-table th.text-right { text-align: right; }
+
+.receipt-table tbody {
+    background-color: rgba(30, 41, 59, 0.5); /* bg-dark-card/50 */
+}
+.receipt-table td {
+    padding: 0.75rem 1rem; /* px-4 py-3 */
+    white-space: nowrap;
+    font-size: 0.875rem; /* text-sm */
+    color: var(--color-text-subtle);
+    border-bottom: 1px solid rgba(51, 65, 85, 0.2); /* divide-dark-border/20 */
+}
+.receipt-table td:last-child { border-bottom: none; } /* For rows within tbody */
+.receipt-table tr:last-child td { border-bottom: none; }
+
+
+.receipt-table .item-name {
+    color: var(--color-text-light);
+}
+.receipt-table .item-variation {
+    font-size: 0.75rem; /* text-xs */
+}
+.receipt-table .item-subtotal {
+    color: var(--color-text-light);
+    font-weight: 500; /* font-medium */
+}
+.receipt-table td.text-center { text-align: center; }
+.receipt-table td.text-right { text-align: right; }
+
+.summary-totals-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+.summary-totals-box {
+    width: 100%;
+}
+@media (min-width: 768px) { /* md */
+    .summary-totals-box {
+        width: 50%;
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    .summary-totals-box {
+        width: 33.3333%;
+    }
+}
+.summary-totals-box > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem; /* space-y-2 */
+}
+.summary-totals-box .summary-label {
+    color: var(--color-text-subtle);
+}
+.summary-totals-box .summary-value {
+    font-weight: 500; /* font-medium */
+    color: var(--color-text-light);
+}
+.summary-totals-box hr {
+    margin: 0.25rem 0; /* my-1 */
+    border-color: rgba(51, 65, 85, 0.3); /* border-dark-border/30 */
+}
+.summary-totals-box .grand-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 700; /* font-bold */
+}
+.summary-totals-box .grand-total-label {
+    color: var(--color-text-light);
+}
+.summary-totals-box .grand-total-value {
+    color: var(--color-primary);
+}
+
+.thank-you-note {
+    text-align: center;
+    font-size: 0.875rem; /* text-sm */
+    color: var(--color-text-subtle);
+    margin-top: 1.5rem; /* mt-6 */
+}
+
+.order-success-actions {
+    margin-top: 2.5rem; /* mt-10 */
+    text-align: center;
+}
+.order-success-actions > * {
+    margin: 0.5rem; /* space-y-3 or space-x-4 for flex */
+}
+.order-success-actions .action-btn {
+    /* Uses .btn .btn-primary or .btn .btn-secondary from theme.css */
+    padding: 0.7rem 2rem; /* py-2.5 px-8 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.order-success-actions .action-btn i {
+    margin-right: 0.5rem; /* mr-2 */
+}
+
+/* Main container for vertical rhythm */
+.order-success-main-container {
+    padding: 3rem 0; /* py-12 */
+}

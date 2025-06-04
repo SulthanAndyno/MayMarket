@@ -1,0 +1,109 @@
+/* css/account.css */
+
+.account-card { 
+    /* Uses .content-card from theme.css as a base */
+    max-width: 56rem; /* max-w-3xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+.account-title { 
+    font-family: var(--font-orbitron); 
+    font-size: clamp(1.75rem, 4vw, 2.25rem); 
+    text-shadow: 0 0 10px rgba(107, 231, 183, 0.5); 
+    margin-bottom: 1.5rem; 
+    text-align: center;
+    color: var(--color-primary);
+}
+.account-subtitle { 
+    color: var(--color-text-subtle); 
+    font-size: 1.125rem; 
+    margin-bottom: 0.5rem; 
+}
+.account-text { 
+    color: var(--color-text-subtle); 
+    margin-bottom: 2rem; 
+    line-height: 1.7;
+}
+
+.order-history-title, .account-settings-title { 
+    font-family: var(--font-orbitron); 
+    font-size: 1.5rem; 
+    color: var(--color-text-light); 
+    margin-bottom: 1rem; 
+}
+.order-history-title i, .account-settings-title i {
+    margin-right: 0.75rem; /* mr-3 */
+    color: var(--color-primary);
+}
+
+.content-box-dark { /* For inner boxes like order history placeholder */
+    background-color: rgba(15, 23, 42, 0.5); /* bg-dark-bg/50 */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    border: 1px solid var(--color-border-dark);
+}
+.content-box-dark .text-content {
+    color: var(--color-text-subtle);
+}
+.content-box-dark .link-text {
+    color: var(--color-primary);
+    font-weight: 600; /* font-semibold */
+}
+.content-box-dark .link-text:hover {
+    text-decoration: underline;
+}
+
+.logout-button-container {
+    margin-top: 2.5rem; /* mt-10 */
+}
+.btn-logout-system {
+    /* Uses .btn .btn-danger from theme.css */
+    width: 100%;
+    padding: 0.85rem 2rem; /* py-3 px-8 */
+}
+@media (min-width: 768px) { /* md */
+    .btn-logout-system {
+        width: auto;
+    }
+}
+.btn-logout-system i {
+    margin-right: 0.5rem; /* mr-2 */
+}
+
+#login-prompt {
+    text-align: center;
+    padding: 2rem 0; /* py-8 */
+}
+#login-prompt .prompt-icon {
+    font-size: 3rem; /* fa-3x */
+    color: var(--color-primary);
+    margin-bottom: 1rem; /* mb-4 */
+}
+#login-prompt .prompt-title { /* Uses .account-title styling */
+    /* Handled by .account-title class directly */
+}
+#login-prompt .prompt-subtitle {
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+#login-prompt .prompt-text {
+    max-width: 36rem; /* max-w-md */
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-text-subtle); /* Using theme.css variable */
+    margin-bottom: 1.5rem;
+}
+#login-prompt .btn-authenticate {
+    /* Uses .btn .btn-primary from theme.css */
+    padding: 0.85rem 2rem; /* py-3 px-8 */
+    display: inline-block;
+}
+#login-prompt .btn-authenticate i {
+    margin-right: 0.5rem; /* mr-2 */
+}
+
+/* Container for main content to ensure min-height works well with sticky footer */
+.account-main-container {
+    min-height: calc(100vh - var(--navbar-height, 5rem) - var(--footer-height, 10rem)); /* Adjust vars based on actual heights */
+    padding: 3rem 0; /* py-12 */
+}
