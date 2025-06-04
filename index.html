@@ -3,244 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAYMART - Sayuran Segar Online</title>
+    <title>MAYMART - Inovasi Pangan Masa Depan</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <style>
-        /* INDEX-SPECIFIC STYLES - Minimal */
-        .hero-section-modern {
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            min-height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 2.5rem;
-            padding-bottom: 2.5rem;
-        }
-        .hero-section-modern .hero-content {
-            position: relative;
-            z-index: 10;
-            padding: 1.5rem;
-        }
-        .hero-section-modern h1 {
-            font-family: var(--font-orbitron);
-            font-size: clamp(2.25rem, 6vw, 4.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.025em;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-        }
-        .hero-section-modern .hero-subtitle {
-            font-size: 1.125rem;
-            margin-bottom: 2.5rem;
-            color: var(--color-text-subtle);
-            max-width: 42rem;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero-section-modern .hero-cta {
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-        }
-        .hero-section-modern .hero-cta:hover {
-             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-             transform: scale(1.05);
-        }
-        .hero-section-modern .hero-cta i { margin-left: 0.5rem; }
-
-        .about-us-section {
-            background: linear-gradient(160deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 30, 48, 0.9) 100%);
-            padding: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .about-us-section::before {
-            content: ''; position: absolute; top: -50%; left: -20%; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(107, 231, 183, 0.05) 0%, rgba(107, 231, 183, 0) 60%);
-            pointer-events: none; z-index: 0;
-        }
-        .about-us-content-wrapper { position: relative; z-index: 1; }
-        .about-us-section .section-subtitle {
-            font-family: var(--font-orbitron); text-transform: uppercase; letter-spacing: 0.15em;
-            color: var(--color-primary); font-size: 0.875rem; display: block; margin-bottom: 0.5rem;
-        }
-        .about-us-section .section-title {
-            font-family: var(--font-orbitron); font-size: clamp(2.25rem, 5vw, 3rem); font-weight: 700;
-            color: var(--color-text-light); margin-bottom: 1.5rem; line-height: 1.2;
-        }
-        .about-us-section .section-title .primary-text { text-shadow: var(--shadow-glow-primary); }
-
-        .about-us-grid {
-            display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem;
-        }
-        @media (min-width: 768px) { .about-us-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .about-us-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-
-        .vision-card {
-            background-color: rgba(30, 41, 59, 0.6); border: 1px solid var(--color-border-primary-accent);
-            padding: 2rem; border-radius: 1rem;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            position: relative; overflow: hidden;
-        }
-        .vision-card::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(107, 231, 183, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .vision-card:hover {
-            transform: translateY(-8px) scale(1.03); background-color: rgba(30, 41, 59, 0.8);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(107, 231, 183, 0.15);
-        }
-        .vision-card:hover::before { left: 120%; }
-        .vision-card .icon-wrapper {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(145deg, rgba(107, 231, 183, 0.1), rgba(59, 130, 246, 0.1));
-            margin-bottom: 1.5rem; border: 1px solid rgba(107, 231, 183, 0.2);
-            color: var(--color-primary); display: flex; align-items: center; justify-content: center;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; font-size: 1.5rem;
-        }
-        .vision-card:hover .icon-wrapper {
-            transform: rotateY(180deg) scale(1.1); box-shadow: 0 0 15px rgba(107, 231, 183, 0.3);
-        }
-        .vision-card h3 {
-            font-size: 1.375rem; font-weight: 600; color: var(--color-text-light); margin-bottom: 0.75rem;
-        }
-        .vision-card p {
-            font-size: 0.95rem; color: var(--color-text-subtle); line-height: 1.6;
-        }
-        @media (min-width: 768px) {
-            .vision-card.md-col-span-2 { grid-column: span 2 / span 2; }
-        }
-        @media (min-width: 1024px) {
-            .vision-card.lg-col-span-1 { grid-column: span 1 / span 1; }
-            .vision-card.lg-col-span-2 { grid-column: span 2 / span 2; }
-        }
-
-        .products-section {
-            background: var(--color-bg-dark); padding: 4rem 0; position: relative; overflow: hidden;
-        }
-        .products-section::after {
-            content: ''; position: absolute; bottom: -30%; right: -15%; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, rgba(59, 130, 246, 0) 60%);
-            pointer-events: none; z-index: 0;
-        }
-        .products-section .section-title-products {
-            font-family: var(--font-orbitron); font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 700;
-            color: var(--color-primary); margin-bottom: 1rem; text-align: center;
-            text-shadow: var(--shadow-glow-primary);
-        }
-        /* .products-section #search-message is now in theme.css */
-        .products-grid {
-            display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem;
-        }
-        @media (min-width: 640px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        @media (min-width: 1280px) { .products-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-
-        .products-section #no-products-message {
-            text-align: center; font-size: 1.25rem; color: var(--color-text-subtle); margin-top: 2.5rem;
-        }
-        .products-section #no-products-message.hidden { display: none; }
-        .products-section #no-products-message i {
-             font-size: 2rem; color: var(--color-primary); margin-bottom: 0.75rem; display: block;
-        }
-        .hidden { display: none !important; } /* Global utility if needed */
-    </style>
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/index.css"> <!-- Index page specific styles -->
 </head>
 <body class="antialiased">
 
-    <div id="page-navbar-container"></div> <!-- Navbar will be loaded here -->
+    <div id="page-navbar-container"></div> <!-- Navbar akan dimuat di sini -->
 
-    <main>
+    <main class="page-main-content">
         <!-- Hero Section -->
-        <section class="hero-section-modern">
-            <div class="hero-content">
-                <h1>Sayuran <span class="primary-text">Segar Berkualitas</span>, Masa Depan Pangan Anda.</h1>
-                <p class="hero-subtitle">
-                    Teknologi bertemu tradisi. Dapatkan hasil panen terbaik langsung ke pintu Anda, didukung oleh inovasi untuk kesegaran maksimal.
-                </p>
-                <a href="#products" class="btn btn-primary hero-cta">
-                    Jelajahi Produk <i class="fas fa-angle-double-right"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about-us" class="about-us-section">
-            <div class="container about-us-content-wrapper">
-                <div class="about-us-intro"> <!-- Diganti dari text-center mb-16 -->
-                    <span class="section-subtitle">Our Core</span>
-                    <h2 class="section-title">Visi <span class="primary-text">MAYMART</span>: Pertanian Masa Depan</h2>
-                    <p class="section-description">
-                        MAYMART bukan hanya e-commerce sayuran. Kami adalah pionir dalam mengintegrasikan teknologi dengan pertanian untuk menghadirkan produk segar berkualitas tinggi, memberdayakan petani lokal, dan membangun ekosistem pangan yang berkelanjutan dan transparan.
+        <section id="hero-home" class="hero-section-modern">
+            <div class="container hero-container"> <!-- Tambahkan kelas .hero-container untuk kontrol lebih -->
+                <div class="hero-content">
+                    <h1 class="hero-title">Sayuran <span class="primary-text">Segar Berkualitas</span>, Transformasi Pangan Digital.</h1>
+                    <p class="hero-subtitle">
+                        Inovasi teknologi bertemu kearifan agrikultur. Nikmati hasil panen premium langsung ke pintu Anda, dengan kesegaran dan kualitas terdepan.
                     </p>
-                </div>
-
-                <div class="about-us-grid">
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-cogs"></i></div>
-                        <h3>Inovasi Teknologi</h3>
-                        <p>Memanfaatkan AI dan IoT untuk optimalisasi rantai pasok, dari pemantauan pertumbuhan hingga pengiriman presisi, memastikan kesegaran terjaga.</p>
-                    </div>
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
-                        <h3>Kualitas & Kesegaran Terdepan</h3>
-                        <p>Standar kualitas ketat dan kemasan pintar menjaga nutrisi dan kesegaran produk hingga sampai ke tangan Anda.</p>
-                    </div>
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-users"></i></div>
-                        <h3>Pemberdayaan Komunitas</h3>
-                        <p>Membangun kemitraan adil dengan petani lokal, meningkatkan kesejahteraan mereka melalui akses pasar digital dan praktik pertanian modern.</p>
-                    </div>
-                    <div class="vision-card md-col-span-2 lg-col-span-1">
-                        <div class="icon-wrapper"><i class="fas fa-globe-asia"></i></div>
-                        <h3>Keberlanjutan Ekosistem</h3>
-                        <p>Mendorong praktik pertanian ramah lingkungan, mengurangi limbah pangan, dan jejak karbon untuk planet yang lebih sehat.</p>
-                    </div>
-                    <div class="vision-card lg-col-span-2">
-                        <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
-                        <h3>Transformasi Digital Pangan</h3>
-                        <p>Menjadi platform terdepan yang menghubungkan produsen dan konsumen secara transparan, efisien, dan cerdas, menciptakan masa depan pangan yang lebih baik untuk semua.</p>
-                    </div>
-                </div>
-                <div class="about-us-cta-container"> <!-- Diganti dari text-center mt-12 -->
-                    <a href="#products" class="btn btn-primary">
-                        Lihat Bagaimana Kami Bekerja
+                    <a href="products.html" class="btn btn-secondary hero-cta">
+                        Jelajahi Ekosistem Produk <i class="fas fa-angle-double-right"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Products Section -->
-        <section id="products" class="products-section">
-            <div class="container">
-                <h2 class="section-title-products">Produk Pilihan MAYMART</h2>
-                <p id="search-message" class="hidden"></p>
-                <div id="product-list" class="products-grid">
-                    <!-- Product cards will be generated by JavaScript -->
+        <!-- Call to Action / About Us Snippet -->
+        <section id="about-snippet-section" class="home-section about-us-snippet-section section-padding">
+            <div class="container text-center">
+                <div class="section-heading">
+                    <h2 class="section-heading__title snippet-title">Kenapa Memilih <span class="primary-text">MAYMART</span>?</h2>
                 </div>
-                <p id="no-products-message" class="hidden">
-                    <i class="fas fa-satellite-dish"></i><br>
-                    Sinyal Produk Hilang! Coba kata kunci lain atau <a href="#products" onclick="window.displayProducts(window.allProducts); document.getElementById('search-input-desktop').value=''; document.getElementById('search-input-mobile').value=''; document.getElementById('search-message').classList.add('hidden'); return false;" class="primary-text">lihat semua produk</a>.
+                <p class="snippet-description">
+                    Kami adalah pionir dalam revolusi agrikultur digital, menghubungkan Anda langsung dengan petani lokal melalui platform yang transparan dan berkelanjutan. Rasakan bedanya kualitas, kesegaran, dan dampak positif bagi komunitas.
                 </p>
+                <div class="section-cta">
+                    <a href="about.html" class="btn btn-secondary">Jelajahi Visi Kami <i class="fas fa-angle-double-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section id="featured-products-section" class="home-section featured-products-section section-padding">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <h2 class="section-heading__title">Produk <span class="primary-text">Unggulan</span> Terkurasi</h2>
+                    <p class="section-heading__subtitle">Pilihan terbaik dari kebun kami, hasil inovasi dan dedikasi untuk Anda.</p>
+                </div>
+                <div id="featured-product-list" class="products-grid featured-grid">
+                    <p class="placeholder-text text-center text-subtle col-span-full">Memuat produk unggulan...</p>
+                </div>
+                <div class="section-cta text-center">
+                    <a href="products.html" class="btn btn-secondary">Lihat Semua Koleksi <i class="fas fa-angle-double-right"></i></a>
+                </div>
             </div>
         </section>
     </main>
 
-    <div id="page-footer-container"></div> <!-- Footer will be loaded here -->
+    <div id="page-footer-container"></div> <!-- Footer akan dimuat di sini -->
 
     <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Memuat produk unggulan
+            if (typeof displayFeaturedProducts === 'function') {
+                displayFeaturedProducts(4); // Menampilkan 4 produk unggulan
+            } else {
+                const featuredList = document.getElementById('featured-product-list');
+                if(featuredList) {
+                    const placeholder = featuredList.querySelector('.placeholder-text');
+                    if(placeholder) placeholder.textContent = 'Gagal memuat produk unggulan (fungsi tidak ada).';
+                }
+                console.warn('Fungsi displayFeaturedProducts tidak ditemukan.');
+            }
+        });
+    </script>
 </body>
 </html>

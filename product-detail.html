@@ -4,97 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk - MAYMART</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Lightbox2 CSS for Zoom -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
-    <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F7FAFC; color: #1A202C; }
-        .primary-bg { background-color: #99cc76; }
-        .primary-text { color: #99cc76; }
-        .dark-bg { background-color: #1A202C; }
-        .btn-primary { background-color: #99cc76; color: white; transition: background-color 0.3s ease; }
-        .btn-primary:hover { background-color: #82b362; }
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    </style>
-     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#99cc76',
-                        dark: '#1A202C',
-                        'slate-gray': '#4A5568',
-                        'off-white': '#F7FAFC',
-                    },
-                    fontFamily: {
-                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/product-detail.css"> <!-- Product detail specific styles -->
 </head>
 <body class="antialiased">
-    <!-- Header (Sama seperti index.html, bisa dibuat komponen terpisah nanti) -->
-    <header class="dark-bg text-off-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold primary-text tracking-wider">MAYMART</a>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:primary-text transition-colors">Beranda</a>
-                <a href="index.html#products" class="hover:primary-text transition-colors">Produk</a>
-                <a href="cart.html" class="relative hover:primary-text transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-xs text-white rounded-full px-1.5 py-0.5">0</span>
-                </a>
-                <a href="login.html" id="user-link" class="hover:primary-text transition-colors">Login</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden dark-bg">
-             <a href="index.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Beranda</a>
-            <a href="index.html#products" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Produk</a>
-            <a href="cart.html" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Keranjang</a>
-            <a href="login.html" id="mobile-user-link" class="block px-4 py-2 hover:bg-slate-gray transition-colors">Login</a>
-        </div>
-    </header>
 
-    <main class="container mx-auto px-4 py-12">
-        <div id="product-detail-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-            <!-- Konten detail produk akan di-generate JavaScript -->
-            <!-- Fallback content if JS fails or product not found -->
-            <div id="product-loading" class="md:col-span-2 text-center py-10">
-                <i class="fas fa-spinner fa-spin fa-3x text-primary mb-4"></i>
-                <p class="text-xl text-slate-gray">Memuat detail produk...</p>
+    <div id="page-navbar-container"></div> <!-- Standard Navbar -->
+
+    <main class="container mx-auto px-4 py-8 md:py-12 product-detail-page"> <!-- Adjusted py -->
+        <div id="product-detail-content-wrapper" class="product-detail-container">
+            <div id="product-detail-content" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start"> <!-- Adjusted gap -->
+                <!-- Fallback content if JS fails or product not found -->
+                <div id="product-loading-placeholder" class="md:col-span-2">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat detail produk...</p>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer (Sama seperti index.html) -->
-    <footer class="dark-bg text-off-white py-12 mt-16">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-2xl font-bold primary-text mb-4">MAYMART</p>
-            <p>© <span id="current-year-footer"></span> MAYMART. Semua Hak Dilindungi.</p>
-        </div>
-    </footer>
+    <div id="page-footer-container"></div> <!-- Standard Footer -->
     
-    <!-- Lightbox2 JS -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     <script>
+        // Initialize Lightbox
         if (typeof lightbox !== 'undefined') {
             lightbox.option({
-              'resizeDuration': 200,
-              'wrapAround': true
+              'resizeDuration': 180, // slightly faster
+              'wrapAround': true,
+              'fadeDuration': 250, // slightly faster
+              'imageFadeDuration': 250, // slightly faster
+              'disableScrolling': true // Good for focus
             });
         }
     </script>
-    <script src="js/script.js"></script> <!-- Umum, allProducts, mobile menu -->
-    <script src="js/auth.js"></script> <!-- Untuk update user link & cart count -->
-    <script src="js/cart.js"></script> <!-- Untuk update cart count & addToCart function -->
-    <script src="js/product.js"></script> <!-- Khusus halaman detail produk -->
+    <script src="js/global.js"></script> <!-- Handles navbar, footer, global interactions -->
+    <script src="js/auth.js"></script> 
+    <script src="js/cart.js"></script> <!-- For addToCart function and cart count update -->
+    <script src="js/script.js"></script> <!-- For allProducts array -->
+    <script src="js/product.js"></script> <!-- Specific logic for this page -->
 </body>
 </html>

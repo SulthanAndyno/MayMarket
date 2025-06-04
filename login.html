@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/auth.css">
     <style>
-        .hidden { display: none; }
+        /* Minimal local style if needed, auth.css should cover this */
+        .hidden { display: none; } 
     </style>
 </head>
 <body class="auth-page">
@@ -19,7 +20,7 @@
                 <div class="input-group">
                     <label for="username">User Identifier</label>
                     <div class="input-field-container">
-                        <input class="input-field" type="text" id="username" name="username" required placeholder="e.g., maymartadmin">
+                        <input class="input-field" type="text" id="username" name="username" required placeholder="Username">
                         <i class="fas fa-user-astronaut input-icon"></i>
                     </div>
                 </div>
@@ -35,11 +36,18 @@
                     <!-- Error message will be inserted here by JavaScript -->
                 </div>
             </form>
-            <p class="demo-creds">
-                Access: Username: <strong>maymartadmin</strong>, Password: <strong>password123</strong>
-            </p>
         </div>
     </div>
     <script src="js/auth.js"></script>
+    <script>
+        // Add fade-in for login page specifically, if not handled by auth.js globally
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1'; // Simple fade-in
+             // If auth.js already handles 'loaded' class, this is redundant
+            if (!document.body.classList.contains('loaded')) {
+                 setTimeout(() => document.body.classList.add('loaded'), 50); // Slight delay for transition
+            }
+        });
+    </script>
 </body>
 </html>

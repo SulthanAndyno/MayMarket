@@ -6,150 +6,123 @@
     <title>Tentang Kami - MAYMART</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <style>
-        /* ABOUT-PAGE-SPECIFIC STYLES (if any, reuse from index or theme) */
-        /* Styles for .about-us-section and its children are now in theme.css or index.html's specific styles */
-        /* For this page, we assume they are sufficiently covered by theme.css or copied from index.html if needed */
-        .hero-placeholder { /* Optional: if you want some top spacing like a hero but simpler */
-            padding-top: 3rem; /* Adjust as needed */
-            padding-bottom: 1rem;
-            background-color: var(--color-bg-dark); /* Match body background */
-        }
-         /* Re-include about-us-section specific styles if not fully in theme.css */
-        .about-us-section {
-            background: linear-gradient(160deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 30, 48, 0.9) 100%);
-            padding: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .about-us-section::before {
-            content: ''; position: absolute; top: -50%; left: -20%; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(107, 231, 183, 0.05) 0%, rgba(107, 231, 183, 0) 60%);
-            pointer-events: none; z-index: 0;
-        }
-        .about-us-content-wrapper { position: relative; z-index: 1; }
-        .about-us-section .section-subtitle {
-            font-family: var(--font-orbitron); text-transform: uppercase; letter-spacing: 0.15em;
-            color: var(--color-primary); font-size: 0.875rem; display: block; margin-bottom: 0.5rem;
-        }
-        .about-us-section .section-title {
-            font-family: var(--font-orbitron); font-size: clamp(2.25rem, 5vw, 3rem); font-weight: 700;
-            color: var(--color-text-light); margin-bottom: 1.5rem; line-height: 1.2;
-        }
-        .about-us-section .section-title .primary-text { text-shadow: var(--shadow-glow-primary); }
-
-        .about-us-grid {
-            display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem;
-        }
-        @media (min-width: 768px) { .about-us-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .about-us-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-
-        .vision-card {
-            background-color: rgba(30, 41, 59, 0.6); border: 1px solid var(--color-border-primary-accent);
-            padding: 2rem; border-radius: 1rem;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            position: relative; overflow: hidden;
-        }
-        .vision-card::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(107, 231, 183, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .vision-card:hover {
-            transform: translateY(-8px) scale(1.03); background-color: rgba(30, 41, 59, 0.8);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(107, 231, 183, 0.15);
-        }
-        .vision-card:hover::before { left: 120%; }
-        .vision-card .icon-wrapper {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(145deg, rgba(107, 231, 183, 0.1), rgba(59, 130, 246, 0.1));
-            margin-bottom: 1.5rem; border: 1px solid rgba(107, 231, 183, 0.2);
-            color: var(--color-primary); display: flex; align-items: center; justify-content: center;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; font-size: 1.5rem;
-        }
-        .vision-card:hover .icon-wrapper {
-            transform: rotateY(180deg) scale(1.1); box-shadow: 0 0 15px rgba(107, 231, 183, 0.3);
-        }
-        .vision-card h3 {
-            font-size: 1.375rem; font-weight: 600; color: var(--color-text-light); margin-bottom: 0.75rem;
-        }
-        .vision-card p {
-            font-size: 0.95rem; color: var(--color-text-subtle); line-height: 1.6;
-        }
-        @media (min-width: 768px) {
-            .vision-card.md-col-span-2 { grid-column: span 2 / span 2; }
-        }
-        @media (min-width: 1024px) {
-            .vision-card.lg-col-span-1 { grid-column: span 1 / span 1; }
-            .vision-card.lg-col-span-2 { grid-column: span 2 / span 2; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/theme.css"> <!-- Global theme styles -->
+    <link rel="stylesheet" href="css/about.css"> <!-- About page specific styles -->
 </head>
 <body class="antialiased">
+<div id="page-navbar-container"></div> <!-- Navbar akan dimuat di sini -->
 
-    <div id="page-navbar-container"></div> <!-- Navbar will be loaded here -->
+<main>
+    <!-- Hero Section using classes from about.css that mirror index.html's hero -->
+    <section class="hero-section-modern hero-placeholder"> <!-- hero-placeholder can be removed if hero-section-modern is sufficient -->
+        <div class="hero-content container">
+            <h1 class="page-title">Tentang <span class="primary-text">MAYMART</span></h1>
+            <p class="hero-subtitle">Menghubungkan petani lokal dengan Anda melalui inovasi dan dedikasi untuk pangan berkualitas.</p>
+        </div>
+    </section>
 
-    <main>
-        <div class="hero-placeholder">
-            <div class="container">
-                <h1 class="page-title" style="color: var(--color-primary); text-shadow: var(--shadow-glow-primary);">Tentang MAYMART</h1>
+    <!-- Section: Visi Website -->
+    <section class="vision-mission-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle-alt">Pandangan Ke Depan</span>
+                <h2 class="section-title-alt">Visi <span class="primary-text">Digital</span> Kami</h2>
+                <p class="section-description-alt">
+                    Menjadi platform e-commerce agrikultur terdepan yang memberdayakan petani kecil melalui teknologi, menghadirkan produk segar berkualitas langsung ke konsumen, serta membangun ekosistem pangan lokal yang adil, transparan, dan berkelanjutan untuk masa depan Indonesia.
+                </p>
             </div>
         </div>
+    </section>
 
-        <!-- About Us Section (copied from index.html content structure) -->
-        <section id="about-us-content" class="about-us-section">
-            <div class="container about-us-content-wrapper">
-                <div class="about-us-intro">
-                    <span class="section-subtitle">Our Core</span>
-                    <h2 class="section-title">Visi <span class="primary-text">MAYMART</span>: Pertanian Masa Depan</h2>
-                    <p class="section-description">
-                        MAYMART bukan hanya e-commerce sayuran. Kami adalah pionir dalam mengintegrasikan teknologi dengan pertanian untuk menghadirkan produk segar berkualitas tinggi, memberdayakan petani lokal, dan membangun ekosistem pangan yang berkelanjutan dan transparan.
-                    </p>
-                </div>
-
-                <div class="about-us-grid">
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-cogs"></i></div>
-                        <h3>Inovasi Teknologi</h3>
-                        <p>Memanfaatkan AI dan IoT untuk optimalisasi rantai pasok, dari pemantauan pertumbuhan hingga pengiriman presisi, memastikan kesegaran terjaga.</p>
-                    </div>
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
-                        <h3>Kualitas & Kesegaran Terdepan</h3>
-                        <p>Standar kualitas ketat dan kemasan pintar menjaga nutrisi dan kesegaran produk hingga sampai ke tangan Anda.</p>
-                    </div>
-                    <div class="vision-card">
-                        <div class="icon-wrapper"><i class="fas fa-users"></i></div>
-                        <h3>Pemberdayaan Komunitas</h3>
-                        <p>Membangun kemitraan adil dengan petani lokal, meningkatkan kesejahteraan mereka melalui akses pasar digital dan praktik pertanian modern.</p>
-                    </div>
-                    <div class="vision-card md-col-span-2 lg-col-span-1">
-                        <div class="icon-wrapper"><i class="fas fa-globe-asia"></i></div>
-                        <h3>Keberlanjutan Ekosistem</h3>
-                        <p>Mendorong praktik pertanian ramah lingkungan, mengurangi limbah pangan, dan jejak karbon untuk planet yang lebih sehat.</p>
-                    </div>
-                    <div class="vision-card lg-col-span-2">
-                        <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
-                        <h3>Transformasi Digital Pangan</h3>
-                        <p>Menjadi platform terdepan yang menghubungkan produsen dan konsumen secara transparan, efisien, dan cerdas, menciptakan masa depan pangan yang lebih baik untuk semua.</p>
+    <!-- Section: Kelebihan Website -->
+    <section class="advantages-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle-alt">Mengapa Memilih Kami</span>
+                <h2 class="section-title-alt">Keunggulan Platform <span class="primary-text">MAYMART</span></h2>
+            </div>
+            <div class="feature-card-grid">
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-seedling"></i></div>
+                        <h3>Kesegaran Terjamin</h3>
+                        <p>Produk dipanen dan dikirim dengan optimalisasi rantai pasok berbasis teknologi untuk menjaga kesegaran maksimal hingga ke tangan Anda.</p>
                     </div>
                 </div>
-                 <div class="about-us-cta-container">
-                    <a href="index.html#products" class="btn btn-primary">
-                        Jelajahi Produk Kami
-                    </a>
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-users-cog"></i></div>
+                        <h3>Dukung Petani Lokal</h3>
+                        <p>Kami bermitra langsung dengan petani, memberikan harga yang adil dan akses pasar digital, meningkatkan kesejahteraan mereka.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-shipping-fast"></i></div>
+                        <h3>Pengiriman Cepat</h3>
+                        <p>Sistem logistik cerdas memastikan pengiriman yang cepat, aman, dan terjadwal, dilengkapi pelacakan real-time.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Kualitas Terkontrol</h3>
+                        <p>Standar sortir dan pengemasan yang ketat menjaga kualitas dan nutrisi produk. Transparansi informasi produk lengkap.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-globe-asia"></i></div>
+                        <h3>Ekosistem Berkelanjutan</h3>
+                        <p>Mendorong praktik pertanian ramah lingkungan dan mengurangi jejak karbon untuk masa depan pangan yang lebih baik.</p>
+                    </div>
+                </div>
+                <div class="feature-card"> <!-- Example of adding one more, ensure grid handles it or adjust grid-template-columns -->
+                    <div class="feature-card-content">
+                        <div class="icon-container"><i class="fas fa-headset"></i></div>
+                        <h3>Layanan Pelanggan Responsif</h3>
+                        <p>Tim dukungan kami siap membantu Anda dengan pertanyaan atau kebutuhan apa pun terkait pesanan dan platform kami.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <div id="page-footer-container"></div> <!-- Footer will be loaded here -->
+    <!-- Team Section -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <h2 class="section-title-team">Team <span class="primary-text">MAYMART</span></h2>
+            <div class="team-grid">
+                <div class="team-member-card">
+                    <img src="images/team/sulthan.jpg" alt="Anggota Tim Sulthan H. Andyno">
+                    <h3>Sulthan H. Andyno</h3>
+                    <p class="role">103062400023</p>
+                </div>
+                <div class="team-member-card">
+                    <img src="images/team/althaf.jpg" alt="Anggota Tim Althaf Razanullaya Rizqi Mulyawan">
+                    <h3>Althaf Razanullaya R</h3>
+                    <p class="role">103062400032</p>
+                </div>
+                <div class="team-member-card">
+                    <img src="images/team/balya.jpg" alt="Anggota Tim Sultan Balya Haidar">
+                    <h3>Sultan Balya Haidar</h3>
+                    <p class="role">103062400003</p> <!-- Ganti XX dengan digit terakhir jika ada -->
+                </div>
+                <div class="team-member-card">
+                    <img src="images/team/rasya.jpg" alt="Anggota Tim Rasya Naufal Khairunnas">
+                    <h3>Rassya Naufal K</h3>
+                    <p class="role">103062400044</p> <!-- Ganti XX dengan digit terakhir jika ada -->
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-    <script src="js/global.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cart.js"></script>
-    <!-- No script.js needed as it's for product listing on index.html -->
+<div id="page-footer-container"></div>
+
+<script src="js/global.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<!-- No specific JS for about.html beyond global scripts for now -->
 </body>
 </html>
