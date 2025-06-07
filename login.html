@@ -3,27 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - MAYMART</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login - MAYMART Secure Access</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/auth.css">
+    <style>
+        /* Minimal local style if needed, auth.css should cover this */
+        .hidden { display: none; }
+    </style>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-off-white">
-    <div class="login-card dark-bg text-off-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h2 class="text-3xl font-bold mb-6 text-center primary-text">Login ke MAYMART</h2>
-        <form id="login-form" autocomplete="off">
-            <div class="mb-4">
-                <label class="block mb-2" for="username">Username</label>
-                <input class="input-field" type="text" id="username" required>
-            </div>
-            <div class="mb-6">
-                <label class="block mb-2" for="password">Password</label>
-                <input class="input-field" type="password" id="password" required>
-            </div>
-            <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold text-lg">Login</button>
-            <p id="login-error" class="text-red-400 mt-4 text-center hidden">Username atau password salah!</p>
-        </form>
+<body class="auth-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="site-logo">MAYMART</div>
+            <h2>Secure Portal Access</h2>
+            <form id="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="username">User Identifier</label>
+                    <div class="input-field-container">
+                        <input class="input-field" type="text" id="username" name="username" required placeholder="Username">
+                        <i class="fas fa-user-astronaut input-icon"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="password">Authentication Key</label>
+                    <div class="input-field-container">
+                        <input class="input-field" type="password" id="password" name="password" required placeholder="••••••••••••">
+                        <i class="fas fa-key input-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary mt-4">Authenticate</button>
+                <div id="login-error" class="hidden">
+                    <!-- Error message will be inserted here by JavaScript -->
+                </div>
+            </form>
+        </div>
     </div>
     <script src="js/auth.js"></script>
+    <script>
+        // Add fade-in for login page specifically, if not handled by auth.js globally
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1'; // Simple fade-in
+             // If auth.js already handles 'loaded' class, this is redundant
+            if (!document.body.classList.contains('loaded')) {
+                 setTimeout(() => document.body.classList.add('loaded'), 50); // Slight delay for transition
+            }
+        });
+    </script>
 </body>
 </html>
