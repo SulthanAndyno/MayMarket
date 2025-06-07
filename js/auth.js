@@ -1,186 +1,177 @@
-// Simulasi State Login
-let currentUser = JSON.parse(localStorage.getItem('maymartUser')) || null;
-
-function initializeAuth() {
-    updateUserLinks();
-    // Jika ada di halaman login atau register
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
+    const loginErrorDiv = document.getElementById('login-error');
+
+    updateUserLinks(); // Update links on page load based on login state
+
+    // Static credentials for demo purposes - Now an array of user objects
+    const VALID_USERS = [
+        { username: "Andyno", password: "00023" },
+        { username: "Althaf", password: "00032" },
+        { username: "Balya", password: "00003" },
+        { username: "Rasya", password: "00044" }
+    ];
 
     if (loginForm) {
-        loginForm.addEventListener('submit', handleLogin);
-    }
-    if (registerForm) {
-        registerForm.addEventListener('submit', handleRegister);
-    }
-
-    // Jika ada di halaman akun
-    const accountInfo = document.getElementById('account-info');
-    if (accountInfo && currentUser) {
-        displayAccountInfo();
-    } else if (accountInfo && !currentUser) {
-        // Jika belum login dan mencoba akses halaman akun, redirect ke login
-        window.location.href = 'login.html';
-    }
-
-    const logoutButton = document.getElementById('logout-button');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', handleLogout);
-    }
-}
-
-function handleLogin(event) {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value; // Dalam aplikasi nyata, jangan simpan password plain text
-
-    // Simulasi: Cek jika user ada di localStorage (dari register)
-    // Dalam aplikasi nyata, ini adalah panggilan API ke backend
-    const storedUsers = JSON.parse(localStorage.getItem('maymartRegisteredUsers')) || [];
-    const foundUser = storedUsers.find(user => user.email === email && user.password === password); // Password check sederhana
-
-    if (foundUser) {
-        currentUser = { email: foundUser.email, name: foundUser.name || 'Pengguna MAYMART' }; // Ambil nama jika ada
-        localStorage.setItem('maymartUser', JSON.stringify(currentUser));
-        alert('Login berhasil!');
-        window.location.href = 'account.html'; // Redirect ke halaman akun atau beranda
-    } else {
-        alert('Email atau password salah.');
-    }
-}
-
-function handleRegister(event) {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    // const confirmPassword = event.target['confirm-password'].value;
-
-    // if (password !== confirmPassword) {
-    //     alert('Password dan konfirmasi password tidak cocok!');
-    //     return;
-    // }
-
-    // Simulasi: Simpan user ke localStorage
-    let storedUsers = JSON.parse(localStorage.getItem('maymartRegisteredUsers')) || [];
-    if (storedUsers.find(user => user.email === email)) {
-        alert('Email sudah terdaftar.');
-        return;
-    }
-
-    storedUsers.push({ name, email, password }); // Simpan password (tidak aman untuk produksi!)
-    localStorage.setItem('maymartRegisteredUsers', JSON.stringify(storedUsers));
-
-    alert('Registrasi berhasil! Silakan login.');
-    window.location.href = 'login.html';
-}
-
-function handleLogout() {
-    currentUser = null;
-    localStorage.removeItem('maymartUser');
-    // localStorage.removeItem('maymartCart'); // Opsional: hapus keranjang saat logout
-    alert('Anda telah logout.');
-    updateUserLinks();
-    window.location.href = 'index.html';
-}
-
-function updateUserLinks() {
-    const userLink = document.getElementById('user-link');
-    const mobileUserLink = document.getElementById('mobile-user-link');
-    // const accountLink = document.getElementById('account-link'); // Jika ada link akun terpisah
-
-    if (currentUser) {
-        if (userLink) {
-            userLink.textContent = `Hi, ${currentUser.name.split(' ')[0] || 'User'}`;
-            userLink.href = 'account.html';
-        }
-        if (mobileUserLink) {
-            mobileUserLink.textContent = `Akun Saya`;
-            mobileUserLink.href = 'account.html';
-        }
-        // if (accountLink) accountLink.classList.remove('hidden');
-    } else {
-        if (userLink) {
-            userLink.textContent = 'Login';
-            userLink.href = 'login.html';
-        }
-        if (mobileUserLink) {
-            mobileUserLink.textContent = 'Login/Register';
-            mobileUserLink.href = 'login.html';
-        }
-        // if (accountLink) accountLink.classList.add('hidden');
-    }
-}
-
-function displayAccountInfo() {
-    const accountInfoDiv = document.getElementById('account-info');
-    const orderHistoryDiv = document.getElementById('order-history-content'); // Pastikan ada elemen ini di account.html
-
-    if (accountInfoDiv && currentUser) {
-        accountInfoDiv.innerHTML = `
-            <h2 class="text-2xl font-semibold mb-2">Profil Saya</h2>
-            <p class="mb-1"><strong class="text-slate-gray">Nama:</strong> ${currentUser.name || 'Belum diatur'}</p>
-            <p><strong class="text-slate-gray">Email:</strong> ${currentUser.email}</p>
-            <button id="edit-profile-btn" class="mt-4 btn-secondary py-2 px-4 rounded-md text-sm">Edit Profil</button>
-        `;
-        // Tambahkan event listener untuk edit profil jika diperlukan
-    }
-
-    if (orderHistoryDiv) {
-        // Simulasi riwayat pesanan
-        const orders = JSON.parse(localStorage.getItem('maymartOrders')) || [];
-        const userOrders = orders.filter(order => order.userEmail === currentUser.email);
-
-        if (userOrders.length > 0) {
-            orderHistoryDiv.innerHTML = userOrders.map(order => `
-                <div class="p-4 border border-gray-200 rounded-md mb-3 bg-white shadow">
-                    <p class="font-semibold">Pesanan #${order.id} <span class="text-sm text-slate-gray">- ${new Date(order.date).toLocaleDateString('id-ID')}</span></p>
-                    <p>Total: ${formatRupiah(order.total)} - Status: <span class="font-medium ${order.status === 'Dikirim' ? 'text-blue-600' : 'text-green-600'}">${order.status}</span></p>
-                    ${order.trackingNumber ? `<p class="text-sm">No. Resi: ${order.trackingNumber} <button onclick="trackOrder('${order.trackingNumber}')" class="text-primary hover:underline ml-2">Lacak</button></p>` : ''}
-                </div>
-            `).join('');
-        } else {
-            orderHistoryDiv.innerHTML = `<p class="text-slate-gray">Anda belum memiliki riwayat pesanan.</p>`;
-        }
-    }
-}
-
-function trackOrder(trackingNumber) {
-    // Simulasi pelacakan
-    alert(`Melacak pesanan dengan nomor resi: ${trackingNumber}...\nStatus: Sedang dalam perjalanan menuju alamat Anda.`);
-}
-
-
-// Panggil initializeAuth saat DOM siap
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('login-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            // Demo: username = admin, password = 123456
-            if (username === 'admin' && password === '123456') {
-                localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'index.html';
+            const usernameInput = loginForm.username.value;
+            const passwordInput = loginForm.password.value;
+
+            const foundUser = VALID_USERS.find(user => user.username === usernameInput && user.password === passwordInput);
+
+            if (foundUser) {
+                // Store the found user object, which includes the role
+                localStorage.setItem('currentUser', JSON.stringify({
+                    username: foundUser.username,
+                    role: foundUser.role
+                }));
+
+                const redirectTarget = localStorage.getItem('loginRedirect');
+                localStorage.removeItem('loginRedirect'); // Clear after use
+
+                // Perform fade-out then redirect
+                document.body.classList.remove('loaded'); // Assuming 'loaded' class controls opacity
+                setTimeout(() => {
+                    window.location.href = redirectTarget || 'index.html';
+                }, 300); // Match transition duration
+
             } else {
-                document.getElementById('login-error').classList.remove('hidden');
+                if(loginErrorDiv) {
+                    loginErrorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Autentikasi Gagal. Periksa kembali User Identifier dan Authentication Key Anda.`;
+                    loginErrorDiv.classList.remove('hidden');
+                    // Trigger shake animation
+                    loginErrorDiv.classList.remove('shake'); 
+                    void loginErrorDiv.offsetWidth; // Force reflow to restart animation
+                    loginErrorDiv.classList.add('shake'); 
+                }
             }
         });
     }
-
-    // Update navbar login/account link
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const userLink = document.getElementById('user-link');
-    const mobileUserLink = document.getElementById('mobile-user-link');
-    if (userLink) {
-        userLink.textContent = isLoggedIn ? 'Logout' : 'Login';
-        userLink.href = isLoggedIn ? '#' : 'login.html';
-        userLink.onclick = isLoggedIn ? function(e){e.preventDefault();localStorage.removeItem('isLoggedIn');location.reload();} : null;
-    }
-    if (mobileUserLink) {
-        mobileUserLink.textContent = isLoggedIn ? 'Logout' : 'Login';
-        mobileUserLink.href = isLoggedIn ? '#' : 'login.html';
-        mobileUserLink.onclick = isLoggedIn ? function(e){e.preventDefault();localStorage.removeItem('isLoggedIn');location.reload();} : null;
-    }
 });
+
+function updateUserLinks() {
+    const currentUserData = JSON.parse(localStorage.getItem('currentUser')); // Renamed for clarity
+
+    // Common selectors for navbar elements loaded by global.js
+    const navUserLink = document.getElementById('nav-user-link'); 
+    const mobileNavUserLink = document.getElementById('mobile-nav-user-link'); 
+    const navAccountLink = document.getElementById('nav-account-link'); 
+    const mobileNavAccountLink = document.getElementById('mobile-nav-account-link'); 
+    // Example: Link to an admin panel if user is admin
+    const navAdminPanelLink = document.getElementById('nav-admin-panel-link'); 
+    const mobileNavAdminPanelLink = document.getElementById('mobile-nav-admin-panel-link');
+
+    if (currentUserData) {
+        const displayName = currentUserData.username.length > 10 ? currentUserData.username.substring(0,10) + "..." : currentUserData.username;
+
+        if (navUserLink) {
+            navUserLink.innerHTML = `<i class="fas fa-user-circle nav-icon"></i> ${displayName}`;
+            navUserLink.href = 'account.html';
+            navUserLink.dataset.navlink = 'account.html';
+        }
+        if (mobileNavUserLink) {
+            mobileNavUserLink.innerHTML = `<i class="fas fa-user-circle nav-icon-mobile"></i> ${displayName}`;
+            mobileNavUserLink.href = 'account.html';
+            mobileNavUserLink.dataset.navlink = 'account.html';
+        }
+        if (navAccountLink) navAccountLink.classList.remove('hidden');
+        if (mobileNavAccountLink) mobileNavAccountLink.classList.remove('hidden');
+
+        // Show/hide admin link based on role
+        if (currentUserData.role === 'admin') {
+            if (navAdminPanelLink) navAdminPanelLink.classList.remove('hidden');
+            if (mobileNavAdminPanelLink) mobileNavAdminPanelLink.classList.remove('hidden');
+        } else {
+            if (navAdminPanelLink) navAdminPanelLink.classList.add('hidden');
+            if (mobileNavAdminPanelLink) mobileNavAdminPanelLink.classList.add('hidden');
+        }
+
+
+    } else { // Not logged in
+        if (navUserLink) {
+            navUserLink.innerHTML = '<i class="fas fa-sign-in-alt nav-icon"></i> Login';
+            navUserLink.href = 'login.html';
+            navUserLink.dataset.navlink = 'login.html';
+        }
+        if (mobileNavUserLink) {
+            mobileNavUserLink.innerHTML = '<i class="fas fa-sign-in-alt nav-icon-mobile"></i> Login';
+            mobileNavUserLink.href = 'login.html';
+            mobileNavUserLink.dataset.navlink = 'login.html';
+        }
+        if (navAccountLink) navAccountLink.classList.add('hidden');
+        if (mobileNavAccountLink) mobileNavAccountLink.classList.add('hidden');
+        if (navAdminPanelLink) navAdminPanelLink.classList.add('hidden'); // Hide admin link if not logged in
+        if (mobileNavAdminPanelLink) mobileNavAdminPanelLink.classList.add('hidden');
+    }
+}
+
+function logout() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('cart'); 
+    localStorage.removeItem('cartSummary'); // Clear cart summary on logout
+    
+    updateUserLinks(); // This will now also hide role-specific links like admin panel
+    if (typeof updateCartCount === 'function') {
+        updateCartCount(); // Update cart display in navbar
+    }
+
+    const fadeOutAndRedirect = (url) => {
+        document.body.classList.remove('loaded');
+        setTimeout(() => { window.location.href = url; }, 300); // Match transition duration
+    };
+
+    // Redirect to login if on a protected page, otherwise to index
+    const protectedPaths = ['account.html', 'checkout.html', 'cart.html', 'admin-panel.html']; // Added admin-panel
+    const currentPath = window.location.pathname.split("/").pop();
+    
+    if (protectedPaths.includes(currentPath)) {
+        fadeOutAndRedirect('login.html');
+    } else {
+        if (document.body.classList.contains('loaded')) {
+             document.body.classList.remove('loaded');
+             setTimeout(() => { window.location.reload(); }, 300);
+        } else {
+            window.location.reload();
+        }
+    }
+}
+
+function isLoggedIn() {
+    return !!localStorage.getItem('currentUser');
+}
+
+// Function to check if the current user has a specific role
+function hasRole(roleName) {
+    const currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUserData && currentUserData.role === roleName;
+}
+window.hasRole = hasRole; // Expose globally if needed by other scripts
+
+
+function redirectToLogin(targetPage = null) {
+    if (targetPage) {
+        localStorage.setItem('loginRedirect', targetPage);
+    } else {
+        localStorage.removeItem('loginRedirect');
+    }
+    document.body.classList.remove('loaded');
+    setTimeout(() => {
+        window.location.href = 'login.html';
+    }, 300); 
+}
+
+if (typeof window.updateCartCount === 'undefined') {
+    window.updateCartCount = function() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCountElements = document.querySelectorAll('#cart-count');
+        cartCountElements.forEach(el => {
+            if (el) {
+                el.textContent = totalItems;
+                el.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            }
+        });
+    };
+    document.addEventListener('DOMContentLoaded', window.updateCartCount);
+}
